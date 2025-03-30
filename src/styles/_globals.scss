@@ -1,0 +1,56 @@
+@use 'helpers/mixins' as *;
+@use "helpers/functions" as *;
+
+body {
+  @include fluid-text(18, 16);
+
+  font-family: var(--font-family-base), sans-serif;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--absolute-white);
+  background-color: var(--black-06);
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+  color: var(--absolute-white);
+}
+
+p {
+  --paragraphMarginBottom: #{rem(24)};
+}
+
+a,
+button,
+label,
+input,
+textarea,
+select,
+svg * {
+  transition-duration: var(--transition-duration);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1, .h1 {
+  @include fluid-text(58, 43);
+}
+
+h2, .h2 {
+  @include fluid-text(38, 25);
+}
+
+h3, .h3 {
+  @include fluid-text(24, 20);
+}
+
+h4, .h4 {
+  @include fluid-text(22, 18);
+}
