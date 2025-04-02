@@ -25,10 +25,10 @@ const imageHorrorArray = Object.values(imagesHorror).map((img) => img.default);
 
 export const Category = () => {
     return (
-        <section className='flex flex-col gap-20 mt-[200px]'>
+        <section className='flex flex-col gap-20'>
             <div className='flex justify-between'>
                 <div className='flex flex-col gap-3.5'>
-                    <h1>Explore our wide variety of categories</h1>
+                    <h2>Explore our wide variety of categories</h2>
                     <p style={{color: "var(--grey-60)"}}>Whether you're looking for a comedy to make you laugh, a drama
                         to make you think, or a documentary to
                         learn something new</p>
@@ -147,9 +147,6 @@ export const Category = () => {
                     </span>
                     </div>
                 </div>
-
-
-
             </div>
         </section>
     );

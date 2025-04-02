@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { Header } from "@/layout/Header.tsx";
 import { Footer } from "@/layout/Footer.tsx";
-import { BackgroundGrid } from "@/components/BackgroundGrid";
+import { BackgroundGrid } from "@/components/Home/BackgroundGrid.tsx";
 import { AnimatePresence, motion } from "framer-motion";
 
 export const Layout = () => {

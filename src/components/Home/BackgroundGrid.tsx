@@ -1,5 +1,5 @@
 
-const images = import.meta.glob<{ default: string }>('../assets/home-title-images/*.{png,jpg,jpeg,svg}', { eager: true });
+const images = import.meta.glob<{ default: string }>('../../assets/home-title-images/*.{png,jpg,jpeg,svg}', { eager: true });
 const imageArray = Object.values(images).map((img) => img.default);
 
 export const BackgroundGrid = () => {
