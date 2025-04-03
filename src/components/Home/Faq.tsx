@@ -7,6 +7,7 @@ import {
 
 // import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
+import {Button} from "@/components/ui/button.tsx";
 // import { useState } from "react";
 // import { ArrowLeft, ArrowRight } from "lucide-react";
 // import { cn } from "@/lib/utils";
@@ -39,7 +40,14 @@ export const Faq = () => {
 
 
     return (
-        <>
+        <section className='flex flex-col gap-20'>
+            <div className='flex gap-80'>
+                <div className='flex flex-col gap-3.5'>
+                    <h2>Frequently Asked Questions</h2>
+                    <p style={{color: "var(--grey-60)"}}>Got questions? We've got answers! Check out our FAQ section to find answers to the most common questions about StreamVibe.</p>
+                </div>
+                <Button>Ask a Question</Button>
+            </div>
             <div className="grid grid-cols-2 gap-x-20 w-full mx-auto">
                 {[firstColumn, secondColumn].map((column, colIndex) => (
                     <Accordion key={colIndex} type="single" collapsible className="space-y-4">
@@ -105,7 +113,7 @@ export const Faq = () => {
             {/*    </div>*/}
 
             {/*</div>*/}
-        </>
+        </section>
 
     );
 };

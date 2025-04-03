@@ -45,11 +45,6 @@ export const BackgroundGrid = () => {
                     </linearGradient>
                 </defs>
             </svg>
-
-
         </div>
-
-
-
     );
 };

@@ -6,11 +6,13 @@ import { motion } from "framer-motion";
 const LazyCategory = lazy(() => import("@/components/Home/Category").then((module) => ({ default: module.Category })));
 const LazyDevices = lazy(() => import("@/components/Home/Devices").then((module) => ({ default: module.Devices })));
 const LazyFaq = lazy(() => import("@/components/Home/Faq").then((module) => ({ default: module.Faq })));
+const LazySubscription = lazy(() => import("@/components/Home/Subscription").then((module) => ({ default: module.Subscription })));
 
 export const Home = () => {
     const [isCategoryVisible, setIsCategoryVisible] = useState(false);
     const [isDevicesVisible, setIsDevicesVisible] = useState(false);
     const [isFaqVisible, setIsFaqVisible] = useState(false);
+    const [isSubscriptionVisible, setIsSubscriptionVisible] = useState(false);
 
     const { ref: categoryRef, inView: categoryInView } = useInView({
         triggerOnce: true,
@@ -23,6 +25,11 @@ export const Home = () => {
     });
 
     const { ref: faqRef, inView: faqInView } = useInView({
+        triggerOnce: true,
+        threshold: 0.5,
+    });
+
+    const { ref: subscriptionRef, inView: subscriptionInView } = useInView({
         triggerOnce: true,
         threshold: 0.6,
     });
@@ -38,6 +45,10 @@ export const Home = () => {
     useEffect(() => {
         if (faqInView) setIsFaqVisible(true);
     }, [faqInView]);
+
+    useEffect(() => {
+        if (subscriptionInView) setIsSubscriptionVisible(true);
+    }, [subscriptionInView]);
 
     return (
         <main className="flex flex-col">
@@ -80,6 +91,20 @@ export const Home = () => {
                             transition={{ duration: 0.8, ease: "easeOut" }}
                         >
                             <LazyFaq/>
+                        </motion.div>
+                    </Suspense>
+                )}
+            </div>
+
+            <div ref={subscriptionRef} className="min-h-[30vh] flex justify-center items-center">
+                {isSubscriptionVisible && (
+                    <Suspense>
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, ease: "easeOut" }}
+                        >
+                            <LazySubscription/>
                         </motion.div>
                     </Suspense>
                 )}
