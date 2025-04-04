@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { Header } from "@/layout/Header.tsx";
 import { Footer } from "@/layout/Footer.tsx";
@@ -8,12 +8,11 @@ import { AnimatePresence, motion } from "framer-motion";
 export const Layout = () => {
     const location = useLocation();
     const isHomePage = location.pathname === "/";
-    const [isFirstLoad, setIsFirstLoad] = useState(true);
+    // const [isFirstLoad, setIsFirstLoad] = useState(true);
 
-    // При первом рендере снимаем флаг isFirstLoad
-    useEffect(() => {
-        setIsFirstLoad(false);
-    }, []);
+    // useEffect(() => {
+    //     setIsFirstLoad(false);
+    // }, []);
 
     return (
         <div>
@@ -33,61 +32,16 @@ export const Layout = () => {
 
                     <div className="relative z-10 container">
                         {/* Анимация только при первой загрузке */}
-                        {isFirstLoad ? (
-                            <AnimatePresence mode="wait">
-                                <motion.div
-                                    key="header"
-                                    initial={{ opacity: 0, scale: 0 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    transition={{ duration: 0.4, ease: "easeInOut" }}
-                                >
-                                    <Header />
-                                </motion.div>
-                            </AnimatePresence>
-                        ) : (
-                            <Header />
-                        )}
-
-                        <AnimatePresence mode="wait">
-                            <motion.div
-                                key={location.pathname}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -20 }}
-                                transition={{ duration: 0.4, ease: "easeInOut" }}
-                            >
-                                <Outlet />
-                            </motion.div>
-                        </AnimatePresence>
+                        <Header/>
+                        <Outlet/>
                         <Footer />
                     </div>
                 </div>
             ) : (
                 <div className="container">
                     <Header />
-                    <AnimatePresence mode="wait">
-                        <motion.div
-                            key={location.pathname}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
-                            transition={{ duration: 0.4, ease: "easeInOut" }}
-                        >
-                            <Outlet />
-                        </motion.div>
-                    </AnimatePresence>
-                    <AnimatePresence mode="wait">
-                        <motion.div
-                            key={location.pathname}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
-                            transition={{ duration: 0.4, ease: "easeInOut" }}
-                        >
-                            <Footer />
-                        </motion.div>
-                    </AnimatePresence>
-
+                    <Outlet/>
+                    <Footer/>
                 </div>
             )}
         </div>

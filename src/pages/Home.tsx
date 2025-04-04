@@ -7,12 +7,14 @@ const LazyCategory = lazy(() => import("@/components/Home/Category").then((modul
 const LazyDevices = lazy(() => import("@/components/Home/Devices").then((module) => ({ default: module.Devices })));
 const LazyFaq = lazy(() => import("@/components/Home/Faq").then((module) => ({ default: module.Faq })));
 const LazySubscription = lazy(() => import("@/components/Home/Subscription").then((module) => ({ default: module.Subscription })));
+const LazyAdvertisement = lazy(() => import("@/components/Home/Advertisement").then((module) => ({ default: module.Advertisement })));
 
 export const Home = () => {
     const [isCategoryVisible, setIsCategoryVisible] = useState(false);
     const [isDevicesVisible, setIsDevicesVisible] = useState(false);
     const [isFaqVisible, setIsFaqVisible] = useState(false);
     const [isSubscriptionVisible, setIsSubscriptionVisible] = useState(false);
+    const [isAdvertisementVisible, setIsAdvertisementVisible] = useState(false);
 
     const { ref: categoryRef, inView: categoryInView } = useInView({
         triggerOnce: true,
@@ -34,6 +36,11 @@ export const Home = () => {
         threshold: 0.6,
     });
 
+    const { ref: advertisementRef, inView: advertisementInView } = useInView({
+        triggerOnce: true,
+        threshold: 0.6,
+    });
+
     useEffect(() => {
         if (categoryInView) setIsCategoryVisible(true);
     }, [categoryInView]);
@@ -49,6 +56,10 @@ export const Home = () => {
     useEffect(() => {
         if (subscriptionInView) setIsSubscriptionVisible(true);
     }, [subscriptionInView]);
+
+    useEffect(() => {
+        if (advertisementInView) setIsAdvertisementVisible(true);
+    }, [advertisementInView]);
 
     return (
         <main className="flex flex-col">
@@ -105,6 +116,20 @@ export const Home = () => {
                             transition={{ duration: 0.8, ease: "easeOut" }}
                         >
                             <LazySubscription/>
+                        </motion.div>
+                    </Suspense>
+                )}
+            </div>
+
+            <div ref={advertisementRef} className="min-h-[40vh] flex justify-center items-center">
+                {isAdvertisementVisible && (
+                    <Suspense>
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, ease: "easeOut" }}
+                        >
+                            <LazyAdvertisement/>
                         </motion.div>
                     </Suspense>
                 )}
