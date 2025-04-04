@@ -2,7 +2,7 @@ import { lazy, Suspense, useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
 
-const LazyIntro = lazy(() => import("@/components/Home/Intro").then((module) => ({ default: module.Intro })));
+const LazyHero = lazy(() => import("@/components/Home/Hero.tsx").then((module) => ({ default: module.Hero })));
 const LazyCategory = lazy(() => import("@/components/Home/Category").then((module) => ({ default: module.Category })));
 const LazyDevices = lazy(() => import("@/components/Home/Devices").then((module) => ({ default: module.Devices })));
 const LazyFaq = lazy(() => import("@/components/Home/Faq").then((module) => ({ default: module.Faq })));
@@ -10,14 +10,14 @@ const LazySubscription = lazy(() => import("@/components/Home/Subscription").the
 const LazyAdvertisement = lazy(() => import("@/components/Home/Advertisement").then((module) => ({ default: module.Advertisement })));
 
 export const Home = () => {
-    const [isIntroVisible, setIsIntroVisible] = useState(false);
+    const [isHeroVisible, setIsHeroVisible] = useState(false);
     const [isCategoryVisible, setIsCategoryVisible] = useState(false);
     const [isDevicesVisible, setIsDevicesVisible] = useState(false);
     const [isFaqVisible, setIsFaqVisible] = useState(false);
     const [isSubscriptionVisible, setIsSubscriptionVisible] = useState(false);
     const [isAdvertisementVisible, setIsAdvertisementVisible] = useState(false);
 
-    const { ref: introRef, inView: introInView } = useInView({
+    const { ref: heroRef, inView: heroInView } = useInView({
         triggerOnce: true,
         threshold: 0.6,
     });
@@ -48,8 +48,8 @@ export const Home = () => {
     });
 
     useEffect(() => {
-        if (introInView) setIsIntroVisible(true);
-    }, [introInView]);
+        if (heroInView) setIsHeroVisible(true);
+    }, [heroInView]);
 
     useEffect(() => {
         if (categoryInView) setIsCategoryVisible(true);
@@ -73,15 +73,15 @@ export const Home = () => {
 
     return (
         <main className="flex flex-col">
-            <div ref={introRef} className="min-h-[60vh] flex justify-center items-center">
-                {isIntroVisible && (
+            <div ref={heroRef} className="min-h-[60vh] flex justify-center items-center">
+                {isHeroVisible && (
                     <Suspense>
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, ease: "easeOut" }}
                         >
-                            <LazyIntro />
+                            <LazyHero />
                         </motion.div>
                     </Suspense>
                 )}

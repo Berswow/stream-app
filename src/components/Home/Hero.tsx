@@ -1,6 +1,6 @@
 import {Button} from "@/components/ui/button.tsx";
 
-export const Intro = () => {
+export const Hero = () => {
     return (
             <section className='flex flex-col items-center gap-12 mt-[700px]'>
                 <div className='flex flex-col items-center gap-3.5'>
