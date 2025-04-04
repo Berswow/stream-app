@@ -1,7 +1,9 @@
+import {Hero} from "@/components/MoviesShows/Hero.tsx";
+
 export const MoviesShows = () => {
     return (
         <>
-            <h1>Hello from Movies&Show</h1>
+            <Hero/>
         </>
     );
 };
