@@ -1,8 +1,8 @@
-import { Intro } from "@/components/Home/Intro.tsx";
 import { lazy, Suspense, useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
 
+const LazyIntro = lazy(() => import("@/components/Home/Intro").then((module) => ({ default: module.Intro })));
 const LazyCategory = lazy(() => import("@/components/Home/Category").then((module) => ({ default: module.Category })));
 const LazyDevices = lazy(() => import("@/components/Home/Devices").then((module) => ({ default: module.Devices })));
 const LazyFaq = lazy(() => import("@/components/Home/Faq").then((module) => ({ default: module.Faq })));
@@ -10,11 +10,17 @@ const LazySubscription = lazy(() => import("@/components/Home/Subscription").the
 const LazyAdvertisement = lazy(() => import("@/components/Home/Advertisement").then((module) => ({ default: module.Advertisement })));
 
 export const Home = () => {
+    const [isIntroVisible, setIsIntroVisible] = useState(false);
     const [isCategoryVisible, setIsCategoryVisible] = useState(false);
     const [isDevicesVisible, setIsDevicesVisible] = useState(false);
     const [isFaqVisible, setIsFaqVisible] = useState(false);
     const [isSubscriptionVisible, setIsSubscriptionVisible] = useState(false);
     const [isAdvertisementVisible, setIsAdvertisementVisible] = useState(false);
+
+    const { ref: introRef, inView: introInView } = useInView({
+        triggerOnce: true,
+        threshold: 0.6,
+    });
 
     const { ref: categoryRef, inView: categoryInView } = useInView({
         triggerOnce: true,
@@ -42,6 +48,10 @@ export const Home = () => {
     });
 
     useEffect(() => {
+        if (introInView) setIsIntroVisible(true);
+    }, [introInView]);
+
+    useEffect(() => {
         if (categoryInView) setIsCategoryVisible(true);
     }, [categoryInView]);
 
@@ -63,7 +73,19 @@ export const Home = () => {
 
     return (
         <main className="flex flex-col">
-            <Intro />
+            <div ref={introRef} className="min-h-[60vh] flex justify-center items-center">
+                {isIntroVisible && (
+                    <Suspense>
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, ease: "easeOut" }}
+                        >
+                            <LazyIntro />
+                        </motion.div>
+                    </Suspense>
+                )}
+            </div>
 
             <div ref={categoryRef} className="min-h-[60vh] flex justify-center items-center">
                 {isCategoryVisible && (
