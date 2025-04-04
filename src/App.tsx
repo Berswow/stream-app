@@ -3,7 +3,7 @@ import {Layout} from "@/layout/Layout.tsx";
 import {Home} from "@/pages/Home.tsx";
 import {MoviesShows} from "@/pages/MoviesShows.tsx";
 import {Support} from "@/pages/Support.tsx";
-import {Subscription} from "@/pages/Subscription.tsx";
+import {Subscriptions} from "@/pages/Subscriptions.tsx";
 
 function App() {
 
@@ -14,7 +14,7 @@ function App() {
                <Route index element={<Home/>}/>
                 <Route path='movieshows' element={<MoviesShows/>}/>
                 <Route path='support' element={<Support/>}/>
-                <Route path='subscriptions' element={<Subscription/>}/>
+                <Route path='subscriptions' element={<Subscriptions/>}/>
             </Route>
         </Routes>
     </>

@@ -6,8 +6,7 @@ const LazyHero = lazy(() => import("@/components/Home/Hero.tsx").then((module) =
 const LazyCategory = lazy(() => import("@/components/Home/Category").then((module) => ({ default: module.Category })));
 const LazyDevices = lazy(() => import("@/components/Home/Devices").then((module) => ({ default: module.Devices })));
 const LazyFaq = lazy(() => import("@/components/Home/Faq").then((module) => ({ default: module.Faq })));
-const LazySubscription = lazy(() => import("@/components/Home/Subscription").then((module) => ({ default: module.Subscription })));
-const LazyAdvertisement = lazy(() => import("@/components/Home/Advertisement").then((module) => ({ default: module.Advertisement })));
+const LazySubscription = lazy(() => import("@/components/Home/Subscription.tsx").then((module) => ({ default: module.Subscription })));
 
 export const Home = () => {
     const [isHeroVisible, setIsHeroVisible] = useState(false);
@@ -15,7 +14,6 @@ export const Home = () => {
     const [isDevicesVisible, setIsDevicesVisible] = useState(false);
     const [isFaqVisible, setIsFaqVisible] = useState(false);
     const [isSubscriptionVisible, setIsSubscriptionVisible] = useState(false);
-    const [isAdvertisementVisible, setIsAdvertisementVisible] = useState(false);
 
     const { ref: heroRef, inView: heroInView } = useInView({
         triggerOnce: true,
@@ -42,11 +40,6 @@ export const Home = () => {
         threshold: 0.6,
     });
 
-    const { ref: advertisementRef, inView: advertisementInView } = useInView({
-        triggerOnce: true,
-        threshold: 0.6,
-    });
-
     useEffect(() => {
         if (heroInView) setIsHeroVisible(true);
     }, [heroInView]);
@@ -66,10 +59,6 @@ export const Home = () => {
     useEffect(() => {
         if (subscriptionInView) setIsSubscriptionVisible(true);
     }, [subscriptionInView]);
-
-    useEffect(() => {
-        if (advertisementInView) setIsAdvertisementVisible(true);
-    }, [advertisementInView]);
 
     return (
         <main className="flex flex-col">
@@ -138,20 +127,6 @@ export const Home = () => {
                             transition={{ duration: 0.8, ease: "easeOut" }}
                         >
                             <LazySubscription/>
-                        </motion.div>
-                    </Suspense>
-                )}
-            </div>
-
-            <div ref={advertisementRef} className="min-h-[40vh] flex justify-center items-center">
-                {isAdvertisementVisible && (
-                    <Suspense>
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, ease: "easeOut" }}
-                        >
-                            <LazyAdvertisement/>
                         </motion.div>
                     </Suspense>
                 )}

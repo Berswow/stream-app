@@ -1,10 +1,10 @@
-import backgroundImage from '../../assets/background-images.png';
+import backgroundImage from '../assets/background-images.png';
 import {Button} from "@/components/ui/button.tsx";
 
 export const Advertisement = () => {
     return (
         <section
-            className="relative flex items-center w-[1600px] h-[313px]"
+            className="relative flex items-center mt-[100px] w-[1600px] h-[313px]"
             style={{ backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
         >
             <div className="relative z-20 flex gap-80 p-20">

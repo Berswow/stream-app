@@ -1,4 +1,4 @@
-export const Subscription = () => {
+export const Subscriptions = () => {
     return (
         <>
             <h1>Subscription</h1>
