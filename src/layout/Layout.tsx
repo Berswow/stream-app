@@ -19,7 +19,7 @@ export const Layout = () => {
 
     const {ref: footerRef, inView: footerInView} = useInView({
         triggerOnce: true,
-        threshold: 0.6,
+        threshold: 0.4,
     });
 
     useEffect(() => {

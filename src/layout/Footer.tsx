@@ -1,6 +1,6 @@
 export const Footer = () => {
     return (
-        <footer className='flex flex-col gap-[100px] h-[505px]] mt-[100px] bg-transparent'>
+        <footer className='flex flex-col gap-[100px] h-[505px]] bg-transparent'>
             <div className='flex justify-between'>
                 <div className='flex flex-col gap-6'>
                     <h5>Home</h5>
