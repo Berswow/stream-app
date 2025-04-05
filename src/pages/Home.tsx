@@ -1,12 +1,12 @@
-import { lazy, Suspense, useEffect, useState } from "react";
-import { useInView } from "react-intersection-observer";
-import { motion } from "framer-motion";
+import {lazy, Suspense, useEffect, useState} from "react";
+import {useInView} from "react-intersection-observer";
+import {motion} from "framer-motion";
 
-const LazyHero = lazy(() => import("@/components/Home/Hero.tsx").then((module) => ({ default: module.Hero })));
-const LazyCategory = lazy(() => import("@/components/Home/Category").then((module) => ({ default: module.Category })));
-const LazyDevices = lazy(() => import("@/components/Home/Devices").then((module) => ({ default: module.Devices })));
-const LazyFaq = lazy(() => import("@/components/Home/Faq").then((module) => ({ default: module.Faq })));
-const LazySubscription = lazy(() => import("@/components/Home/Subscription.tsx").then((module) => ({ default: module.Subscription })));
+const LazyHero = lazy(() => import("@/components/Home/Hero.tsx").then((module) => ({default: module.Hero})));
+const LazyCategory = lazy(() => import("@/components/Home/Category").then((module) => ({default: module.Category})));
+const LazyDevices = lazy(() => import("@/components/Home/Devices").then((module) => ({default: module.Devices})));
+const LazyFaq = lazy(() => import("@/components/Home/Faq").then((module) => ({default: module.Faq})));
+const LazySubscription = lazy(() => import("@/components/Home/Subscription.tsx").then((module) => ({default: module.Subscription})));
 
 export const Home = () => {
     const [isHeroVisible, setIsHeroVisible] = useState(false);
@@ -15,27 +15,27 @@ export const Home = () => {
     const [isFaqVisible, setIsFaqVisible] = useState(false);
     const [isSubscriptionVisible, setIsSubscriptionVisible] = useState(false);
 
-    const { ref: heroRef, inView: heroInView } = useInView({
+    const {ref: heroRef, inView: heroInView} = useInView({
         triggerOnce: true,
         threshold: 0.6,
     });
 
-    const { ref: categoryRef, inView: categoryInView } = useInView({
+    const {ref: categoryRef, inView: categoryInView} = useInView({
         triggerOnce: true,
         threshold: 0.6,
     });
 
-    const { ref: devicesRef, inView: devicesInView } = useInView({
+    const {ref: devicesRef, inView: devicesInView} = useInView({
         triggerOnce: true,
         threshold: 0.6,
     });
 
-    const { ref: faqRef, inView: faqInView } = useInView({
+    const {ref: faqRef, inView: faqInView} = useInView({
         triggerOnce: true,
         threshold: 0.5,
     });
 
-    const { ref: subscriptionRef, inView: subscriptionInView } = useInView({
+    const {ref: subscriptionRef, inView: subscriptionInView} = useInView({
         triggerOnce: true,
         threshold: 0.6,
     });
@@ -66,11 +66,11 @@ export const Home = () => {
                 {isHeroVisible && (
                     <Suspense>
                         <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, ease: "easeOut" }}
+                            initial={{opacity: 0, y: 20}}
+                            animate={{opacity: 1, y: 0}}
+                            transition={{duration: 0.8, ease: "easeOut"}}
                         >
-                            <LazyHero />
+                            <LazyHero/>
                         </motion.div>
                     </Suspense>
                 )}
@@ -80,11 +80,12 @@ export const Home = () => {
                 {isCategoryVisible && (
                     <Suspense>
                         <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, ease: "easeOut" }}
+                            initial={{opacity: 0, y: 20}}
+                            animate={{opacity: 1, y: 0}}
+                            transition={{duration: 0.8, ease: "easeOut"}}
                         >
-                            <LazyCategory />
+                            <LazyCategory title='Explore our wide variety of categories'
+                                          description="Whether you're looking for a comedy to make you laugh, a drama to make you think, or a documentary to learn something new"/>
                         </motion.div>
                     </Suspense>
                 )}
@@ -94,11 +95,11 @@ export const Home = () => {
                 {isDevicesVisible && (
                     <Suspense>
                         <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, ease: "easeOut" }}
+                            initial={{opacity: 0, y: 20}}
+                            animate={{opacity: 1, y: 0}}
+                            transition={{duration: 0.8, ease: "easeOut"}}
                         >
-                            <LazyDevices />
+                            <LazyDevices/>
                         </motion.div>
                     </Suspense>
                 )}
@@ -108,9 +109,9 @@ export const Home = () => {
                 {isFaqVisible && (
                     <Suspense>
                         <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, ease: "easeOut" }}
+                            initial={{opacity: 0, y: 20}}
+                            animate={{opacity: 1, y: 0}}
+                            transition={{duration: 0.8, ease: "easeOut"}}
                         >
                             <LazyFaq/>
                         </motion.div>
@@ -122,9 +123,9 @@ export const Home = () => {
                 {isSubscriptionVisible && (
                     <Suspense>
                         <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, ease: "easeOut" }}
+                            initial={{opacity: 0, y: 20}}
+                            animate={{opacity: 1, y: 0}}
+                            transition={{duration: 0.8, ease: "easeOut"}}
                         >
                             <LazySubscription/>
                         </motion.div>
