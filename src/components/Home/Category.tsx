@@ -42,10 +42,16 @@ export const Category = ({title, description}: CategoryProps) => {
                             </div>
                             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
                         </div>
-                        <div className='flex mt-2 justify-between items-center w-full'>
-                            <p className='block'>{categoryGenre[i]}</p>
-                            <Play fill="white" stroke="white"/>
+                        <div className='flex flex-col w-full'>
+                            <div className='flex w-[86px] h-[32px] bg-primary rounded items-center p-2.5'>
+                                <p className='block text-[16px]'>Top 10 In</p>
+                            </div>
+                            <div className='flex mt-2 justify-between items-center w-full'>
+                                <p className='block'>{categoryGenre[i]}</p>
+                                <Play fill="white" stroke="white"/>
+                            </div>
                         </div>
+
                     </div>
                 ))}
             </div>

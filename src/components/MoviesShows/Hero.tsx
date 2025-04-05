@@ -7,7 +7,7 @@ import {Card, CardContent} from "@/components/ui/card.tsx";
 import type {EmblaCarouselType} from 'embla-carousel';
 
 const images = import.meta.glob<{ default: string }>(
-    "../../assets/MoviesShows/*.{png,jpg,jpeg,svg}",
+    "../../assets/MoviesShows/Hero/*.{png,jpg,jpeg,svg}",
     {eager: true}
 );
 const imagesArray = Object.values(images).map((img) => img.default);
