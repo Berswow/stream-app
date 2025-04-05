@@ -3,7 +3,7 @@ import {Button} from "@/components/ui/button.tsx";
 export const Hero = () => {
     return (
             <section className='flex flex-col items-center gap-12 mt-[700px]'>
-                <div className='flex flex-col items-center gap-3.5'>
+                <div className='flex flex-col items-center gap-3.5 text-center'>
                     <h1 className='font-bold'>The Best Streaming Experience</h1>
                     <p style={{ color: "var(--grey-60)" }}>StreamVibe is the best streaming experience for watching your favorite movies and shows on
                         demand,

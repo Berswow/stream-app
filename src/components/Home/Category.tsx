@@ -35,7 +35,7 @@ export const Category = ({title, description}: CategoryProps) => {
                     <div className='flex flex-col items-center rounded-2xl p-8'
                          style={{backgroundColor: "var(--black-15)"}}>
                         <div className="relative rounded-2xl overflow-hidden">
-                            <div className="grid grid-cols-2 grid-rows-2 gap-1.5">
+                            <div key={i} className="grid grid-cols-2 grid-rows-2 gap-1.5">
                                 {categoryPoster[i].map((src, index) => (
                                     <img key={index} src={src} alt={`Image ${index}`} className="rounded-lg" />
                                 ))}
