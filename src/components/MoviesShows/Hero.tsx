@@ -5,12 +5,8 @@ import {Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious}
 import Autoplay from "embla-carousel-autoplay";
 import {Card, CardContent} from "@/components/ui/card.tsx";
 import type {EmblaCarouselType} from 'embla-carousel';
+import {imagesArray} from "@/utils/images.ts";
 
-const images = import.meta.glob<{ default: string }>(
-    "../../assets/MoviesShows/Hero/*.{png,jpg,jpeg,svg}",
-    {eager: true}
-);
-const imagesArray = Object.values(images).map((img) => img.default);
 
 const movies = [
     {

@@ -41,12 +41,12 @@ export const Faq = () => {
 
     return (
         <section className='flex flex-col gap-20'>
-            <div className='flex gap-80'>
+            <div className='flex justify-between'>
                 <div className='flex flex-col gap-3.5'>
                     <h2>Frequently Asked Questions</h2>
                     <p style={{color: "var(--grey-60)"}}>Got questions? We've got answers! Check out our FAQ section to find answers to the most common questions about StreamVibe.</p>
                 </div>
-                <Button>Ask a Question</Button>
+                <Button className='self-end'>Ask a Question</Button>
             </div>
             <div className="grid grid-cols-2 gap-x-20 w-full mx-auto">
                 {[firstColumn, secondColumn].map((column, colIndex) => (

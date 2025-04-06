@@ -1,3 +1,5 @@
+/************** Category ******************/
+
 const imagesAction = import.meta.glob<{
     default: string
 }>('../assets/home-category-images/action/*.{png,jpg,jpeg,svg}', {eager: true});
@@ -22,6 +24,22 @@ const imagesHorror = import.meta.glob<{
     default: string
 }>('../assets/home-category-images/horror/*.{png,jpg,jpeg,svg}', {eager: true});
 export const imageHorrorArray = Object.values(imagesHorror).map((img) => img.default);
+
+/************** Hero - MoviesShows ******************/
+
+const images = import.meta.glob<{ default: string }>(
+    "../assets/MoviesShows/Hero/*.{png,jpg,jpeg,svg}",
+    {eager: true}
+);
+export const imagesArray = Object.values(images).map((img) => img.default);
+
+/************** Hero - OpenMovie ******************/
+
+// const images = import.meta.glob<{ default: string }>(
+//     "../assets/MoviesShows/Hero/*.{png,jpg,jpeg,svg}",
+//     {eager: true}
+// );
+// export const imagesArray = Object.values(images).map((img) => img.default);
 
 /************** Movies ******************/
 

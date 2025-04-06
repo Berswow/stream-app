@@ -4,6 +4,7 @@ import {BackgroundGrid} from "@/components/Home/BackgroundGrid.tsx";
 import {AnimatePresence, motion} from "framer-motion";
 import {lazy, Suspense, useEffect, useState} from "react";
 import {useInView} from "react-intersection-observer";
+import {Toaster} from "@/components/ui/sonner";
 
 const LazyAdvertisement = lazy(() => import("@/layout/Advertisement").then((module) => ({default: module.Advertisement})));
 const LazyFooter = lazy(() => import("@/layout/Footer").then((module) => ({default: module.Footer})));
@@ -35,7 +36,7 @@ export const Layout = () => {
     const isHomePage = location.pathname === "/";
 
     return (
-        <div>
+        <>
             {isHomePage ? (
                 <div className="relative min-h-screen">
                     <AnimatePresence mode="wait">
@@ -113,6 +114,7 @@ export const Layout = () => {
                     </div>
                 </div>
             )}
-        </div>
+            <Toaster/>
+        </>
     );
 };
