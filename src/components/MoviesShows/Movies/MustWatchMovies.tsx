@@ -23,7 +23,7 @@ export const MustWatchMovies = () => {
             </div>
             <div className='flex justify-between gap-5'>
                 {[...new Array(4)].map((_, i) => (
-                    <div className='flex flex-col items-center rounded-2xl p-8'
+                    <div className='flex flex-col items-center rounded-2xl p-5'
                          style={{backgroundColor: "var(--black-15)"}}>
                         <div className="relative rounded-2xl overflow-hidden">
                             <div key={i} className="flex">

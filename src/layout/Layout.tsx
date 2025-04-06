@@ -12,6 +12,24 @@ const LazyFooter = lazy(() => import("@/layout/Footer").then((module) => ({defau
 export const Layout = () => {
     const [isAdvertisementVisible, setIsAdvertisementVisible] = useState(false);
     const [isFooterVisible, setIsFooterVisible] = useState(false);
+    const [showFooter, setShowFooter] = useState(false);
+    const [showAdvertisement, setShowAdvertisement] = useState(false);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setShowFooter(true); // Показываем Shows через 1 секунду
+        }, 2000); // Задержка 1 секунда
+        return () => clearTimeout(timer)
+    }, [isFooterVisible])
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setShowAdvertisement(true); // Показываем Shows через 1 секунду
+        }, 2000); // Задержка 1 секунда
+        return () => clearTimeout(timer)
+    }, [isAdvertisementVisible])
+
+
 
     const {ref: advertisementRef, inView: advertisementInView} = useInView({
         triggerOnce: true,
@@ -55,7 +73,7 @@ export const Layout = () => {
                         <Header/>
                         <Outlet/>
                         <div ref={advertisementRef} className="min-h-[40vh]">
-                            {isAdvertisementVisible && (
+                            {isAdvertisementVisible && showAdvertisement && (
                                 <Suspense>
                                     <motion.div
                                         initial={{opacity: 0, y: 20}}
@@ -68,7 +86,7 @@ export const Layout = () => {
                             )}
                         </div>
                         <div ref={footerRef} className="min-h-[40vh]">
-                            {isFooterVisible && (
+                            {isFooterVisible && showFooter && (
                                 <Suspense>
                                     <motion.div
                                         initial={{opacity: 0, y: 20}}
@@ -87,7 +105,7 @@ export const Layout = () => {
                     <Header/>
                     <Outlet/>
                     <div ref={advertisementRef} className="min-h-[40vh]">
-                        {isAdvertisementVisible && (
+                        {isAdvertisementVisible && showAdvertisement && (
                             <Suspense>
                                 <motion.div
                                     initial={{opacity: 0, y: 20}}
@@ -100,7 +118,7 @@ export const Layout = () => {
                         )}
                     </div>
                     <div ref={footerRef} className="min-h-[40vh]">
-                        {isFooterVisible && (
+                        {isFooterVisible && showFooter && (
                             <Suspense>
                                 <motion.div
                                     initial={{opacity: 0, y: 20}}
