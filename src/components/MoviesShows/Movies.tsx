@@ -5,7 +5,7 @@ import {imageMoviesMustWatchArray, imageMoviesTrendArray, imageMoviesNewReleases
 
 export const Movies = () => {
     return (
-        <section className='mt-25'>
+        <section>
             <fieldset className='border border-gray-700 rounded-xl p-12'>
                 <legend className='ml-10'><Button className='h-12.5'>Movies</Button></legend>
                 <div className='p-12'>

@@ -5,12 +5,14 @@ import {Shows} from "@/components/MoviesShows/Shows.tsx";
 export const MoviesShows = () => {
     return (
         <>
-            <div className='mt-12.5'>
+            <div>
                 <Hero/>
             </div>
-            <Movies/>
+            <div className='mt-25'>
 
+            <Movies/>
             <Shows/>
+            </div>
         </>
     );
 };

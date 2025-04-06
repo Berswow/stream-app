@@ -14,7 +14,7 @@ export const Header = () => {
     const activeTab = tabs.find(tab => tab.link === location.pathname)?.id || tabs[0].id;
 
     return (
-        <header className="flex justify-between items-center pt-4">
+        <header className="flex justify-between items-center pt-4 mb-12.5">
             <div className="logo">
                 <svg width="199" height="60" viewBox="0 0 199 60" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path className='text-primary'
