@@ -1,7 +1,0 @@
-export const Trending = () => {
-    return (
-        <>
-
-        </>
-    );
-};
