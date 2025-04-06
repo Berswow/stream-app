@@ -58,7 +58,7 @@ export const Header = () => {
             <nav className="min-w-2xl">
                 <div className="relative w-full max-w-2xl mx-auto p-1 rounded-2xl min-h-[75px]"
                      style={{backgroundColor: "var(--black-10)"}}>
-                    <div className="flex relative gap-2 p-1 bg-gray-800 rounded-xl overflow-hidden"
+                    <div className="flex relative gap-2 bg-gray-800 rounded-xl overflow-hidden"
                          style={{backgroundColor: "var(--black-06)"}}>
                         {tabs.map((tab) => (
                             <NavLink

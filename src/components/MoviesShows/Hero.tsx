@@ -53,7 +53,7 @@ export const Hero = () => {
     }, [emblaReady, onSelect]);
 
     return (
-        <section className="relative w-full h-[835px] overflow-hidden">
+        <section className="relative w-full h-[835px] rounded-2xl overflow-hidden">
             <Carousel
                 className="w-full h-full"
                 plugins={[Autoplay({delay: 4000})]}
