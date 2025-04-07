@@ -1,134 +1,70 @@
-import {lazy, Suspense, useEffect, useState} from "react";
-import {useInView} from "react-intersection-observer";
-import {motion} from "framer-motion";
+import { lazy, Suspense, useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
 
-const LazyHero = lazy(() => import("@/components/Home/Hero.tsx").then((module) => ({default: module.Hero})));
-const LazyCategory = lazy(() => import("@/components/Home/Category").then((module) => ({default: module.Category})));
-const LazyDevices = lazy(() => import("@/components/Home/Devices").then((module) => ({default: module.Devices})));
-const LazyFaq = lazy(() => import("@/components/Home/Faq").then((module) => ({default: module.Faq})));
-const LazySubscription = lazy(() => import("@/components/Home/Subscription.tsx").then((module) => ({default: module.Subscription})));
+const LazyHero = lazy(() => import("@/components/Home/Hero").then(m => ({ default: m.Hero })));
+const LazyCategory = lazy(() => import("@/components/Home/Category").then(m => ({ default: m.Category })));
+const LazyDevices = lazy(() => import("@/components/Home/Devices").then(m => ({ default: m.Devices })));
+const LazyFaq = lazy(() => import("@/components/Home/Faq").then(m => ({ default: m.Faq })));
+const LazySubscription = lazy(() => import("@/components/Home/Subscription").then(m => ({ default: m.Subscription })));
 
 export const Home = () => {
-    const [isHeroVisible, setIsHeroVisible] = useState(false);
-    const [isCategoryVisible, setIsCategoryVisible] = useState(false);
-    const [isDevicesVisible, setIsDevicesVisible] = useState(false);
-    const [isFaqVisible, setIsFaqVisible] = useState(false);
-    const [isSubscriptionVisible, setIsSubscriptionVisible] = useState(false);
+    const [visibleSections, setVisibleSections] = useState<Record<string, boolean>>({});
 
-    const {ref: heroRef, inView: heroInView} = useInView({
-        triggerOnce: true,
-        threshold: 0.6,
-    });
-
-    const {ref: categoryRef, inView: categoryInView} = useInView({
-        triggerOnce: true,
-        threshold: 0.6,
-    });
-
-    const {ref: devicesRef, inView: devicesInView} = useInView({
-        triggerOnce: true,
-        threshold: 0.6,
-    });
-
-    const {ref: faqRef, inView: faqInView} = useInView({
-        triggerOnce: true,
-        threshold: 0.5,
-    });
-
-    const {ref: subscriptionRef, inView: subscriptionInView} = useInView({
-        triggerOnce: true,
-        threshold: 0.6,
-    });
+    const { ref: heroRef, inView: heroInView } = useInView({ triggerOnce: true, threshold: 0.6 });
+    const { ref: categoryRef, inView: categoryInView } = useInView({ triggerOnce: true, threshold: 0.6 });
+    const { ref: devicesRef, inView: devicesInView } = useInView({ triggerOnce: true, threshold: 0.6 });
+    const { ref: faqRef, inView: faqInView } = useInView({ triggerOnce: true, threshold: 0.6 });
+    const { ref: subscriptionRef, inView: subscriptionInView } = useInView({ triggerOnce: true, threshold: 0.6 });
 
     useEffect(() => {
-        if (heroInView) setIsHeroVisible(true);
-    }, [heroInView]);
-
-    useEffect(() => {
-        if (categoryInView) setIsCategoryVisible(true);
-    }, [categoryInView]);
-
-    useEffect(() => {
-        if (devicesInView) setIsDevicesVisible(true);
-    }, [devicesInView]);
-
-    useEffect(() => {
-        if (faqInView) setIsFaqVisible(true);
-    }, [faqInView]);
-
-    useEffect(() => {
-        if (subscriptionInView) setIsSubscriptionVisible(true);
-    }, [subscriptionInView]);
+        if (heroInView) setVisibleSections(prev => ({ ...prev, hero: true }));
+        if (categoryInView) setVisibleSections(prev => ({ ...prev, category: true }));
+        if (devicesInView) setVisibleSections(prev => ({ ...prev, devices: true }));
+        if (faqInView) setVisibleSections(prev => ({ ...prev, faq: true }));
+        if (subscriptionInView) setVisibleSections(prev => ({ ...prev, subscription: true }));
+    }, [heroInView, categoryInView, devicesInView, faqInView, subscriptionInView]);
 
     return (
         <main className="flex flex-col">
             <div ref={heroRef} className="min-h-[60vh] flex justify-center items-center">
-                {isHeroVisible && (
+                {visibleSections.hero && (
                     <Suspense>
-                        <motion.div
-                            initial={{opacity: 0, y: 20}}
-                            animate={{opacity: 1, y: 0}}
-                            transition={{duration: 0.8, ease: "easeOut"}}
-                        >
-                            <LazyHero/>
-                        </motion.div>
+                        <LazyHero />
                     </Suspense>
                 )}
             </div>
 
             <div ref={categoryRef} className="min-h-[60vh] flex justify-center items-center">
-                {isCategoryVisible && (
+                {visibleSections.category && (
                     <Suspense>
-                        <motion.div
-                            initial={{opacity: 0, y: 20}}
-                            animate={{opacity: 1, y: 0}}
-                            transition={{duration: 0.8, ease: "easeOut"}}
-                        >
-                            <LazyCategory title='Explore our wide variety of categories'
-                                          description="Whether you're looking for a comedy to make you laugh, a drama to make you think, or a documentary to learn something new"/>
-                        </motion.div>
+                        <LazyCategory
+                            title="Explore our wide variety of categories"
+                            description="Whether you're looking for a comedy to make you laugh, a drama to make you think, or a documentary to learn something new"
+                        />
                     </Suspense>
                 )}
             </div>
 
             <div ref={devicesRef} className="min-h-[30vh] flex justify-center items-center">
-                {isDevicesVisible && (
+                {visibleSections.devices && (
                     <Suspense>
-                        <motion.div
-                            initial={{opacity: 0, y: 20}}
-                            animate={{opacity: 1, y: 0}}
-                            transition={{duration: 0.8, ease: "easeOut"}}
-                        >
-                            <LazyDevices/>
-                        </motion.div>
+                        <LazyDevices />
                     </Suspense>
                 )}
             </div>
 
             <div ref={faqRef} className="min-h-[60vh] flex justify-center items-center">
-                {isFaqVisible && (
+                {visibleSections.faq && (
                     <Suspense>
-                        <motion.div
-                            initial={{opacity: 0, y: 20}}
-                            animate={{opacity: 1, y: 0}}
-                            transition={{duration: 0.8, ease: "easeOut"}}
-                        >
-                            <LazyFaq/>
-                        </motion.div>
+                        <LazyFaq />
                     </Suspense>
                 )}
             </div>
 
             <div ref={subscriptionRef} className="min-h-[30vh] flex justify-center items-center">
-                {isSubscriptionVisible && (
+                {visibleSections.subscription && (
                     <Suspense>
-                        <motion.div
-                            initial={{opacity: 0, y: 20}}
-                            animate={{opacity: 1, y: 0}}
-                            transition={{duration: 0.8, ease: "easeOut"}}
-                        >
-                            <LazySubscription/>
-                        </motion.div>
+                        <LazySubscription />
                     </Suspense>
                 )}
             </div>

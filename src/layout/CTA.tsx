@@ -1,7 +1,7 @@
 import backgroundImage from '../assets/background-images.png';
 import {Button} from "@/components/ui/button.tsx";
 
-export const Advertisement = () => {
+export const CTA = () => {
     return (
         <section
             className="relative flex items-center mt-[100px] w-[1600px] h-[313px]"

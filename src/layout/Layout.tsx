@@ -1,138 +1,58 @@
-import {Outlet, useLocation} from "react-router-dom";
-import {Header} from "@/layout/Header.tsx";
-import {BackgroundGrid} from "@/components/Home/BackgroundGrid.tsx";
-import {AnimatePresence, motion} from "framer-motion";
-import {lazy, Suspense, useEffect, useState} from "react";
-import {useInView} from "react-intersection-observer";
-import {Toaster} from "@/components/ui/sonner";
+import { Outlet, useLocation } from "react-router-dom";
+import { Header } from "@/layout/Header.tsx";
+import { BackgroundGrid } from "@/components/Home/BackgroundGrid.tsx";
+import { lazy, Suspense } from "react";
+import { Toaster } from "@/components/ui/sonner";
+import { useInView } from "react-intersection-observer";
 
-const LazyAdvertisement = lazy(() => import("@/layout/Advertisement").then((module) => ({default: module.Advertisement})));
-const LazyFooter = lazy(() => import("@/layout/Footer").then((module) => ({default: module.Footer})));
+const LazyCTA = lazy(() =>
+    import("@/layout/CTA.tsx").then((module) => ({ default: module.CTA }))
+);
+const LazyFooter = lazy(() =>
+    import("@/layout/Footer").then((module) => ({ default: module.Footer }))
+);
 
 export const Layout = () => {
-    const [isAdvertisementVisible, setIsAdvertisementVisible] = useState(false);
-    const [isFooterVisible, setIsFooterVisible] = useState(false);
-    const [showFooter, setShowFooter] = useState(false);
-    const [showAdvertisement, setShowAdvertisement] = useState(false);
+    const { pathname } = useLocation();
+    const isHomePage = pathname === "/";
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setShowFooter(true); // Показываем Shows через 1 секунду
-        }, 2000); // Задержка 1 секунда
-        return () => clearTimeout(timer)
-    }, [isFooterVisible])
-
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setShowAdvertisement(true); // Показываем Shows через 1 секунду
-        }, 2000); // Задержка 1 секунда
-        return () => clearTimeout(timer)
-    }, [isAdvertisementVisible])
-
-
-
-    const {ref: advertisementRef, inView: advertisementInView} = useInView({
-        triggerOnce: true,
-        threshold: 0.6,
-    });
-
-    const {ref: footerRef, inView: footerInView} = useInView({
-        triggerOnce: true,
-        threshold: 0.4,
-    });
-
-    useEffect(() => {
-        if (advertisementInView) setIsAdvertisementVisible(true);
-    }, [advertisementInView]);
-
-    useEffect(() => {
-        if (footerInView) setIsFooterVisible(true);
-    }, [footerInView]);
-
-
-    const location = useLocation();
-    const isHomePage = location.pathname === "/";
+    const { ref: CTARef, inView: CTAInView } = useInView({ triggerOnce: true, threshold: 0.6 });
+    const { ref: FooterRef, inView: FooterInView } = useInView({ triggerOnce: true, threshold: 0.6 });
 
     return (
         <>
-            {isHomePage ? (
-                <div className="relative min-h-screen">
-                    <AnimatePresence mode="wait">
-                        <motion.div
-                            key="background"
-                            initial={{opacity: 0}}
-                            animate={{opacity: 1}}
-                            transition={{duration: 0.4, ease: "easeInOut"}}
-                        >
-                            <BackgroundGrid/>
-                        </motion.div>
-                    </AnimatePresence>
-
-                    <div className="relative z-10 container">
-                        {/* Анимация только при первой загрузке */}
-                        <Header/>
-                        <Outlet/>
-                        <div ref={advertisementRef} className="min-h-[40vh]">
-                            {isAdvertisementVisible && showAdvertisement && (
-                                <Suspense>
-                                    <motion.div
-                                        initial={{opacity: 0, y: 20}}
-                                        animate={{opacity: 1, y: 0}}
-                                        transition={{duration: 0.8, ease: "easeOut"}}
-                                    >
-                                        <LazyAdvertisement/>
-                                    </motion.div>
-                                </Suspense>
-                            )}
-                        </div>
-                        <div ref={footerRef} className="min-h-[40vh]">
-                            {isFooterVisible && showFooter && (
-                                <Suspense>
-                                    <motion.div
-                                        initial={{opacity: 0, y: 20}}
-                                        animate={{opacity: 1, y: 0}}
-                                        transition={{duration: 0.8, ease: "easeOut"}}
-                                    >
-                                        <LazyFooter/>
-                                    </motion.div>
-                                </Suspense>
-                            )}
-                        </div>
-                    </div>
-                </div>
-            ) : (
-                <div className="container">
-                    <Header/>
-                    <Outlet/>
-                    <div ref={advertisementRef} className="min-h-[40vh]">
-                        {isAdvertisementVisible && showAdvertisement && (
-                            <Suspense>
-                                <motion.div
-                                    initial={{opacity: 0, y: 20}}
-                                    animate={{opacity: 1, y: 0}}
-                                    transition={{duration: 0.8, ease: "easeOut"}}
-                                >
-                                    <LazyAdvertisement/>
-                                </motion.div>
-                            </Suspense>
-                        )}
-                    </div>
-                    <div ref={footerRef} className="min-h-[40vh]">
-                        {isFooterVisible && showFooter && (
-                            <Suspense>
-                                <motion.div
-                                    initial={{opacity: 0, y: 20}}
-                                    animate={{opacity: 1, y: 0}}
-                                    transition={{duration: 0.8, ease: "easeOut"}}
-                                >
-                                    <LazyFooter/>
-                                </motion.div>
-                            </Suspense>
-                        )}
-                    </div>
+            {isHomePage && (
+                <div className="absolute inset-0 -z-10">
+                    <BackgroundGrid />
                 </div>
             )}
-            <Toaster/>
+
+                <div className={`min-h-screen ${isHomePage ? "relative z-10" : ""}`}>
+                    <div className="container">
+                        <Header />
+                        <Outlet />
+
+                        {/* CTA Lazy Load */}
+                        <div ref={CTARef} className="min-h-[60vh] flex justify-center items-center">
+                            {CTAInView && (
+                                <Suspense fallback={<div className="text-muted-foreground">Загрузка блока...</div>}>
+                                    <LazyCTA />
+                                </Suspense>
+                            )}
+                        </div>
+
+                        {/* Footer Lazy Load */}
+                        <div ref={FooterRef} className="min-h-[60vh]">
+                            {FooterInView && (
+                                <Suspense fallback={<div className="text-muted-foreground">Загрузка футера...</div>}>
+                                    <LazyFooter />
+                                </Suspense>
+                            )}
+                        </div>
+                    </div>
+                </div>
+
+                <Toaster />
         </>
     );
 };
