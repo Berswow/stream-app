@@ -1,7 +1,17 @@
-import {imageMoviesTrendArray} from "@/utils/images.ts";
 import {Clock3, Eye} from "lucide-react";
+import {useEffect, useState} from "react";
+import {getTrending} from "@/services/tmdb.ts";
+import {MovieInterface} from "@/components/Interface/MovieInterface.ts";
 
 export const TrendingMovies = () => {
+    const [movies, setMovies] = useState([])
+
+    useEffect(() => {
+        getTrending('movie', 'day').then(data => {
+            setMovies(data.results.slice(0, 5))
+        })
+    }, [])
+
     return (
         <div className='flex flex-col gap-12.5 p-12'>
             <div className='flex justify-between items-center'>
@@ -22,12 +32,13 @@ export const TrendingMovies = () => {
                 </div>
             </div>
             <div className='flex justify-between gap-7.5'>
-                {[...new Array(5)].map((_, i) => (
+                {movies.map((movie: MovieInterface) => (
                     <div className='flex flex-col items-center rounded-2xl p-5'
                          style={{backgroundColor: "var(--black-15)"}}>
                         <div className="relative rounded-2xl overflow-hidden">
-                            <div key={i} className="flex">
-                                <img src={imageMoviesTrendArray[i]} alt={`Image ${i}`} className="rounded-lg"/>
+                            <div key={movie.id} className="flex">
+                                <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={`Image ${movie.original_title}`}
+                                     className="rounded-lg object-cover" style={{width: '243px', height: '281px'}}/>
                             </div>
                             <div
                                 className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"/>

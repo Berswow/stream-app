@@ -21,7 +21,21 @@ const fetchFromTMDb = async (endpoint: string, params = {}) => {
     }
 };
 
+/************ Movies ****************/
+export const getUpcomingMovies = () => fetchFromTMDb('/movie/upcoming')
 export const getPopularMovies = () => fetchFromTMDb('/movie/popular');
+export const getNowPlayingMovies = () => fetchFromTMDb('/movie/now_playing');
+
+
+/************ Shows ****************/
+export const getAiringToday =() => fetchFromTMDb('/tv/airing_today')
+export const getOnTheAir =() => fetchFromTMDb('/tv/on_the_air')
+
+
+
+
+
+/************************************/
 export const getTrending = (mediaType = 'all', timeWindow = 'day') =>
     fetchFromTMDb(`/trending/${mediaType}/${timeWindow}`);
 export const getMovieDetails = (movieId: number) =>

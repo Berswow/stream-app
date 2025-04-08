@@ -42,7 +42,7 @@ export const Layout = () => {
                         </div>
 
                         {/* Footer Lazy Load */}
-                        <div ref={FooterRef} className="min-h-[60vh]">
+                        <div ref={FooterRef} className="">
                             {FooterInView && (
                                 <Suspense fallback={<div className="text-muted-foreground">Загрузка футера...</div>}>
                                     <LazyFooter />

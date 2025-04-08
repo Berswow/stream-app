@@ -5,11 +5,11 @@ import { useInViewObserver } from "@/utils/hooks/useInViewObserver.ts";
 const LazyHero = lazy(() => import("@/components/MoviesShows/Hero.tsx").then((module) => ({ default: module.Hero })));
 const LazyCategory = lazy(() => import("@/components/Home/Category.tsx").then((module) => ({ default: module.Category })));
 const LazyTrendingMovies = lazy(() => import("@/components/MoviesShows/Movies/TrendingMovies.tsx").then((module) => ({ default: module.TrendingMovies })));
-const LazyNewReleasesMovies = lazy(() => import("@/components/MoviesShows/Movies/NewReleasesMovies.tsx").then((module) => ({ default: module.NewReleasesMovies })));
-const LazyMustWatchMovies = lazy(() => import("@/components/MoviesShows/Movies/MustWatchMovies.tsx").then((module) => ({ default: module.MustWatchMovies })));
+const LazyNewReleasesMovies = lazy(() => import("@/components/MoviesShows/Movies/UpcomingMovies.tsx").then((module) => ({ default: module.UpcomingMovies })));
+const LazyMustWatchMovies = lazy(() => import("@/components/MoviesShows/Movies/NowPlayingMovies.tsx").then((module) => ({ default: module.NowPlayingMovies })));
 const LazyTrendingShows = lazy(() => import("@/components/MoviesShows/Shows/TrendingShows.tsx").then((module) => ({ default: module.TrendingShows })));
-const LazyNewReleasesShows = lazy(() => import("@/components/MoviesShows/Shows/NewReleasesShows.tsx").then((module) => ({ default: module.NewReleasesShows })));
-const LazyMustWatchShows = lazy(() => import("@/components/MoviesShows/Shows/MustWatchShows.tsx").then((module) => ({ default: module.MustWatchShows })));
+const LazyNewReleasesShows = lazy(() => import("@/components/MoviesShows/Shows/AiringToday.tsx").then((module) => ({ default: module.AiringToday })));
+const LazyMustWatchShows = lazy(() => import("@/components/MoviesShows/Shows/OnTheAir.tsx").then((module) => ({ default: module.OnTheAir })));
 
 export const MoviesShows = () => {
     const heroObserver = useInViewObserver();
