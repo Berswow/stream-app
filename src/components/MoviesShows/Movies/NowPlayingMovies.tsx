@@ -1,7 +1,7 @@
 import {Clock3, Star} from "lucide-react";
 import {useEffect, useState} from "react";
 import {getNowPlayingMovies} from "@/services/tmdb.ts";
-import {MovieInterface} from "@/components/Interface/MovieInterface.ts";
+import {MovieInterface} from "@/Interface/MovieInterface.ts";
 
 export const NowPlayingMovies = () => {
     const [movies, setMovies] = useState([])

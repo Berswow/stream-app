@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {getUpcomingMovies} from "@/services/tmdb.ts";
 import {formatDate} from "@/utils/formatDate.ts";
-import {MovieInterface} from "@/components/Interface/MovieInterface.ts";
+import {MovieInterface} from "@/Interface/MovieInterface.ts";
 
 export const UpcomingMovies = () => {
     const [movies, setMovies] = useState([])

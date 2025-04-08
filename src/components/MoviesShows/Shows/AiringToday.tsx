@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {getAiringToday} from "@/services/tmdb.ts";
-import {ShowInterface} from "@/components/Interface/ShowInterface.ts";
+import {ShowInterface} from "@/Interface/ShowInterface.ts";
 
 export const AiringToday = () => {
     const [shows, setShows] = useState([])

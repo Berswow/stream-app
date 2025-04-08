@@ -1,7 +1,7 @@
 import {Clock3, Eye} from "lucide-react";
 import {useEffect, useState} from "react";
 import {getTrending} from "@/services/tmdb.ts";
-import {MovieInterface} from "@/components/Interface/MovieInterface.ts";
+import {MovieInterface} from "@/Interface/MovieInterface.ts";
 
 export const TrendingMovies = () => {
     const [movies, setMovies] = useState([])

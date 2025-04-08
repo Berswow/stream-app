@@ -1,7 +1,7 @@
 import {Clock3, Star} from "lucide-react";
 import {useEffect, useState} from "react";
 import {getOnTheAir} from "@/services/tmdb.ts";
-import {ShowInterface} from "@/components/Interface/ShowInterface.ts";
+import {ShowInterface} from "@/Interface/ShowInterface.ts";
 
 export const OnTheAir = () => {
     const [shows, setShows] = useState([])
