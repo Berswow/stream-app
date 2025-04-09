@@ -5,7 +5,7 @@ import {useGetUpcomingMoviesQuery} from "@/services/tmdb/moviesApi.ts";
 export const UpcomingMovies = () => {
     const {data, isLoading, error} = useGetUpcomingMoviesQuery(1)
 
-    const movies = data?.results?.slice(0, 5) ?? [];
+    const movies = data?.slice(0, 5) ?? [];
 
     if (isLoading) return <div>Загрузка...</div>;
     if (error) return <div>Ошибка загрузки</div>;

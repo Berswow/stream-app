@@ -3,31 +3,54 @@ import {tmdbApi} from "@/services/tmdb/tmdbApi.ts";
 export const moviesApi = tmdbApi.injectEndpoints({
     endpoints: (builder) => ({
         getTrendingMovies: builder.query({
-            query: ({time_window = 'day', page = 1}) => ({
+            query: ({time_window = 'day' , page = 1}) => ({
                 url: `trending/movie/${time_window}`,
                 params: {
-                    page: page
+                    page
                 }
             })
+        }),
+        getPopularMovies: builder.query({
+            query: (page = 1) => ({
+                url: `movie/popular`,
+                params: {
+                    page
+                }
+            }),
+            transformResponse: response => {
+                return response.results
+            }
         }),
         getUpcomingMovies: builder.query({
             query: (page: number = 1) => ({
                 url: 'movie/upcoming',
                 params: {
-                    page: page
+                    page
                 }
-            })
+            }),
+            transformResponse: response => {
+                return response.results
+            }
         }),
         getNowPlayingMovies: builder.query({
             query: (page: number = 1) => ({
                 url: 'movie/now_playing',
                 params: {
-                    page: page
+                    page
                 }
             })
-        })
+        }),
+        getMovieTrailer: builder.query({
+            query: (movieId: number) => ({
+                url: `movie/${movieId}/videos`
+            }),
+            transformResponse: (response) => {
+                const trailer = response.results.find(v => v.type === "Trailer" && v.site === "YouTube")
+                return trailer?.key ?? null
+            }
+        }),
     }),
     overrideExisting: false
 })
 
-export const {useGetTrendingMoviesQuery, useGetUpcomingMoviesQuery, useGetNowPlayingMoviesQuery} = moviesApi
+export const {useGetTrendingMoviesQuery, useGetUpcomingMoviesQuery, useGetNowPlayingMoviesQuery, useGetPopularMoviesQuery, useGetMovieTrailerQuery} = moviesApi
