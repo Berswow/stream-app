@@ -1,16 +1,13 @@
 import {Clock3, Star} from "lucide-react";
-import {useEffect, useState} from "react";
-import {getOnTheAir} from "@/services/tmdb.ts";
 import {ShowInterface} from "@/Interface/ShowInterface.ts";
+import { useGetOnTheAirQuery} from "@/services/tmdb/tvApi.ts";
 
 export const OnTheAir = () => {
-    const [shows, setShows] = useState([])
+    const {data, isLoading, error} = useGetOnTheAirQuery(1)
+    const shows = data?.results?.slice(0, 4) ?? [];
 
-    useEffect(() => {
-        getOnTheAir().then(data => {
-            setShows(data.results.slice(0, 4))
-        })
-    }, []);
+    if (isLoading) return <div>Загрузка...</div>;
+    if (error) return <div>Ошибка загрузки</div>;
 
     return (
         <div className='flex flex-col gap-12.5 p-12'>

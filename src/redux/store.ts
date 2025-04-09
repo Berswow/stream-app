@@ -1,5 +1,5 @@
 import {configureStore} from "@reduxjs/toolkit";
-import {tmdbApi} from "@/services/tmdbApi.ts";
+import {tmdbApi} from "@/services/tmdb/tmdbApi";
 
 export const store = configureStore({
     reducer: {

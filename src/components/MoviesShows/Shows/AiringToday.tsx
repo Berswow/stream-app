@@ -1,15 +1,13 @@
-import {useEffect, useState} from "react";
-import {getAiringToday} from "@/services/tmdb.ts";
 import {ShowInterface} from "@/Interface/ShowInterface.ts";
+import {useGetAiringTodayQuery} from "@/services/tmdb/tvApi.ts";
 
 export const AiringToday = () => {
-    const [shows, setShows] = useState([])
+    const {data, isLoading, error} = useGetAiringTodayQuery(1)
+    const shows = data?.results?.slice(0, 4) ?? [];
 
-    useEffect(() => {
-        getAiringToday().then(data => {
-            setShows(data.results.slice(0, 4))
-        })
-    }, []);
+    if (isLoading) return <div>Загрузка...</div>;
+    if (error) return <div>Ошибка загрузки</div>;
+
     return (
         <div className='flex flex-col gap-12.5 p-12'>
             <div className='flex justify-between items-center'>

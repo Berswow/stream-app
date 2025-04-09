@@ -1,16 +1,14 @@
-import {useEffect, useState} from "react";
-import {getUpcomingMovies} from "@/services/tmdb.ts";
 import {formatDate} from "@/utils/formatDate.ts";
 import {MovieInterface} from "@/Interface/MovieInterface.ts";
+import {useGetUpcomingMoviesQuery} from "@/services/tmdb/moviesApi.ts";
 
 export const UpcomingMovies = () => {
-    const [movies, setMovies] = useState([])
+    const {data, isLoading, error} = useGetUpcomingMoviesQuery(1)
 
-    useEffect(() => {
-        getUpcomingMovies().then(data => {
-            setMovies(data.results.slice(0, 5))
-        })
-    }, []);
+    const movies = data?.results?.slice(0, 5) ?? [];
+
+    if (isLoading) return <div>Загрузка...</div>;
+    if (error) return <div>Ошибка загрузки</div>;
 
     return (
         <div className='flex flex-col gap-12.5 p-12'>
@@ -33,10 +31,10 @@ export const UpcomingMovies = () => {
             </div>
             <div className='flex justify-between gap-7.5'>
                 {movies.map((movie: MovieInterface) => (
-                    <div className='flex flex-col items-center rounded-2xl p-5'
+                    <div key={movie.id} className='flex flex-col items-center rounded-2xl p-5'
                          style={{backgroundColor: "var(--black-15)"}}>
                         <div className="relative rounded-2xl overflow-hidden">
-                            <div key={movie.id} className="flex">
+                            <div className="flex">
                                 <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={`Image ${movie.original_title}`}
                                      className="rounded-lg object-cover" style={{width: '243px', height: '281px'}}/>
                             </div>

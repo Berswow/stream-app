@@ -1,16 +1,13 @@
 import {Clock3, Star} from "lucide-react";
-import {useEffect, useState} from "react";
-import {getNowPlayingMovies} from "@/services/tmdb.ts";
 import {MovieInterface} from "@/Interface/MovieInterface.ts";
+import {useGetNowPlayingMoviesQuery} from "@/services/tmdb/moviesApi.ts";
 
 export const NowPlayingMovies = () => {
-    const [movies, setMovies] = useState([])
+    const {data, isLoading, error} = useGetNowPlayingMoviesQuery(1)
+    const movies = data?.results?.slice(0, 4) ?? [];
 
-    useEffect(() => {
-        getNowPlayingMovies().then(data => {
-            setMovies(data.results.slice(0, 4))
-        })
-    }, []);
+    if (isLoading) return <div>Загрузка...</div>;
+    if (error) return <div>Ошибка загрузки</div>;
 
     return (
         <div className='flex flex-col gap-12.5 p-12'>

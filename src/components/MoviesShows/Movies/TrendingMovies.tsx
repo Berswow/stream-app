@@ -1,16 +1,12 @@
-import {Clock3, Eye} from "lucide-react";
-import {useEffect, useState} from "react";
-import {getTrending} from "@/services/tmdb.ts";
 import {MovieInterface} from "@/Interface/MovieInterface.ts";
-
+import {useGetTrendingMoviesQuery} from "@/services/tmdb/moviesApi.ts";
+import {Clock3, Eye} from "lucide-react";
 export const TrendingMovies = () => {
-    const [movies, setMovies] = useState([])
+    const {data, isLoading, error} = useGetTrendingMoviesQuery({time_window: 'day', page: 2})
+    const movies = data?.results?.slice(0, 5) ?? [];
 
-    useEffect(() => {
-        getTrending('movie', 'day').then(data => {
-            setMovies(data.results.slice(0, 5))
-        })
-    }, [])
+    if (isLoading) return <div>Загрузка...</div>;
+    if (error) return <div>Ошибка загрузки</div>;
 
     return (
         <div className='flex flex-col gap-12.5 p-12'>
@@ -47,7 +43,7 @@ export const TrendingMovies = () => {
                             <div className='flex gap-0.5 rounded-2xl p-1.5 bg-neutral-900'>
                                 <Clock3/><p>1h 30min</p>
                             </div>
-                            <div className='flex gap 0.5 rounded-2xl p-1.5 bg-neutral-900'>
+                            <div className='flex gap-0.5 rounded-2xl p-1.5 bg-neutral-900'>
                                 <Eye/><p>2K</p>
                             </div>
                         </div>

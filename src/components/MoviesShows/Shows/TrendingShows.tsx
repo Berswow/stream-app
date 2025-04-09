@@ -1,7 +1,14 @@
-import {imageShowsTrendArray} from "@/utils/images.ts";
 import {Clock3, Eye} from "lucide-react";
+import { useGetTrendingTVQuery} from "@/services/tmdb/tvApi.ts";
+import {ShowInterface} from "@/Interface/ShowInterface.ts";
 
 export const TrendingShows = () => {
+    const {data, isLoading, error} = useGetTrendingTVQuery(1)
+    const shows = data?.results?.slice(0, 4) ?? [];
+
+    if (isLoading) return <div>Загрузка...</div>;
+    if (error) return <div>Ошибка загрузки</div>;
+
     return (
         <div className='flex flex-col gap-12.5 p-12'>
             <div className='flex justify-between items-center'>
@@ -22,12 +29,14 @@ export const TrendingShows = () => {
                 </div>
             </div>
             <div className='flex justify-between gap-7.5'>
-                {[...new Array(4)].map((_, i) => (
+                {shows.map((show: ShowInterface) => (
                     <div className='flex flex-col items-center rounded-2xl p-5'
                          style={{backgroundColor: "var(--black-15)"}}>
                         <div className="relative rounded-2xl overflow-hidden">
-                            <div key={i} className="flex">
-                                <img src={imageShowsTrendArray[i]} alt={`Image ${i}`} className="rounded-lg"/>
+                            <div key={show.id} className="flex">
+                                <img src={`https://image.tmdb.org/t/p/w500${show.poster_path}`}
+                                     alt={`Image ${show.original_name}`} className="rounded-lg object-cover"
+                                     style={{width: '320px', height: '404px'}}/>
                             </div>
                             <div
                                 className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"/>
