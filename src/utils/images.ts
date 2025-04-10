@@ -1,4 +1,4 @@
-/************** Category ******************/
+/************** CategoryBlock ******************/
 
 const imagesAction = import.meta.glob<{
     default: string

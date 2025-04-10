@@ -10,7 +10,7 @@ export const OnTheAir = () => {
     if (error) return <div>Ошибка загрузки</div>;
 
     return (
-        <div className='flex flex-col gap-12.5 p-12'>
+        <div className='flex flex-col gap-12.5'>
             <div className='flex justify-between items-center'>
                 <div className='flex flex-col gap-3.5'>
                     <h2>On The Air</h2>

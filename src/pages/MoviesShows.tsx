@@ -1,97 +1,56 @@
-import { lazy} from "react";
 import { Button } from "@/components/ui/button.tsx";
-import { useInViewObserver } from "@/utils/hooks/useInViewObserver.ts";
-
-const LazyHero = lazy(() => import("@/components/MoviesShows/Hero.tsx").then((module) => ({ default: module.Hero })));
-const LazyCategory = lazy(() => import("@/components/Home/Category.tsx").then((module) => ({ default: module.Category })));
-const LazyTrendingMovies = lazy(() => import("@/components/MoviesShows/Movies/TrendingMovies.tsx").then((module) => ({ default: module.TrendingMovies })));
-const LazyNewReleasesMovies = lazy(() => import("@/components/MoviesShows/Movies/UpcomingMovies.tsx").then((module) => ({ default: module.UpcomingMovies })));
-const LazyMustWatchMovies = lazy(() => import("@/components/MoviesShows/Movies/NowPlayingMovies.tsx").then((module) => ({ default: module.NowPlayingMovies })));
-const LazyTrendingShows = lazy(() => import("@/components/MoviesShows/Shows/TrendingShows.tsx").then((module) => ({ default: module.TrendingShows })));
-const LazyNewReleasesShows = lazy(() => import("@/components/MoviesShows/Shows/AiringToday.tsx").then((module) => ({ default: module.AiringToday })));
-const LazyMustWatchShows = lazy(() => import("@/components/MoviesShows/Shows/OnTheAir.tsx").then((module) => ({ default: module.OnTheAir })));
+import { Hero } from "@/components/MoviesShows/Hero.tsx";
+import { TrendingMovies } from "@/components/MoviesShows/Movies/TrendingMovies.tsx";
+import { UpcomingMovies } from "@/components/MoviesShows/Movies/UpcomingMovies.tsx";
+import { NowPlayingMovies } from "@/components/MoviesShows/Movies/NowPlayingMovies.tsx";
+import { TrendingShows } from "@/components/MoviesShows/Shows/TrendingShows.tsx";
+import { AiringToday } from "@/components/MoviesShows/Shows/AiringToday.tsx";
+import { OnTheAir } from "@/components/MoviesShows/Shows/OnTheAir.tsx";
+import {PopularMovies} from "@/components/MoviesShows/Movies/PopularMovies.tsx";
+import {PopularShows} from "@/components/MoviesShows/Shows/PopularShows.tsx";
 
 export const MoviesShows = () => {
-    const heroObserver = useInViewObserver();
-    const movieCategoryObservers = [useInViewObserver(), useInViewObserver()];
-    const showCategoryObservers = [useInViewObserver(), useInViewObserver()];
-    const trendingMoviesObserver = useInViewObserver();
-    const newReleasesMoviesObserver = useInViewObserver();
-    const mustWatchMoviesObserver = useInViewObserver();
-    const trendingShowsObserver = useInViewObserver();
-    const newReleasesShowsObserver = useInViewObserver();
-    const mustWatchShowsObserver = useInViewObserver();
-
     return (
         <main>
-            <div ref={heroObserver.ref} className="min-h-[60vh] flex justify-center items-center">
-                {heroObserver.isVisible && <LazyHero />}
+            <div className="min-h-[60vh] flex justify-center items-center">
+                <Hero />
             </div>
 
-            {heroObserver.isVisible && (
-                <section className="flex flex-col gap-25 mt-25">
-                    <fieldset className="border border-gray-700 rounded-xl">
-                        <legend className="ml-10">
-                            <Button className="h-12.5">Movies</Button>
-                        </legend>
+            <section className="flex flex-col gap-25 mt-25">
+                <fieldset className="border border-gray-700 rounded-xl">
+                    <legend className="ml-10">
+                        <Button className="h-12.5">Movies</Button>
+                    </legend>
+                    <div className="flex justify-center items-center">
+                        <PopularMovies />
+                    </div>
+                    <div className="flex justify-center items-center">
+                        <TrendingMovies />
+                    </div>
 
-                        {["Our Genres", "Popular Top 10 In Genres"].map((title, index) => (
-                            <div
-                                key={index}
-                                ref={movieCategoryObservers[index].ref}
-                                className="flex justify-center items-center p-12"
-                            >
-                                {movieCategoryObservers[index].isVisible && (
-                                    <LazyCategory title={title} description="" />
-                                )}
-                            </div>
-                        ))}
+                    <div className="flex justify-center items-center">
+                        <UpcomingMovies />
+                    </div>
 
-                        <div ref={trendingMoviesObserver.ref} className="flex justify-center items-center">
-                            {trendingMoviesObserver.isVisible && <LazyTrendingMovies />}
-                        </div>
+                    <div className="flex justify-center items-center">
+                        <NowPlayingMovies />
+                    </div>
+                </fieldset>
+            </section>
 
-                        <div ref={newReleasesMoviesObserver.ref} className="flex justify-center items-center">
-                            {newReleasesMoviesObserver.isVisible && <LazyNewReleasesMovies />}
-                        </div>
-
-                        <div ref={mustWatchMoviesObserver.ref} className="flex justify-center items-center">
-                            {mustWatchMoviesObserver.isVisible && <LazyMustWatchMovies />}
-                        </div>
-                    </fieldset>
-                </section>
-            )}
-                <section className="flex flex-col gap-25 mt-25">
-                    <fieldset className="border border-gray-700 rounded-xl p-12">
-                        <legend className="ml-10">
-                            <Button className="h-12.5">Shows</Button>
-                        </legend>
-
-                        {["Our Genres", "Popular Top 10 In Genres"].map((title, index) => (
-                            <div
-                                key={index}
-                                ref={showCategoryObservers[index].ref}
-                                className="p-12"
-                            >
-                                {showCategoryObservers[index].isVisible && (
-                                    <LazyCategory title={title} description="" />
-                                )}
-                            </div>
-                        ))}
-
-                        <div ref={trendingShowsObserver.ref}>
-                            {trendingShowsObserver.isVisible && <LazyTrendingShows />}
-                        </div>
-
-                        <div ref={newReleasesShowsObserver.ref}>
-                            {newReleasesShowsObserver.isVisible && <LazyNewReleasesShows />}
-                        </div>
-
-                        <div ref={mustWatchShowsObserver.ref}>
-                            {mustWatchShowsObserver.isVisible && <LazyMustWatchShows />}
-                        </div>
-                    </fieldset>
-                </section>
+            <section className="flex flex-col gap-25 mt-25">
+                <fieldset className="border border-gray-700 rounded-xl p-12">
+                    <legend className="ml-10">
+                        <Button className="h-12.5">Shows</Button>
+                    </legend>
+                    <div className='p-12'>
+                        <PopularShows />
+                        <TrendingShows />
+                        <AiringToday />
+                        <OnTheAir />
+                    </div>
+                </fieldset>
+            </section>
         </main>
     );
 };

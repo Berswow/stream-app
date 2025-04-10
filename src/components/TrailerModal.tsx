@@ -1,6 +1,5 @@
-import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { X } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import {Dialog, DialogContent} from "@/components/ui/dialog";
+import {motion, AnimatePresence} from "framer-motion";
 
 interface TrailerModalProps {
     trailerKey: string | null;
@@ -8,7 +7,7 @@ interface TrailerModalProps {
     onClose: () => void;
 }
 
-export const TrailerModal = ({ trailerKey, isOpen, onClose }: TrailerModalProps) => {
+export const TrailerModal = ({trailerKey, isOpen, onClose}: TrailerModalProps) => {
     return (
         <AnimatePresence>
             {isOpen && (
@@ -18,19 +17,12 @@ export const TrailerModal = ({ trailerKey, isOpen, onClose }: TrailerModalProps)
                         onPointerDownOutside={onClose}
                     >
                         <motion.div
-                            initial={{ opacity: 0, y: 40 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: 40 }}
-                            transition={{ duration: 0.3 }}
+                            initial={{opacity: 0, y: 40}}
+                            animate={{opacity: 1, y: 0}}
+                            exit={{opacity: 0, y: 40}}
+                            transition={{duration: 0.3}}
                             className="relative w-full aspect-video"
                         >
-                            <button
-                                onClick={onClose}
-                                className="absolute top-3 right-3 z-50 text-white bg-black/50 rounded-full p-2 hover:bg-black/70 transition"
-                            >
-                                <X size={24} />
-                            </button>
-
                             {trailerKey ? (
                                 <iframe
                                     className="w-full h-full rounded-xl"
@@ -40,7 +32,8 @@ export const TrailerModal = ({ trailerKey, isOpen, onClose }: TrailerModalProps)
                                     allowFullScreen
                                 />
                             ) : (
-                                <div className="w-full h-full bg-black rounded-xl flex items-center justify-center text-white">
+                                <div
+                                    className="w-full h-full bg-black rounded-xl flex items-center justify-center text-white">
                                     Трейлер не найден
                                 </div>
                             )}

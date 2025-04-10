@@ -1,6 +1,4 @@
-// services/tmdb/genresApi.ts
-import { tmdbApi } from './tmdbApi';
-
+import {tmdbApi} from './tmdbApi';
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
 export const genresApi = tmdbApi.injectEndpoints({
@@ -15,4 +13,7 @@ export const genresApi = tmdbApi.injectEndpoints({
     overrideExisting: false,
 });
 
-export const { useGetMovieGenresQuery, useGetTVGenresQuery } = genresApi;
+export const {
+    useGetMovieGenresQuery,
+    useGetTVGenresQuery,
+} = genresApi;

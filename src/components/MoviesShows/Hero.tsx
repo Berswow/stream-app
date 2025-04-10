@@ -18,10 +18,12 @@ export const Hero = () => {
     const [emblaReady, setEmblaReady] = useState(false);
 
     const { data: popularMovies, isLoading: isLoadingPopular, error: errorPopular } = useGetPopularMoviesQuery(1);
-    const moviesList = popularMovies ?? [];
+    const moviesList = (popularMovies || []).slice(0, 5);
     const currentMovie: MovieInterface = moviesList[currentSlide] || {};
 
-    const { data: MovieTrailer } = useGetMovieTrailerQuery(currentMovie.id)
+    const { data: MovieTrailer } = useGetMovieTrailerQuery(currentMovie.id, {
+        skip: !currentMovie?.id,
+    });
 
     useEffect(() => {
         setTrailerKey(MovieTrailer ?? null)
