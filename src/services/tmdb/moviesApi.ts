@@ -55,17 +55,20 @@ export const moviesApi = tmdbApi.injectEndpoints({
                 return trailer?.key ?? null
             }
         }),
-        getPopularActionMovies: builder.query<MovieInterface[], void>({
-            query: () => ({
+        getPopularActionMovies: builder.query<MovieInterface[], { sort_by?: string, release_date?: string } >({
+            query: ({ sort_by = 'popularity.desc', release_date = '' }) => ({
                 url: 'discover/movie',
                 params: {
                     with_genres: 28,
-                    sort_by: 'popularity.desc',
+                    sort_by,
+                    release_date,
+                    certification_country: 'US',
+                    language: 'en-US',
                     page: 1
                 }
             }),
             transformResponse: (response: TMDBResponse<MovieInterface>) => {
-                return response.results
+               return  response.results.filter(movie => movie.poster_path)
             }
         }),
         getPopularAdventureMovies: builder.query<MovieInterface[], void>({
