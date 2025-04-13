@@ -1,20 +1,14 @@
 import { CategoryBlock } from "@/components/CategoryBlock.tsx";
 import { MovieInterface } from "@/Interface/MovieInterface";
-import {
-    useGetPopularActionMoviesQuery,
-    useGetPopularAdventureMoviesQuery,
-    useGetPopularComedyMoviesQuery,
-    useGetPopularDramaMoviesQuery,
-    useGetPopularHorrorMoviesQuery
-} from "@/services/tmdb/moviesApi.ts";
 import {useGenreQueries} from "@/utils/hooks/useGenreQueries.ts";
+import {useGetFilteredMoviesQuery} from "@/services/tmdb/filterApi.ts";
 
 const queries = [
-    { genre: "Action", hook: useGetPopularActionMoviesQuery },
-    { genre: "Adventure", hook: useGetPopularAdventureMoviesQuery },
-    { genre: "Comedy", hook: useGetPopularComedyMoviesQuery },
-    { genre: "Drama", hook: useGetPopularDramaMoviesQuery },
-    { genre: "Horror", hook: useGetPopularHorrorMoviesQuery }
+    { genre: "Action", hook: useGetFilteredMoviesQuery },
+    { genre: "Adventure", hook: useGetFilteredMoviesQuery },
+    { genre: "Comedy", hook: useGetFilteredMoviesQuery },
+    { genre: "Drama", hook: useGetFilteredMoviesQuery },
+    { genre: "Horror", hook: useGetFilteredMoviesQuery }
 ];
 
 export const PopularMovies = () => {

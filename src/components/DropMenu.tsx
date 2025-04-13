@@ -20,10 +20,13 @@ import {
     setSort
 } from "@/redux/slices/filterSlice.ts";
 import {GENRES} from "@/constants/genres.ts";
+import {YEARS} from '@/constants/years.ts'
 
-const years = [2025, 2024, 2023, 2022, 2021, 2020];
+interface DropMenuProps {
+    baseGenreId: number; // базовый жанр, который всегда активен
+}
 
-export const DropMenu = () => {
+export const DropMenu = ({ baseGenreId }: DropMenuProps) => {
     const dispatch = useDispatch()
 
     const sortValue = useSelector(selectSortFilter)
@@ -31,7 +34,10 @@ export const DropMenu = () => {
     const originalLanguageValue = useSelector(selectOriginalLanguageFilter)
     const selectedGenres = useSelector(selectGenresFilter)
 
-    console.log(selectedGenres)
+    const normalizedGenres = selectedGenres.includes(baseGenreId)
+        ? selectedGenres
+        : [...selectedGenres, baseGenreId];
+
 
     const handleLanguageChange = (code: string) => {
         let updated;
@@ -60,6 +66,8 @@ export const DropMenu = () => {
     };
 
     const handleGenreChange = (id: number) => {
+        if (id === baseGenreId) return; // Нельзя удалить базовый жанр
+
         const updated = selectedGenres.includes(id)
             ? selectedGenres.filter(g => g !== id)
             : [...selectedGenres, id];
@@ -90,10 +98,11 @@ export const DropMenu = () => {
                     {GENRES.map(({ id, name }) => (
                         <DropdownMenuCheckboxItem
                             key={id}
-                            checked={selectedGenres.includes(id)}
-                            onCheckedChange={() => handleGenreChange(Number(id))}
+                            checked={normalizedGenres.includes(id)}
+                            onCheckedChange={() => handleGenreChange(id)}
+                            disabled={id === baseGenreId}
                         >
-                            {name}
+                            {name} {id === baseGenreId && "🔒"}
                         </DropdownMenuCheckboxItem>
                     ))}
                 </DropdownMenuContent>
@@ -125,7 +134,7 @@ export const DropMenu = () => {
                 <DropdownMenuContent className="w-56">
                     <DropdownMenuLabel>Choose year</DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    {years.map(year => (
+                    {YEARS.map(year => (
                         <DropdownMenuCheckboxItem
                             key={year}
                             checked={releasedDateValue?.includes(year) || false}
