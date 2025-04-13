@@ -30,10 +30,10 @@ export const NowPlayingMovies = () => {
             </div>
             <div className='flex justify-between gap-5'>
                 {movies.map((movie: MovieInterface) => (
-                    <div className='flex flex-col items-center rounded-2xl p-5'
+                    <div key={movie.id} className='flex flex-col items-center rounded-2xl p-5'
                          style={{backgroundColor: "var(--black-15)"}}>
                         <div className="relative rounded-2xl overflow-hidden">
-                            <div key={movie.id} className="flex">
+                            <div className="flex">
                                 <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={`Image ${movie.original_title}`}
                                 className="rounded-lg object-cover" style={{width: '319px', height: '404px'}}/>
                             </div>

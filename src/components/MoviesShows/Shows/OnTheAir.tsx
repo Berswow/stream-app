@@ -30,10 +30,10 @@ export const OnTheAir = () => {
             </div>
             <div className='flex justify-between gap-5'>
                 {shows.map((show: ShowInterface) => (
-                    <div className='flex flex-col items-center rounded-2xl p-5'
+                    <div key={show.id} className='flex flex-col items-center rounded-2xl p-5'
                          style={{backgroundColor: "var(--black-15)"}}>
                         <div className="relative rounded-2xl overflow-hidden">
-                            <div key={show.id} className="flex">
+                            <div className="flex">
                                 <img src={`https://image.tmdb.org/t/p/w500${show.poster_path}`}
                                      alt={`Image ${show.original_name}`} className="rounded-lg object-cover"
                                      style={{width: '320px', height: '404px'}}/>

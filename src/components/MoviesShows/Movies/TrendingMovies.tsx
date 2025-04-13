@@ -2,7 +2,7 @@ import {MovieInterface} from "@/Interface/MovieInterface.ts";
 import {useGetTrendingMoviesQuery} from "@/services/tmdb/moviesApi.ts";
 import {Clock3, Eye} from "lucide-react";
 export const TrendingMovies = () => {
-    const {data, isLoading, error} = useGetTrendingMoviesQuery({time_window: 'day', page: 2})
+    const {data, isLoading, error} = useGetTrendingMoviesQuery({time_window: 'day', page: 1})
     const movies = data?.results?.slice(0, 5) ?? [];
 
     if (isLoading) return <div>Загрузка...</div>;
@@ -29,15 +29,14 @@ export const TrendingMovies = () => {
             </div>
             <div className='flex justify-between gap-7.5'>
                 {movies.map((movie: MovieInterface) => (
-                    <div className='flex flex-col items-center rounded-2xl p-5'
+                    <div key={movie.id} className='flex flex-col items-center rounded-2xl p-5'
                          style={{backgroundColor: "var(--black-15)"}}>
                         <div className="relative rounded-2xl overflow-hidden">
-                            <div key={movie.id} className="flex">
+                            <div className="flex">
                                 <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={`Image ${movie.original_title}`}
                                      className="rounded-lg object-cover" style={{width: '243px', height: '281px'}}/>
                             </div>
-                            <div
-                                className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"/>
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"/>
                         </div>
                         <div className='flex justify-between w-full text-[16px] pt-5'>
                             <div className='flex gap-0.5 rounded-2xl p-1.5 bg-neutral-900'>
