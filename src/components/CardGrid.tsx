@@ -2,15 +2,24 @@ import {MovieInterface} from "@/Interface/MovieInterface.ts";
 import {DropMenu} from "@/components/DropMenu.tsx";
 import {useGetPopularActionMoviesQuery} from "@/services/tmdb/moviesApi.ts";
 import {useSelector} from "react-redux";
-import {selectReleaseDateFilter, selectSortFilter} from "@/redux/slices/filterSlice.ts";
+import {
+    selectGenresFilter,
+    selectOriginalLanguageFilter,
+    selectReleaseDateFilter,
+    selectSortFilter
+} from "@/redux/slices/filterSlice.ts";
 
-export const CardBlock = () => {
+
+
+
+export const CardGrid = () => {
     const sort_by = useSelector(selectSortFilter)
-    const release_date = useSelector(selectReleaseDateFilter)
+    const release_years = useSelector(selectReleaseDateFilter)
+    const languages = useSelector(selectOriginalLanguageFilter)
+    const genres = useSelector(selectGenresFilter)
 
-    console.log(release_date)
 
-    const {data, isLoading, error} = useGetPopularActionMoviesQuery({ sort_by })
+    const {data, isLoading, error} = useGetPopularActionMoviesQuery({ sort_by, release_years, languages, genres })
     const movies = data ?? [];
 
 

@@ -1,7 +1,7 @@
 // import {Hero} from "@/components/Support/Hero.tsx";
 import {Faq} from "@/components/Home/Faq.tsx";
 // import {SupportForm} from "@/components/Support/SupportForm.tsx";
-import {CardBlock} from "@/components/CardBlock.tsx";
+import {CardGrid} from "@/components/CardGrid.tsx";
 
 export const Support = () => {
     return (
@@ -10,7 +10,7 @@ export const Support = () => {
             {/*    <Hero/>*/}
             {/*    <SupportForm/>*/}
             {/*</div>*/}
-            <CardBlock/>
+            <CardGrid/>
             <Faq/>
         </main>
     );

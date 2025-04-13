@@ -3,14 +3,16 @@ import {RootState} from "@/redux/store.ts";
 
 interface filterInterface {
     release_date: number[] | null;
-    original_language: string;
+    original_language: string[];
+    genres: number[];
     sort: string;
 
 }
 
 const initialState: filterInterface = {
     release_date: [2025],
-    original_language: '',
+    original_language: ['en'],
+    genres: [],
     sort: 'popularity.desc'
 }
 
@@ -21,20 +23,24 @@ const filterSlice = createSlice({
         setReleaseDate: (state, action: PayloadAction<number[]>) => {
             return {...state, release_date: action.payload}
         },
-        setOriginalLanguage: (state, action: PayloadAction<string>) => {
+        setOriginalLanguage: (state, action: PayloadAction<string[]>) => {
             state.original_language = action.payload;
         },
         setSort: (state, action: PayloadAction<string>) => {
             state.sort = action.payload;
         },
+        setGenres: (state, action: PayloadAction<number[]>) => {
+            state.genres = action.payload
+        }
     },
 })
 
-export const {setSort, setOriginalLanguage, setReleaseDate} = filterSlice.actions
+export const {setSort, setOriginalLanguage, setReleaseDate, setGenres} = filterSlice.actions
 
-export const selectReleaseDateFilter = (state: RootState) => state.filter.release_date
+export const selectReleaseDateFilter = (state: RootState) => state.filter.release_date ?? undefined
 export const selectOriginalLanguageFilter = (state: RootState) => state.filter.original_language
 export const selectSortFilter = (state: RootState) => state.filter.sort
+export const selectGenresFilter = (state: RootState) => state.filter.genres
 
 
 export default filterSlice.reducer
