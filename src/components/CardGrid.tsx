@@ -1,5 +1,4 @@
 import {MovieInterface} from "@/Interface/MovieInterface.ts";
-import {DropMenu} from "@/components/DropMenu.tsx";
 import {useSelector} from "react-redux";
 import {
     selectGenresFilter,
@@ -8,6 +7,7 @@ import {
     selectSortFilter
 } from "@/redux/slices/filterSlice.ts";
 import {useGetFilteredMoviesQuery} from "@/services/tmdb/filterApi.ts";
+import {MovieFilterMenu} from "@/features/movie/MovieFilterMenu.tsx";
 
 
 
@@ -29,7 +29,8 @@ export const CardGrid = () => {
 
     return (
         <div className='flex flex-col gap-10'>
-            <DropMenu baseGenreId={28}/>
+            <MovieFilterMenu baseGenreId={28} />
+
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
                 {movies.map((movie: MovieInterface) => (
                     <div
