@@ -1,39 +1,26 @@
-import { useMemo } from "react";
-
 type GenreQueryHook<T> = () => {
-    data?: T[] | null;  // Можем явно указать, что data может быть null
+    data?: T[];
     isLoading: boolean;
-    error?: unknown;
+    isError: boolean;
 };
-
 type GenreQueries<T> = {
     genre: string;
     hook: GenreQueryHook<T>;
 }[];
 
-// Данный хук возвращает результаты нескольких запросов с типизацией
 export function useGenreQueries<T>(queries: GenreQueries<T>) {
     const results = queries.map(({ genre, hook }) => {
-        const { data, isLoading, error } = hook();
-        return {
-            genre,
-            data: data ? data.slice(0, 4) : [],  // Защищаем от null и undefined, используя пустой массив
-            isLoading,
-            error,
-        };
+        const { data, isLoading, isError } = hook();
+        return { genre, data, isLoading, isError };
     });
 
     const isLoading = results.some((r) => r.isLoading);
-    const isError = results.some((r) => r.error);
+    const isError = results.some((r) => r.isError);
 
-    // Мемоизация данных по жанрам для предотвращения лишних перерасчётов
-    const genreMap = useMemo(() => {
-        const map: Record<string, T[]> = {};
-        results.forEach(({ genre, data }) => {
-            map[genre] = data;
-        });
-        return map;
-    }, [results]);
+    const genreMap = results.reduce((acc, { genre, data }) => {
+        acc[genre] = data?.slice(0, 10) || [];
+        return acc;
+    }, {} as Record<string, T[]>);
 
     return { genreMap, isLoading, isError };
 }

@@ -4,15 +4,18 @@ import {useGenreQueries} from "@/utils/hooks/useGenreQueries.ts";
 import {useGetFilteredMoviesQuery} from "@/services/tmdb/filterApi.ts";
 
 const queries = [
-    { genre: "Action", hook: useGetFilteredMoviesQuery },
-    { genre: "Adventure", hook: useGetFilteredMoviesQuery },
-    { genre: "Comedy", hook: useGetFilteredMoviesQuery },
-    { genre: "Drama", hook: useGetFilteredMoviesQuery },
-    { genre: "Horror", hook: useGetFilteredMoviesQuery }
+    { genre: "Action", hook: () => useGetFilteredMoviesQuery({ genres: [28] }) },
+    { genre: "Adventure", hook: () => useGetFilteredMoviesQuery({ genres: [12] }) },
+    { genre: "Comedy", hook: () => useGetFilteredMoviesQuery({ genres: [35] }) },
+    { genre: "Drama", hook: () => useGetFilteredMoviesQuery({ genres: [18] }) },
+    { genre: "Horror", hook: () => useGetFilteredMoviesQuery({ genres: [27] }) }
 ];
+
 
 export const PopularMovies = () => {
     const { genreMap, isLoading, isError } = useGenreQueries<MovieInterface>(queries);
+
+    console.log(genreMap)
 
     if (isLoading) return <div>Загрузка...</div>;
     if (isError) return <div>Ошибка загрузки</div>;
