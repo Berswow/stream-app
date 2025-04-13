@@ -8,11 +8,11 @@ import {
     setOriginalLanguage,
     setReleaseDate,
     setSort
-} from "@/redux/slices/filterSlice";
-import { GENRES } from "@/constants/genres";
-import { LANGUAGES } from "@/constants/languages";
-import { YEARS } from "@/constants/years";
-import { FilterMenu } from "@/components/shared/FilterMenu";
+} from "@/redux/slices/filterSlice.ts";
+import {TV_GENRES} from "@/constants/genres.ts";
+import { LANGUAGES } from "@/constants/languages.ts";
+import { YEARS } from "@/constants/years.ts";
+import { FilterMenu } from "@/components/shared/FilterMenu.tsx";
 
 interface TvFilterMenuProps {
     baseGenreId: number;
@@ -58,7 +58,7 @@ export const TvFilterMenu = ({ baseGenreId }: TvFilterMenuProps) => {
 
     return (
         <FilterMenu
-            genres={GENRES}
+            genres={TV_GENRES}
             selectedGenres={selectedGenres}
             onGenreChange={handleGenreChange}
             baseGenreId={baseGenreId}

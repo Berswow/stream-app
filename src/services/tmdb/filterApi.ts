@@ -43,14 +43,13 @@ export const moviesApi = tmdbApi.injectEndpoints({
                     return { data: movies.filter(m => m.poster_path) };
                 }
 
-                const combinations =
-                    release_years.length && languages.length
-                        ? release_years.flatMap(year =>
-                            languages.map(lang => ({ year, lang }))
-                        )
-                        : release_years.length
-                            ? release_years.map(year => ({ year, lang: undefined }))
-                            : languages.map(lang => ({ year: undefined, lang }));
+// 👇 добавим fallback, если только один из массивов пуст
+                const years = release_years.length ? release_years : [undefined];
+                const langs = languages.length ? languages : [undefined];
+
+                const combinations = years.flatMap(year =>
+                    langs.map(lang => ({ year, lang }))
+                );
 
                 const responses = await Promise.all(
                     combinations.map(({ year, lang }) =>

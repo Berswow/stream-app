@@ -2,12 +2,14 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "@/redux/store.ts";
 
 interface filterInterface {
-    release_date: number[] | null;
+    release_date: number[];
     original_language: string[];
     genres: number[];
     sort: string;
 
 }
+
+
 
 const initialState: filterInterface = {
     release_date: [2025],
@@ -31,11 +33,14 @@ const filterSlice = createSlice({
         },
         setGenres: (state, action: PayloadAction<number[]>) => {
             state.genres = action.payload
-        }
+        },
+        setClearGenres: (state) => {
+            state.genres = []; // очищаем массив жанров
+        },
     },
 })
 
-export const {setSort, setOriginalLanguage, setReleaseDate, setGenres} = filterSlice.actions
+export const {setSort, setOriginalLanguage, setReleaseDate, setGenres, setClearGenres} = filterSlice.actions
 
 export const selectReleaseDateFilter = (state: RootState) => state.filter.release_date ?? undefined
 export const selectOriginalLanguageFilter = (state: RootState) => state.filter.original_language

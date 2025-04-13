@@ -1,21 +1,21 @@
 export const buildMovieParams = ({
                                      sort_by,
                                      primary_release_year,
+                                     original_language,
                                      with_genres,
-                                     original_language
                                  }: {
-    sort_by?: string;
+    sort_by: string;
     primary_release_year?: number;
-    with_genres?: string;
     original_language?: string;
+    with_genres?: string;
 }) => {
-    return {
+    const params: Record<string, string> = {
         sort_by,
-        with_genres,
-        primary_release_year,
-        with_original_language: original_language,
-        certification_country: 'US',
-        language: 'en-US',
-        page: 1
     };
+
+    if (primary_release_year) params.primary_release_year = String(primary_release_year);
+    if (original_language) params.with_original_language = original_language;
+    if (with_genres) params.with_genres = with_genres;
+
+    return params;
 };

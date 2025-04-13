@@ -11,7 +11,7 @@ const tabs = [
 
 export const Header = () => {
     const location = useLocation();
-    const activeTab = tabs.find(tab => tab.link === location.pathname)?.id || tabs[0].id;
+    const activeTab = tabs.find((tab) => location.pathname === tab.link)?.id;
 
     return (
         <header className="flex justify-between items-center pt-4 mb-12.5">

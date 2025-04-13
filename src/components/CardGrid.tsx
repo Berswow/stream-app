@@ -8,20 +8,27 @@ import {
 } from "@/redux/slices/filterSlice.ts";
 import {useGetFilteredMoviesQuery} from "@/services/tmdb/filterApi.ts";
 import {MovieFilterMenu} from "@/features/movie/MovieFilterMenu.tsx";
+import {useMemo} from "react";
 
+interface CardGridProps {
+    genreId: number;
+    // возможно, другие пропсы тоже есть
+}
 
-
-
-export const CardGrid = () => {
+export const CardGrid = ({genreId}: CardGridProps) => {
     const sort_by = useSelector(selectSortFilter)
     const release_years = useSelector(selectReleaseDateFilter)
     const languages = useSelector(selectOriginalLanguageFilter)
     const genres = useSelector(selectGenresFilter)
 
-
-    const {data, isLoading, error} = useGetFilteredMoviesQuery({ sort_by, release_years, languages, genres })
+    const queryParams = useMemo(() => ({
+        sort_by,
+        release_years,
+        languages,
+        genres
+    }), [sort_by, release_years, languages, genres]);
+    const { data, isLoading, error } = useGetFilteredMoviesQuery(queryParams);
     const movies = data ?? [];
-
 
     if (isLoading) return <div>Загрузка...</div>;
     if (error) return <div>Ошибка загрузки</div>;
@@ -29,7 +36,7 @@ export const CardGrid = () => {
 
     return (
         <div className='flex flex-col gap-10'>
-            <MovieFilterMenu baseGenreId={28} />
+            <MovieFilterMenu baseGenreId={genreId} />
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
                 {movies.map((movie: MovieInterface) => (

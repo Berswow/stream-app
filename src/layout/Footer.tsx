@@ -9,7 +9,7 @@ const footerData = [
     },
     {
         title: 'Shows',
-        items: ['Gernes', 'Trending', 'New Release', 'Popular'], // "Gernes" или "Genres"? Проверь опечатку.
+        items: ['Gernes', 'Trending', 'New Release', 'Popular'], // "Gernes" или "GenrePage"? Проверь опечатку.
     },
     {
         title: 'Support',

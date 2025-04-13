@@ -75,7 +75,7 @@ export const FilterMenu = ({
 
     return (
         <div className='grid grid-cols-4 gap-4'>
-            {/* Genres */}
+            {/* GenrePage */}
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                     <Button variant='outline' className='p-5 rounded-xl'>Genres</Button>
