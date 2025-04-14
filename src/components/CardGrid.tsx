@@ -79,7 +79,7 @@ export const CardGrid = ({ genreId }: CardGridProps) => {
                         </div>
                         <div className="w-full text-[16px] gap-2">
                             <div className="gap-0.5 rounded-xl p-3.5 bg-neutral-900 text-center">
-                                <p>{movie.title} {movie.release_date}</p>
+                                <p>{movie.title}</p>
                             </div>
                         </div>
                     </div>
