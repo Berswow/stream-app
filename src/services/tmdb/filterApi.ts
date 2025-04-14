@@ -8,43 +8,18 @@ interface TMDBResponse<T> {
 
 export const moviesApi = tmdbApi.injectEndpoints({
     endpoints: (builder) => ({
-        getFilteredMovies: builder.query<
-            MovieInterface[],
-            {
-                sort_by?: string;
-                release_years?: number[];
-                languages?: string[];
-                genres?: number[];
-                page?: number;
-            }
-        >({
-            async queryFn(
-                {
-                    sort_by = 'popularity.desc',
-                    release_years = [],
-                    languages = [],
-                    genres = [],
-                    page = 1
-                },
-                _queryApi,
-                _extraOptions,
-                fetchWithBQ
-            ) {
-                const buildParams = (year?: number, lang?: string) =>
-                    buildMovieParams({
-                        sort_by,
-                        primary_release_year: year,
-                        original_language: lang,
-                        with_genres: genres.join(','),
-                        page
-                    });
-
-                // Простой случай: без комбинаций языков/лет
+        getFilteredMovies: builder.query<MovieInterface[], {
+            sort_by?: string;
+            release_years?: number[];
+            languages?: string[];
+            genres?: number[];
+            page?: number;
+        }>({
+            async queryFn({ sort_by = 'popularity.desc', release_years = [], languages = [], genres = [], page = 1 }, _queryApi, _extraOptions, fetchWithBQ) {
+                // Если нет фильтров по языкам и годам — просто отправляем один запрос
                 if (!release_years.length && !languages.length) {
-                    const result = await fetchWithBQ({
-                        url: 'discover/movie',
-                        params: buildParams()
-                    });
+                    const params = buildMovieParams({ sort_by, with_genres: genres.join(','), page });
+                    const result = await fetchWithBQ({ url: 'discover/movie', params });
 
                     if (result.error) return { error: result.error };
 
@@ -52,27 +27,15 @@ export const moviesApi = tmdbApi.injectEndpoints({
                     return { data: movies.filter(m => m.poster_path) };
                 }
 
-                // Комбинированный случай
-                const years = release_years.length ? release_years : [undefined];
-                const langs = languages.length ? languages : [undefined];
-
-                const combinations = years.flatMap(year =>
-                    langs.map(lang => ({ year, lang }))
-                );
-
+                // Если есть комбинированные фильтры, делаем запросы по очереди
                 const responses = await Promise.all(
-                    combinations.map(({ year, lang }) =>
+                    languages.map(lang =>
                         fetchWithBQ({
                             url: 'discover/movie',
-                            params: buildParams(year, lang)
+                            params: buildMovieParams({ sort_by, with_genres: genres.join(','), original_language: lang, page })
                         })
                     )
                 );
-
-                const errorResponse = responses.find(res => res.error);
-                if (errorResponse && errorResponse.error) {
-                    return { error: errorResponse.error };
-                }
 
                 const allMovies = responses.flatMap(
                     res => (res.data as TMDBResponse<MovieInterface>).results ?? []
@@ -81,10 +44,9 @@ export const moviesApi = tmdbApi.injectEndpoints({
                 return { data: allMovies.filter(m => m.poster_path) };
             }
         }),
-
     }),
     overrideExisting: false
-})
+});
 
 export const { useGetFilteredMoviesQuery
 } = moviesApi

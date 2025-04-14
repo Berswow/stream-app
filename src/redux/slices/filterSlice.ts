@@ -12,7 +12,7 @@ interface filterInterface {
 
 
 const initialState: filterInterface = {
-    release_date: [2025],
+    release_date: [],
     original_language: ['en'],
     genres: [],
     sort: 'popularity.desc'
