@@ -32,7 +32,7 @@ interface FilterMenuProps {
     onLanguageChange: (code: string) => void;
 
     years: number[];
-    selectedYears: number[];
+    selectedYear: number | null;
     onYearChange: (year: number) => void;
 
     sort: string;
@@ -50,7 +50,7 @@ export const FilterMenu = ({
                                onLanguageChange,
 
                                years,
-                               selectedYears,
+                               selectedYear,
                                onYearChange,
 
                                sort,
@@ -116,7 +116,7 @@ export const FilterMenu = ({
                 </DropdownMenuContent>
             </DropdownMenu>
 
-            {/* Year */}
+            {/* Released date */}
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                     <Button variant='outline' className='p-5 rounded-xl'>Released date</Button>
@@ -124,15 +124,13 @@ export const FilterMenu = ({
                 <DropdownMenuContent className="w-56">
                     <DropdownMenuLabel>Choose year</DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    {years.map(year => (
-                        <DropdownMenuCheckboxItem
-                            key={year}
-                            checked={selectedYears.includes(year)}
-                            onCheckedChange={() => onYearChange(year)}
-                        >
-                            {year}
-                        </DropdownMenuCheckboxItem>
-                    ))}
+                    <DropdownMenuRadioGroup value={selectedYear?.toString()} onValueChange={(val) => onYearChange(Number(val))}>
+                        {years.map(year => (
+                            <DropdownMenuRadioItem key={year} value={year.toString()}>
+                                {year}
+                            </DropdownMenuRadioItem>
+                        ))}
+                    </DropdownMenuRadioGroup>
                 </DropdownMenuContent>
             </DropdownMenu>
 

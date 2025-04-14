@@ -23,7 +23,7 @@ export const MovieFilterMenu = ({ baseGenreId }: MovieFilterMenuProps) => {
     const dispatch = useDispatch();
 
     const sortValue = useSelector(selectSortFilter);
-    const releasedDateValue = useSelector(selectReleaseDateFilter) || [];
+    const releasedDateValue = useSelector(selectReleaseDateFilter);
     const originalLanguageValue = useSelector(selectOriginalLanguageFilter) || [];
     const rawSelectedGenres = useSelector(selectGenresFilter);
     const selectedGenres = useMemo(() => rawSelectedGenres || [], [rawSelectedGenres]);
@@ -43,11 +43,7 @@ export const MovieFilterMenu = ({ baseGenreId }: MovieFilterMenuProps) => {
     };
 
     const handleReleaseDateChange = (year: number) => {
-        const updated = releasedDateValue.includes(year)
-            ? releasedDateValue.filter(y => y !== year)
-            : [...releasedDateValue, year];
-
-        dispatch(setReleaseDate(updated));
+        dispatch(setReleaseDate(year));
     };
 
     const handleSortChange = (value: string) => {
@@ -76,7 +72,7 @@ export const MovieFilterMenu = ({ baseGenreId }: MovieFilterMenuProps) => {
             onLanguageChange={handleLanguageChange}
 
             years={YEARS}
-            selectedYears={releasedDateValue}
+            selectedYear={releasedDateValue}
             onYearChange={handleReleaseDateChange}
 
             sort={sortValue}

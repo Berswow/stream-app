@@ -17,7 +17,7 @@ interface CardGridProps {
 
 export const CardGrid = ({ genreId }: CardGridProps) => {
     const sort_by = useSelector(selectSortFilter);
-    const release_years = useSelector(selectReleaseDateFilter);
+    const release_year = useSelector(selectReleaseDateFilter);
     const languages = useSelector(selectOriginalLanguageFilter);
     const genres = useSelector(selectGenresFilter);
 
@@ -26,11 +26,11 @@ export const CardGrid = ({ genreId }: CardGridProps) => {
 
     const queryParams = useMemo(() => ({
         sort_by,
-        release_years,
+        release_year,
         languages,
         genres,
         page
-    }), [sort_by, release_years, languages, genres, page]);
+    }), [sort_by, release_year, languages, genres, page]);
 
     const { data, isLoading, isFetching, error } = useGetFilteredMoviesQuery(queryParams);
 
@@ -45,7 +45,7 @@ export const CardGrid = ({ genreId }: CardGridProps) => {
     useEffect(() => {
         setPage(1);
         setAllMovies([]);
-    }, [sort_by, release_years, languages, genres]);
+    }, [sort_by, release_year, languages, genres]);
 
     const loadMore = useCallback(() => {
         if (!isFetching) {
@@ -79,7 +79,7 @@ export const CardGrid = ({ genreId }: CardGridProps) => {
                         </div>
                         <div className="w-full text-[16px] gap-2">
                             <div className="gap-0.5 rounded-xl p-3.5 bg-neutral-900 text-center">
-                                <p>{movie.title}</p>
+                                <p>{movie.title} {movie.release_date}</p>
                             </div>
                         </div>
                     </div>
