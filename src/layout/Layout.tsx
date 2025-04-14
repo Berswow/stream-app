@@ -20,10 +20,14 @@ export const Layout = () => {
 
             <div className={`min-h-screen ${isHomePage ? "relative z-10" : ""}`}>
                 <div className="container">
-                    <Header/>
-                    <Outlet/>
-                    <CTA/>
-                    <Footer/>
+                    <div className='-mb-25 relative z-20'>
+                        <Header/>
+                    </div>
+                    <div className='flex flex-col gap-25'>
+                        <Outlet/>
+                        <CTA/>
+                        <Footer/>
+                    </div>
                 </div>
             </div>
             <Toaster/>

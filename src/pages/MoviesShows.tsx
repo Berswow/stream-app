@@ -19,11 +19,11 @@ export const MoviesShows = () => {
 
     return (
         <main>
-            <div className="min-h-[60vh] flex justify-center items-center">
+            <div className="flex justify-center">
                 <Hero />
             </div>
 
-            <section className="px-8 py-6">
+            <section className="px-8 py-6 my-50">
                 <h2 className="text-2xl font-semibold mb-4">Browse by Genre</h2>
                 <div className="flex flex-wrap gap-4">
                     {MOVIE_GENRES.map((genre) => (
