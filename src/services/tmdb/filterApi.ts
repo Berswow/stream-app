@@ -14,11 +14,18 @@ export const moviesApi = tmdbApi.injectEndpoints({
                 sort_by?: string;
                 release_years?: number[];
                 languages?: string[];
-                genres?: number[]; // универсальный жанр
+                genres?: number[];
+                page?: number;
             }
         >({
             async queryFn(
-                { sort_by = 'popularity.desc', release_years = [], languages = [], genres = [] },
+                {
+                    sort_by = 'popularity.desc',
+                    release_years = [],
+                    languages = [],
+                    genres = [],
+                    page = 1
+                },
                 _queryApi,
                 _extraOptions,
                 fetchWithBQ
@@ -28,9 +35,11 @@ export const moviesApi = tmdbApi.injectEndpoints({
                         sort_by,
                         primary_release_year: year,
                         original_language: lang,
-                        with_genres: genres.join(',') // универсально
+                        with_genres: genres.join(','),
+                        page
                     });
 
+                // Простой случай: без комбинаций языков/лет
                 if (!release_years.length && !languages.length) {
                     const result = await fetchWithBQ({
                         url: 'discover/movie',
@@ -43,7 +52,7 @@ export const moviesApi = tmdbApi.injectEndpoints({
                     return { data: movies.filter(m => m.poster_path) };
                 }
 
-// 👇 добавим fallback, если только один из массивов пуст
+                // Комбинированный случай
                 const years = release_years.length ? release_years : [undefined];
                 const langs = languages.length ? languages : [undefined];
 

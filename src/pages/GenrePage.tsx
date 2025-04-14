@@ -1,12 +1,12 @@
 import {CardGrid} from "@/components/CardGrid.tsx";
-import {useSelector} from "react-redux";
-import {selectGenresFilter} from "@/redux/slices/filterSlice.ts";
+import {useParams} from "react-router-dom";
 
 export const GenrePage = () => {
-    const genre = useSelector(selectGenresFilter)[0]
+    const { id } = useParams<{ id: string }>();
+    const genreId = Number(id);
     return (
         <div className='my-50'>
-            <CardGrid genreId={genre}/>
+            <CardGrid genreId={genreId}/>
         </div>
     );
 };
