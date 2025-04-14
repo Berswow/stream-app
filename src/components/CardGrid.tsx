@@ -62,9 +62,9 @@ export const CardGrid = ({ genreId }: CardGridProps) => {
             <MovieFilterMenu baseGenreId={genreId} />
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
-                {allMovies.map((movie: MovieInterface) => (
+                {allMovies.map((movie: MovieInterface, index: number) => (
                     <div
-                        key={movie.id}
+                        key={`${movie.id}-${index}`}
                         className="flex flex-col items-center rounded-2xl p-5 justify-between gap-2"
                         style={{ backgroundColor: "var(--black-15)" }}
                     >

@@ -15,8 +15,6 @@ const queries = [
 export const PopularMovies = () => {
     const { genreMap, isLoading, isError } = useGenreQueries<MovieInterface>(queries);
 
-    console.log(genreMap)
-
     if (isLoading) return <div>Загрузка...</div>;
     if (isError) return <div>Ошибка загрузки</div>;
 
