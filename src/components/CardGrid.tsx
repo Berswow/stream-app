@@ -10,6 +10,7 @@ import { useGetFilteredMoviesQuery } from "@/services/tmdb/filterApi.ts";
 import { MovieFilterMenu } from "@/features/movie/MovieFilterMenu.tsx";
 import { useEffect, useMemo, useState, useCallback } from "react";
 import { useInfiniteScroll } from "@/utils/hooks/useInfiniteScroll.ts";
+import {Link} from "react-router-dom";
 
 interface CardGridProps {
     genreId: number;
@@ -63,8 +64,9 @@ export const CardGrid = ({ genreId }: CardGridProps) => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
                 {allMovies.map((movie: MovieInterface, index: number) => (
-                    <div
+                    <Link
                         key={`${movie.id}-${index}`}
+                        to={`/movies/${movie.id}`}
                         className="flex flex-col items-center rounded-2xl p-5 justify-between gap-2"
                         style={{ backgroundColor: "var(--black-15)" }}
                     >
@@ -82,7 +84,7 @@ export const CardGrid = ({ genreId }: CardGridProps) => {
                                 <p>{movie.title}</p>
                             </div>
                         </div>
-                    </div>
+                    </Link>
                 ))}
 
                 {/* Триггер для скролла */}

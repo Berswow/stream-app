@@ -1,6 +1,6 @@
 import image from "../../assets/Support/image-container.png"
 
-export const Hero = () => {
+export const SupportHero = () => {
     return (
         <div className='flex flex-col max-w-[532px] justify-between'>
             <div className='flex flex-col gap-5'>

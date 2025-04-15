@@ -1,6 +1,7 @@
 import {tmdbApi} from "@/services/tmdb/tmdbApi.ts";
 import {MovieInterface} from "@/Interface/MovieInterface.ts";
 import {VideoInterface} from "@/Interface/VideoInterface.ts";
+import {MovieDetailed} from "@/Interface/MovieDetailInterface.ts";
 
 interface TMDBResponse<T> {
     results: T[];
@@ -55,6 +56,9 @@ export const moviesApi = tmdbApi.injectEndpoints({
                 return trailer?.key ?? null
             }
         }),
+        getMovieDetails: builder.query<MovieDetailed, string | number>({
+            query: (id) => `/movie/${id}`, // TMDb эндпоинт
+        }),
     }),
     overrideExisting: false
 })
@@ -64,5 +68,6 @@ export const {
     useGetUpcomingMoviesQuery,
     useGetNowPlayingMoviesQuery,
     useGetPopularMoviesQuery,
-    useGetMovieTrailerQuery
+    useGetMovieTrailerQuery,
+    useGetMovieDetailsQuery
 } = moviesApi

@@ -6,7 +6,7 @@ interface TMDBResponse<T> {
     results: T[];
 }
 
-export const moviesApi = tmdbApi.injectEndpoints({
+export const filterApi = tmdbApi.injectEndpoints({
     endpoints: (builder) => ({
         getFilteredMovies: builder.query<MovieInterface[], {
             sort_by?: string;
@@ -58,4 +58,4 @@ export const moviesApi = tmdbApi.injectEndpoints({
 });
 
 export const { useGetFilteredMoviesQuery
-} = moviesApi
+} = filterApi
