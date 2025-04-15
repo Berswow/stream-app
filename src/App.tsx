@@ -5,6 +5,7 @@ import {MoviesShows} from "@/pages/MoviesShows.tsx";
 import {Support} from "@/pages/Support.tsx";
 import {Subscriptions} from "@/pages/Subscriptions.tsx";
 import {GenrePage} from "@/pages/GenrePage.tsx";
+import {Movie} from "@/pages/Movie.tsx";
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
                 <Route path='support' element={<Support/>}/>
                 <Route path='subscriptions' element={<Subscriptions/>}/>
                 <Route path="movies/genre/:id" element={<GenrePage />} />
+                <Route path="movies/:id" element={<Movie />} />
             </Route>
         </Routes>
     </>

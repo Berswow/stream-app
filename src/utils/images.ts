@@ -25,18 +25,18 @@ const imagesHorror = import.meta.glob<{
 }>('../assets/home-category-images/horror/*.{png,jpg,jpeg,svg}', {eager: true});
 export const imageHorrorArray = Object.values(imagesHorror).map((img) => img.default);
 
-/************** Hero - MoviesShows ******************/
+/************** MovieHero - MoviesShows ******************/
 
 const images = import.meta.glob<{ default: string }>(
-    "../assets/MoviesShows/Hero/*.{png,jpg,jpeg,svg}",
+    "../assets/MoviesShows/MovieHero/*.{png,jpg,jpeg,svg}",
     {eager: true}
 );
 export const imagesArray = Object.values(images).map((img) => img.default);
 
-/************** Hero - OpenMovie ******************/
+/************** MovieHero - Movie ******************/
 
 // const images = import.meta.glob<{ default: string }>(
-//     "../assets/MoviesShows/Hero/*.{png,jpg,jpeg,svg}",
+//     "../assets/MoviesShows/MovieHero/*.{png,jpg,jpeg,svg}",
 //     {eager: true}
 // );
 // export const imagesArray = Object.values(images).map((img) => img.default);
