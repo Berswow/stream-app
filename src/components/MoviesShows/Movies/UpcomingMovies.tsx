@@ -1,5 +1,5 @@
 import {formatDate} from "@/utils/formatDate.ts";
-import {MovieInterface} from "@/Interface/MovieInterface.ts";
+import {MovieInterface} from "@/Interface/Movie/MovieInterface.ts";
 import {useGetUpcomingMoviesQuery} from "@/services/tmdb/moviesApi.ts";
 
 export const UpcomingMovies = () => {

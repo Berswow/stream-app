@@ -1,5 +1,5 @@
 import { CategoryBlock } from "@/components/CategoryBlock.tsx";
-import { MovieInterface } from "@/Interface/MovieInterface";
+import { MovieInterface } from "@/Interface/Movie/MovieInterface.ts";
 import {useGenreQueries} from "@/utils/hooks/useGenreQueries.ts";
 import {useGetFilteredMoviesQuery} from "@/services/tmdb/filterApi.ts";
 

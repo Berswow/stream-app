@@ -1,6 +1,22 @@
-import {Calendar, Languages, LayoutGrid, Music, Star, Video} from "lucide-react";
+import {Calendar, LayoutGrid, Music, Star, Video} from "lucide-react";
+import {useGetMovieCastQuery} from "@/services/tmdb/moviesApi.ts";
+import {MovieDetailed} from "@/Interface/Movie/MovieDetailInterface.ts";
+import {FC} from "react";
+import {formatDate} from "@/utils/formatDate.ts";
 
-export const MovieStats = () => {
+
+interface MovieStatsProps {
+    movieId: number;
+    movie: MovieDetailed;
+}
+
+export const MovieStats: FC<MovieStatsProps> = ({movieId, movie}) => {
+    const {data} = useGetMovieCastQuery(movieId);
+
+    const directors = data?.crew.directors;
+    const producers = data?.crew.producers;
+
+
     return (
         <div className='flex flex-col max-w-[519px] rounded-xl p-12.5 gap-7.5'
              style={{backgroundColor: "var(--black-15)"}}>
@@ -8,32 +24,13 @@ export const MovieStats = () => {
 
             <div className='flex flex-col gap-3.5'>
                 <div className='flex items-center gap-1' style={{color: "var(--grey-60)"}}>
-                    <Calendar size={24}/><h4 style={{color: "var(--grey-60)"}}>Released Year</h4>
+                    <Calendar size={24}/><h4 style={{color: "var(--grey-60)"}}>Released Date</h4>
                 </div>
                 <div>
-                    <p>2022</p>
+                    <p>{formatDate(movie.release_date)}</p>
                 </div>
             </div>
 
-            {/*Available Languages*/}
-
-            <div className='flex flex-col gap-3.5'>
-                <div className='flex items-center gap-1' style={{color: "var(--grey-60)"}}>
-                    <Languages size={24}/><h4 style={{color: "var(--grey-60)"}}>Available Languages</h4>
-                </div>
-                <div className='flex flex-wrap gap-2.5'>
-                    <p className='py-2 px-3.5 rounded-xl border border-neutral-700 text-center'
-                       style={{backgroundColor: "var(--black-08)"}}>English</p>
-                    <p className='py-2 px-3.5 rounded-xl border border-neutral-700 text-center'
-                       style={{backgroundColor: "var(--black-08)"}}>Hindi</p>
-                    <p className='py-2 px-3.5 rounded-xl border border-neutral-700 text-center'
-                       style={{backgroundColor: "var(--black-08)"}}>Tamil</p>
-                    <p className='py-2 px-3.5 rounded-xl border border-neutral-700 text-center'
-                       style={{backgroundColor: "var(--black-08)"}}>Telegu</p>
-                    <p className='py-2 px-3.5 rounded-xl border border-neutral-700 text-center'
-                       style={{backgroundColor: "var(--black-08)"}}>Kannada</p>
-                </div>
-            </div>
 
             {/*Ratings*/}
 
@@ -71,12 +68,15 @@ export const MovieStats = () => {
                 <div className='flex items-center gap-1' style={{color: "var(--grey-60)"}}>
                     <LayoutGrid size={24}/><h4 style={{color: "var(--grey-60)"}}>Gernes</h4>
                 </div>
-                <div className='flex gap-2.5'>
-                    <p className='py-2 px-3.5 rounded-xl border border-neutral-700 text-center'
-                       style={{backgroundColor: "var(--black-08)"}}>Action</p>
-                    <p className='py-2 px-3.5 rounded-xl border border-neutral-700 text-center'
-                       style={{backgroundColor: "var(--black-08)"}}>Adventure</p>
+
+                <div className='flex flex-wrap gap-2.5'>
+                    {movie.genres.map(genre => (
+                        <p key={genre.id} className='py-2 px-3.5 rounded-xl border border-neutral-700 text-center'
+                           style={{backgroundColor: "var(--black-08)"}}>{genre.name}</p>
+                    ))}
                 </div>
+
+
             </div>
 
             {/*Director*/}
@@ -86,29 +86,57 @@ export const MovieStats = () => {
                     <Video size={24}/><h4 style={{color: "var(--grey-60)"}}>Director</h4>
                 </div>
 
-                <div className='flex gap-2.5 rounded-xl items-center p-3.5' style={{backgroundColor: "var(--black-08)"}}>
-                    <div className='w-[56px] h-[60px] bg-neutral-500 rounded-xl text-center'>img</div>
-                    <div className='flex flex-col'>
-                        <h4>Rishab Shetty</h4>
-                        <p>From India</p>
+                {directors?.map(director => (
+                    <div key={director.id} className='flex gap-2.5 rounded-xl items-center p-3.5'
+                         style={{backgroundColor: "var(--black-08)"}}>
+                        <div className="w-[56px] h-[60px] rounded-xl overflow-hidden">
+                            {director.profile_path ? (
+                                <img
+                                    src={`https://image.tmdb.org/t/p/w185${director.profile_path}`}
+                                    alt={director.name}
+                                    className="object-cover w-full h-full"
+                                />
+                            ) : (
+                                <div className="flex items-center justify-center h-full text-xs text-white">
+                                    No Image
+                                </div>
+                            )}
+                        </div>
+                        <div className='flex flex-col'>
+                            <h4>{director.name}</h4>
+                        </div>
                     </div>
-                </div>
+                ))}
             </div>
 
-            {/*Music*/}
+            {/*Producer*/}
 
             <div className='flex flex-col gap-3.5'>
                 <div className='flex items-center gap-1' style={{color: "var(--grey-60)"}}>
-                    <Music size={24}/><h4 style={{color: "var(--grey-60)"}}>Music</h4>
+                    <Music size={24}/><h4 style={{color: "var(--grey-60)"}}>Producer</h4>
                 </div>
-
-                <div className='flex gap-2.5 rounded-xl items-center p-3.5' style={{backgroundColor: "var(--black-08)"}}>
-                    <div className='w-[56px] h-[60px] bg-neutral-500 rounded-xl text-center'>img</div>
-                    <div className='flex flex-col'>
-                        <h4>B. Ajaneesh Loknath</h4>
-                        <p>From India</p>
+                {producers?.map(producer => (
+                    <div key={producer.id} className='flex gap-2.5 rounded-xl items-center p-3.5'
+                         style={{backgroundColor: "var(--black-08)"}}>
+                        <div className="w-[56px] h-[60px] rounded-xl overflow-hidden">
+                            {producer.profile_path ? (
+                                <img
+                                    src={`https://image.tmdb.org/t/p/w185${producer.profile_path}`}
+                                    alt={producer.name}
+                                    className="object-cover w-full h-full"
+                                />
+                            ) : (
+                                <div className="flex items-center justify-center h-full text-xs text-white">
+                                    No Image
+                                </div>
+                            )}
+                        </div>
+                        <div className='flex flex-col'>
+                            <h4>{producer.name}</h4>
+                        </div>
                     </div>
-                </div>
+                ))}
+
             </div>
         </div>
     );

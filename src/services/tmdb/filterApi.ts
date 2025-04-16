@@ -1,5 +1,5 @@
 import {tmdbApi} from "@/services/tmdb/tmdbApi.ts";
-import {MovieInterface} from "@/Interface/MovieInterface.ts";
+import {MovieInterface} from "@/Interface/Movie/MovieInterface.ts";
 import {buildMovieParams} from "@/utils/buildMovieParams.ts";
 
 interface TMDBResponse<T> {

@@ -6,11 +6,14 @@ import {MovieStats} from "@/components/Movie/MovieStats.tsx";
 import {useParams} from "react-router-dom";
 import {useGetMovieDetailsQuery} from "@/services/tmdb/moviesApi.ts";
 
+
+
 export const Movie = () => {
     const { id } = useParams();
+    const movieId = Number(id);
+
     const { data: movie, isLoading, error } = useGetMovieDetailsQuery(id!);
 
-    console.log(movie)
 
     if (isLoading) return <div>Загрузка фильма...</div>;
     if (error || !movie) return <div>Ошибка загрузки данных</div>;
@@ -22,10 +25,10 @@ export const Movie = () => {
                 <div className="flex flex-col max-w-[1057px] gap-7.5">
                     <MovieDescription overview={movie.overview} />
                     <MovieCast />
-                    <MovieReviews />
+                    <MovieReviews movieId={movieId}/>
                 </div>
-                <div className="w-full">
-                    <MovieStats movie={movie} />
+                <div>
+                    <MovieStats movie={movie} movieId={movieId} />
                 </div>
             </div>
         </div>

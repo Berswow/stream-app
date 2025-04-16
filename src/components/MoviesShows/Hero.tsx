@@ -6,7 +6,7 @@ import Autoplay from "embla-carousel-autoplay";
 import { Card, CardContent } from "@/components/ui/card.tsx";
 import type { EmblaCarouselType } from 'embla-carousel';
 import {useGetMovieTrailerQuery, useGetPopularMoviesQuery} from "@/services/tmdb/moviesApi.ts";
-import { MovieInterface } from "@/Interface/MovieInterface.ts";
+import { MovieInterface } from "@/Interface/Movie/MovieInterface.ts";
 import {TrailerModal} from "@/components/TrailerModal.tsx";
 
 export const Hero = () => {

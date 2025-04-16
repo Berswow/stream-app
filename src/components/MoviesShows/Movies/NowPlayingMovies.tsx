@@ -1,5 +1,5 @@
 import {Clock3, Star} from "lucide-react";
-import {MovieInterface} from "@/Interface/MovieInterface.ts";
+import {MovieInterface} from "@/Interface/Movie/MovieInterface.ts";
 import {useGetNowPlayingMoviesQuery} from "@/services/tmdb/moviesApi.ts";
 
 export const NowPlayingMovies = () => {

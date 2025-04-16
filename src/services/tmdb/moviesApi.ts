@@ -1,7 +1,10 @@
 import {tmdbApi} from "@/services/tmdb/tmdbApi.ts";
-import {MovieInterface} from "@/Interface/MovieInterface.ts";
+import {MovieInterface} from "@/Interface/Movie/MovieInterface.ts";
 import {VideoInterface} from "@/Interface/VideoInterface.ts";
-import {MovieDetailed} from "@/Interface/MovieDetailInterface.ts";
+import {MovieDetailed} from "@/Interface/Movie/MovieDetailInterface.ts";
+import {CastMember} from "@/Interface/Movie/MovieCastInerface.ts";
+import {CrewMember} from "@/Interface/Movie/MovieCrewInterface.ts";
+import {ExternalIds} from "@/Interface/Movie/ExternalIDInterface.ts";
 
 interface TMDBResponse<T> {
     results: T[];
@@ -57,7 +60,39 @@ export const moviesApi = tmdbApi.injectEndpoints({
             }
         }),
         getMovieDetails: builder.query<MovieDetailed, string | number>({
-            query: (id) => `/movie/${id}`, // TMDb эндпоинт
+            query: (id) => `/movie/${id}`,
+        }),
+        getMovieCast: builder.query<{
+            cast: CastMember[];
+            crew: {
+                directors: CrewMember[];
+                producers: CrewMember[];
+            };
+        }, string | number>({
+            query: (id) => `/movie/${id}/credits`,
+            transformResponse: (response: {
+                cast: CastMember[];
+                crew: CrewMember[];
+            }) => {
+                const directors = response.crew.filter(
+                    (member) => member.job === 'Director'
+                );
+
+                const producers = response.crew.filter(
+                    (member) => member.job === 'Producer'
+                );
+
+                return {
+                    cast: response.cast,
+                    crew: {
+                        directors,
+                        producers,
+                    },
+                };
+            },
+        }),
+        getMovieExternalIds: builder.query<ExternalIds, number>({
+            query: (movieId) => `/movie/${movieId}/external_ids`,
         }),
     }),
     overrideExisting: false
@@ -69,5 +104,7 @@ export const {
     useGetNowPlayingMoviesQuery,
     useGetPopularMoviesQuery,
     useGetMovieTrailerQuery,
-    useGetMovieDetailsQuery
+    useGetMovieDetailsQuery,
+    useGetMovieCastQuery,
+    useGetMovieExternalIdsQuery
 } = moviesApi

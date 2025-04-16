@@ -1,4 +1,4 @@
-import { MovieInterface } from "@/Interface/MovieInterface.ts";
+import { MovieInterface } from "@/Interface/Movie/MovieInterface.ts";
 import { useSelector } from "react-redux";
 import {
     selectGenresFilter,

@@ -1,4 +1,4 @@
-import {MovieInterface} from "@/Interface/MovieInterface.ts";
+import {MovieInterface} from "@/Interface/Movie/MovieInterface.ts";
 import {useGetTrendingMoviesQuery} from "@/services/tmdb/moviesApi.ts";
 import {Clock3, Eye} from "lucide-react";
 export const TrendingMovies = () => {
