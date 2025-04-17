@@ -10,7 +10,7 @@ import { useGetFilteredMoviesQuery } from "@/services/tmdb/filterApi.ts";
 import { MovieFilterMenu } from "@/features/movie/MovieFilterMenu.tsx";
 import { useEffect, useMemo, useState, useCallback } from "react";
 import { useInfiniteScroll } from "@/utils/hooks/useInfiniteScroll.ts";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 interface CardGridProps {
     genreId: number;
@@ -24,6 +24,7 @@ export const CardGrid = ({ genreId }: CardGridProps) => {
 
     const [page, setPage] = useState(1);
     const [allMovies, setAllMovies] = useState<MovieInterface[]>([]);
+    const [hasFilterChanged, setHasFilterChanged] = useState(false);
 
     const queryParams = useMemo(() => {
         const mergedGenres = genres.includes(genreId) ? genres : [genreId, ...genres];
@@ -36,30 +37,34 @@ export const CardGrid = ({ genreId }: CardGridProps) => {
         };
     }, [sort_by, release_year, languages, genres, genreId, page]);
 
-    useEffect(() => {
-        console.log("Query Params", queryParams);
-    }, [queryParams]);
-
     const { data, isLoading, isFetching, error } = useGetFilteredMoviesQuery(queryParams);
 
-    // добавляем новые фильмы к общему списку
+    // Сброс фильмов при изменении фильтров
     useEffect(() => {
-        if (data) {
-            setAllMovies(prev => [...prev, ...data]);
-        }
-    }, [data]);
-
-    // сбрасываем фильмы при изменении фильтров
-    useEffect(() => {
+        console.log("Filters changed, resetting movies...");
         setPage(1);
         setAllMovies([]);
-    }, [sort_by, release_year, languages, genres]);
+        setHasFilterChanged(true);
+    }, [sort_by, release_year, languages, genres, genreId]);
+
+    // Обновление allMovies после запроса
+    useEffect(() => {
+        if (data) {
+            console.log("Data received from API:", data);
+            if (hasFilterChanged) {
+                setAllMovies(data);
+                setHasFilterChanged(false);
+            } else {
+                setAllMovies(prev => [...prev, ...data]);
+            }
+        }
+    }, [data, hasFilterChanged]);
 
     const loadMore = useCallback(() => {
-        if (!isFetching) {
+        if (!isFetching && !isLoading) {
             setPage(prev => prev + 1);
         }
-    }, [isFetching]);
+    }, [isFetching, isLoading]);
 
     const triggerRef = useInfiniteScroll(loadMore);
 
@@ -98,7 +103,7 @@ export const CardGrid = ({ genreId }: CardGridProps) => {
                 <div ref={triggerRef} className="h-1 col-span-full" />
             </div>
 
-            {isLoading && <div>Загрузка...</div>}
+            {(isLoading || isFetching) && <div className="text-center py-5">Загрузка...</div>}
         </div>
     );
 };
