@@ -43,20 +43,22 @@ export const CardGrid = ({ genreId }: CardGridProps) => {
     useEffect(() => {
         console.log("Filters changed, resetting movies...");
         setPage(1);
-        setAllMovies([]);
-        setHasFilterChanged(true);
+        setAllMovies([]); // Сброс фильмов
     }, [sort_by, release_year, languages, genres, genreId]);
 
     // Обновление allMovies после запроса
     useEffect(() => {
         if (data) {
             console.log("Data received from API:", data);
-            if (hasFilterChanged) {
-                setAllMovies(data);
-                setHasFilterChanged(false);
-            } else {
-                setAllMovies(prev => [...prev, ...data]);
-            }
+            setAllMovies(prev => {
+                const combinedMovies = [...prev, ...data];
+                // Удаление дублирующихся фильмов по id
+                const uniqueMovies = combinedMovies.filter((movie, index, self) =>
+                    index === self.findIndex(m => m.id === movie.id)
+                );
+                return hasFilterChanged ? data : uniqueMovies;
+            });
+            setHasFilterChanged(false);
         }
     }, [data, hasFilterChanged]);
 
