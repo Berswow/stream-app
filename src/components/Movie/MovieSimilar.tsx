@@ -20,7 +20,7 @@ export const MovieSimilar = ({movieId}: MovieSimilarProps) => {
     return (
         <div className='flex flex-col rounded-xl p-12.5 gap-7.5' style={{backgroundColor: "var(--black-15)"}}>
             <h4 style={{ color: "var(--grey-60)" }}>Similar Movies</h4>
-            <div className='flex gap-3'>
+            <div className='flex'>
                 {movies.map((movie: MovieDetailed) => (
                     <div key={movie.id} className='flex flex-col gap-2 items-center rounded-2xl cursor-pointer hover:bg-neutral-700 hover:text-white transition-all duration-300 p-3'
                     onClick={() => navigate(`/movies/${movie.id}`)}>

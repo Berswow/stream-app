@@ -25,13 +25,20 @@ export const CardGrid = ({ genreId }: CardGridProps) => {
     const [page, setPage] = useState(1);
     const [allMovies, setAllMovies] = useState<MovieInterface[]>([]);
 
-    const queryParams = useMemo(() => ({
-        sort_by,
-        release_year,
-        languages,
-        genres,
-        page
-    }), [sort_by, release_year, languages, genres, page]);
+    const queryParams = useMemo(() => {
+        const mergedGenres = genres.includes(genreId) ? genres : [genreId, ...genres];
+        return {
+            sort_by,
+            release_year,
+            languages,
+            genres: mergedGenres,
+            page
+        };
+    }, [sort_by, release_year, languages, genres, genreId, page]);
+
+    useEffect(() => {
+        console.log("Query Params", queryParams);
+    }, [queryParams]);
 
     const { data, isLoading, isFetching, error } = useGetFilteredMoviesQuery(queryParams);
 

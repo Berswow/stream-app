@@ -2,14 +2,12 @@ import { CategoryBlock } from "@/components/CategoryBlock.tsx";
 import { MovieInterface } from "@/Interface/Movie/MovieInterface.ts";
 import {useGenreQueries} from "@/utils/hooks/useGenreQueries.ts";
 import {useGetFilteredMoviesQuery} from "@/services/tmdb/filterApi.ts";
+import {MOVIE_GENRES} from "@/constants/genres.ts";
 
-const queries = [
-    { genre: "Action", hook: () => useGetFilteredMoviesQuery({ genres: [28] }) },
-    { genre: "Adventure", hook: () => useGetFilteredMoviesQuery({ genres: [12] }) },
-    { genre: "Comedy", hook: () => useGetFilteredMoviesQuery({ genres: [35] }) },
-    { genre: "Drama", hook: () => useGetFilteredMoviesQuery({ genres: [18] }) },
-    { genre: "Horror", hook: () => useGetFilteredMoviesQuery({ genres: [27] }) }
-];
+const queries = MOVIE_GENRES.map((genre) => ({
+    genre: genre.name,
+    hook: () => useGetFilteredMoviesQuery({ genres: [genre.id] }),
+}));
 
 
 export const PopularMovies = () => {
@@ -20,7 +18,7 @@ export const PopularMovies = () => {
 
     return (
         <CategoryBlock<MovieInterface>
-            title="Top 10 Movies by Genre"
+            title="Top Movies by Genre"
             genres={queries.map((q) => q.genre)}
             genreMap={genreMap}
             getId={(item) => item.id}
