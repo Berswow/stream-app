@@ -94,6 +94,12 @@ export const moviesApi = tmdbApi.injectEndpoints({
         getMovieExternalIds: builder.query<ExternalIds, number>({
             query: (movieId) => `/movie/${movieId}/external_ids`,
         }),
+        getMovieSimilar: builder.query<MovieDetailed[], string | number>({
+            query: (id) => `/movie/${id}/similar`,
+            transformResponse: (response: TMDBResponse<MovieDetailed>) => {
+                return response.results
+            }
+        })
     }),
     overrideExisting: false
 })
@@ -106,5 +112,6 @@ export const {
     useGetMovieTrailerQuery,
     useGetMovieDetailsQuery,
     useGetMovieCastQuery,
-    useGetMovieExternalIdsQuery
+    useGetMovieExternalIdsQuery,
+    useGetMovieSimilarQuery
 } = moviesApi

@@ -5,6 +5,7 @@ import {MovieReviews} from "@/components/Movie/MovieReviews.tsx";
 import {MovieStats} from "@/components/Movie/MovieStats.tsx";
 import {useParams} from "react-router-dom";
 import {useGetMovieDetailsQuery} from "@/services/tmdb/moviesApi.ts";
+import {MovieSimilar} from "@/components/Movie/MovieSimilar.tsx";
 
 
 
@@ -25,6 +26,7 @@ export const Movie = () => {
                 <div className="flex flex-col max-w-[1057px] gap-7.5">
                     <MovieDescription overview={movie.overview} />
                     <MovieCast />
+                    <MovieSimilar movieId={movieId}/>
                     <MovieReviews movieId={movieId}/>
                 </div>
                 <div>

@@ -6,11 +6,13 @@ import {Support} from "@/pages/Support.tsx";
 import {Subscriptions} from "@/pages/Subscriptions.tsx";
 import {GenrePage} from "@/pages/GenrePage.tsx";
 import {Movie} from "@/pages/Movie.tsx";
+import ScrollToTop from "@/components/ScrollToTop.tsx";
 
 function App() {
 
   return (
     <>
+        <ScrollToTop />
         <Routes>
             <Route path="/" element={<Layout />}>
                <Route index element={<Home/>}/>
