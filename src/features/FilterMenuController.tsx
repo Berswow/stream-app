@@ -8,11 +8,11 @@ import {
     setOriginalLanguage,
     setReleaseDate,
     setSort
-} from "@/redux/slices/filterSlice";
+} from "@/redux/slices/filterSlice.ts";
 
-import { LANGUAGES } from "@/constants/languages";
-import { YEARS } from "@/constants/years";
-import { FilterMenu } from "@/components/shared/FilterMenu";
+import { LANGUAGES } from "@/constants/languages.ts";
+import { YEARS } from "@/constants/years.ts";
+import { FilterMenu } from "@/components/shared/FilterMenu.tsx";
 import { useEffect, useMemo } from "react";
 
 interface Genre {

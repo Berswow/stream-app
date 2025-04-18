@@ -4,7 +4,7 @@ import { useGetFilteredMoviesQuery, useGetFilteredTvShowsQuery } from "@/service
 import { useEffect, useMemo, useState, useCallback } from "react";
 import { useInfiniteScroll } from "@/utils/hooks/useInfiniteScroll.ts";
 import { Link } from "react-router-dom";
-import {FilterMenuController} from "@/features/movie/FilterMenuController.tsx";
+import {FilterMenuController} from "@/features/FilterMenuController.tsx";
 import { MOVIE_GENRES } from "@/constants/genres";
 import {TV_GENRES} from "@/constants/genres.ts";
 
