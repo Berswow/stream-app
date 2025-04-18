@@ -17,13 +17,16 @@ export const PopularMovies = () => {
     if (isError) return <div>Ошибка загрузки</div>;
 
     return (
-        <CategoryBlock<MovieInterface>
-            title="Top Movies by Genre"
-            genres={queries.map((q) => q.genre)}
-            genreMap={genreMap}
-            getId={(item) => item.id}
-            getImage={(item) => `https://image.tmdb.org/t/p/w154${item.poster_path}`}
-            getTitle={(item) => item.original_title}
-        />
+        <article>
+            <CategoryBlock<MovieInterface>
+                title="Top Movies by Genre"
+                genres={queries.map((q) => q.genre)}
+                genreMap={genreMap}
+                getId={(item) => item.id}
+                getImage={(item) => `https://image.tmdb.org/t/p/w154${item.poster_path}`}
+                getTitle={(item) => item.original_title}
+                contentType="movie"  // Явно указали тип контента (фильмы)
+            />
+        </article>
     );
 };

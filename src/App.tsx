@@ -19,7 +19,8 @@ function App() {
                 <Route path='movieshows' element={<MoviesShows/>}/>
                 <Route path='support' element={<Support/>}/>
                 <Route path='subscriptions' element={<Subscriptions/>}/>
-                <Route path="movies/genre/:id" element={<GenrePage />} />
+                <Route path="/movies/genre/:id" element={<GenrePage />} />
+                <Route path="/tv/genre/:id" element={<GenrePage />} />
                 <Route path="movies/:id" element={<Movie />} />
             </Route>
         </Routes>

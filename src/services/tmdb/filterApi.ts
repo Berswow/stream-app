@@ -115,4 +115,4 @@ export const filterApi = tmdbApi.injectEndpoints({
     overrideExisting: false,
 });
 
-export const { useGetFilteredMoviesQuery } = filterApi;
+export const { useGetFilteredMoviesQuery, useGetFilteredTvShowsQuery } = filterApi;
