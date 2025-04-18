@@ -1,5 +1,5 @@
 import {Clock3, Eye} from "lucide-react";
-import { useGetTrendingTVQuery} from "@/services/tmdb/tvApi.ts";
+import { useGetTrendingTVQuery} from "@/services/tmdb/tvShowApi.ts";
 import {TvShowInterface} from "@/Interface/Show/TvShowBaseInterface.ts";
 
 export const TrendingShows = () => {

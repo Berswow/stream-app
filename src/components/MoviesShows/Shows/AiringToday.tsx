@@ -1,5 +1,5 @@
 import {TvShowInterface} from "@/Interface/Show/TvShowBaseInterface.ts";
-import {useGetAiringTodayQuery} from "@/services/tmdb/tvApi.ts";
+import {useGetAiringTodayQuery} from "@/services/tmdb/tvShowApi.ts";
 
 export const AiringToday = () => {
     const {data, isLoading, error} = useGetAiringTodayQuery(1)

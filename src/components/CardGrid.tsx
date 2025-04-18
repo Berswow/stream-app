@@ -81,7 +81,7 @@ export const CardGrid = ({ genreId, contentType }: CardGridProps) => {
                 {allItems.map((item: any, index: number) => (
                     <Link
                         key={`${item.id}-${index}`}
-                        to={`/${contentType === 'tv' ? 'tv' : 'movies'}/${item.id}`}
+                        to={`/${contentType === 'tv' ? 'tvshow' : 'movies'}/${item.id}`}
                         className="flex flex-col items-center rounded-2xl p-5 justify-between gap-2"
                         style={{ backgroundColor: "var(--black-15)" }}
                     >

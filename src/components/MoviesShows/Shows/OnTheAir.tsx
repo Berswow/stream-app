@@ -1,6 +1,6 @@
 import {Clock3, Star} from "lucide-react";
 import {TvShowInterface} from "@/Interface/Show/TvShowBaseInterface.ts";
-import { useGetOnTheAirQuery} from "@/services/tmdb/tvApi.ts";
+import { useGetOnTheAirQuery} from "@/services/tmdb/tvShowApi.ts";
 
 export const OnTheAir = () => {
     const {data, isLoading, error} = useGetOnTheAirQuery(1)
