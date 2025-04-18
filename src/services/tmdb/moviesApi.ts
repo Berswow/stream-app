@@ -1,5 +1,5 @@
 import {tmdbApi} from "@/services/tmdb/tmdbApi.ts";
-import {MovieInterface} from "@/Interface/Movie/MovieInterface.ts";
+import {MovieInterface} from "@/Interface/Movie/MovieBaseInterface.ts";
 import {VideoInterface} from "@/Interface/VideoInterface.ts";
 import {MovieDetailed} from "@/Interface/Movie/MovieDetailInterface.ts";
 import {CastMember} from "@/Interface/Movie/MovieCastInerface.ts";
