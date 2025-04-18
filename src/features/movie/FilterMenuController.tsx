@@ -9,17 +9,23 @@ import {
     setReleaseDate,
     setSort
 } from "@/redux/slices/filterSlice";
-import {MOVIE_GENRES} from "@/constants/genres";
+
 import { LANGUAGES } from "@/constants/languages";
 import { YEARS } from "@/constants/years";
 import { FilterMenu } from "@/components/shared/FilterMenu";
-import {useEffect, useMemo} from "react";
+import { useEffect, useMemo } from "react";
 
-interface MovieFilterMenuProps {
-    baseGenreId: number;
+interface Genre {
+    id: number;
+    name: string;
 }
 
-export const MovieFilterMenu = ({ baseGenreId }: MovieFilterMenuProps) => {
+interface FilterMenuControllerProps {
+    baseGenreId: number;
+    genres: Genre[];
+}
+
+export const FilterMenuController = ({ baseGenreId, genres }: FilterMenuControllerProps) => {
     const dispatch = useDispatch();
 
     const sortValue = useSelector(selectSortFilter);
@@ -62,7 +68,7 @@ export const MovieFilterMenu = ({ baseGenreId }: MovieFilterMenuProps) => {
 
     return (
         <FilterMenu
-            genres={MOVIE_GENRES}
+            genres={genres}
             selectedGenres={selectedGenres}
             onGenreChange={handleGenreChange}
             baseGenreId={baseGenreId}

@@ -4,7 +4,9 @@ import { useGetFilteredMoviesQuery, useGetFilteredTvShowsQuery } from "@/service
 import { useEffect, useMemo, useState, useCallback } from "react";
 import { useInfiniteScroll } from "@/utils/hooks/useInfiniteScroll.ts";
 import { Link } from "react-router-dom";
-import {MovieFilterMenu} from "@/features/movie/MovieFilterMenu.tsx";
+import {FilterMenuController} from "@/features/movie/FilterMenuController.tsx";
+import { MOVIE_GENRES } from "@/constants/genres";
+import {TV_GENRES} from "@/constants/genres.ts";
 
 interface CardGridProps {
     genreId: number;
@@ -71,7 +73,9 @@ export const CardGrid = ({ genreId, contentType }: CardGridProps) => {
 
     return (
         <div className="flex flex-col gap-10">
-             <MovieFilterMenu baseGenreId={genreId} />
+            {contentType === 'movie' ? (
+                <FilterMenuController baseGenreId={genreId} genres={MOVIE_GENRES} />
+            ) : <FilterMenuController baseGenreId={genreId} genres={TV_GENRES} />}
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
                 {allItems.map((item: any, index: number) => (
