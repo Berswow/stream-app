@@ -1,8 +1,13 @@
 import {Button} from "@/components/ui/button.tsx";
 import {Play, Plus, ThumbsUp, Volume2} from "lucide-react";
 import {Card, CardContent} from "@/components/ui/card.tsx";
+import {MovieDetailed} from "@/Interface/Movie/MovieDetailInterface.ts";
 
-export const MovieHero = ({movie}) => {
+interface MovieHeroProps {
+    movie: MovieDetailed;
+}
+
+export const MovieHero = ({movie}: MovieHeroProps) => {
     return (
         <>
 

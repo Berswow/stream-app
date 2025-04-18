@@ -17,6 +17,8 @@ export const TvShow = () => {const { id } = useParams();
     if (isLoading) return <div>Загрузка фильма...</div>;
     if (error) return <div>Ошибка загрузки данных</div>;
 
+    if (!tvShow) return <div>Данные не найдены</div>;
+
     return (
         <div className="flex flex-col gap-25">
             <TvShowHero tvShow={tvShow} />
