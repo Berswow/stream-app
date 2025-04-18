@@ -23,29 +23,22 @@ export const MoviesShows = () => {
                     <legend className="ml-10">
                         <Button className="h-12.5">Movies</Button>
                     </legend>
-                    <div className="flex justify-center items-center">
+                    <div className='p-12.5'>
+
                         <PopularMovies />
-                    </div>
-                    <div className="flex justify-center items-center">
                         <TrendingMovies />
-                    </div>
-
-                    <div className="flex justify-center items-center">
                         <UpcomingMovies />
-                    </div>
-
-                    <div className="flex justify-center items-center">
                         <NowPlayingMovies />
                     </div>
                 </fieldset>
             </section>
 
             <section className="flex flex-col gap-25 mt-25">
-                <fieldset className="border border-gray-700 rounded-xl p-12">
+                <fieldset className="border border-gray-700 rounded-xl p-12.5">
                     <legend className="ml-10">
                         <Button className="h-12.5">Shows</Button>
                     </legend>
-                    <div className='p-12'>
+                    <div className='p-12.5'>
                         <PopularShows />
                         <TrendingShows />
                         <AiringToday />
