@@ -2,9 +2,9 @@ import { Play } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { MOVIE_GENRES } from "@/constants/genres.ts";
-import {useDispatch} from "react-redux";
-import {setClearGenres, setGenres} from "@/redux/slices/filterSlice.ts";
+import { MOVIE_GENRES, TV_GENRES } from "@/constants/genres.ts"; // Предполагаем, что у тебя есть константы для жанров фильмов и сериалов
+import { useDispatch } from "react-redux";
+import {setClearAllFilters, setGenres} from "@/redux/slices/filterSlice.ts";
 
 type CategoryBlockProps<T> = {
     title: string;
@@ -14,7 +14,7 @@ type CategoryBlockProps<T> = {
     getId: (item: T) => string | number;
     getImage: (item: T) => string;
     getTitle: (item: T) => string;
-    contentType: 'movie' | 'tv';  // Добавили пропс для типа контента
+    contentType: 'movie' | 'tv'; // Добавляем contentType
 };
 
 export const CategoryBlock = <T,>({
@@ -25,7 +25,7 @@ export const CategoryBlock = <T,>({
                                       getId,
                                       getImage,
                                       getTitle,
-                                      contentType, // Принимаем тип контента
+                                      contentType, // Получаем contentType
                                   }: CategoryBlockProps<T>) => {
     const [currentPage, setCurrentPage] = useState(1);
     const navigate = useNavigate();
@@ -48,11 +48,14 @@ export const CategoryBlock = <T,>({
     };
 
     const handleGenreClick = (genre: string) => {
-        const matched = MOVIE_GENRES.find((g) => g.name === genre);
+        const matched = (contentType === 'movie' ? MOVIE_GENRES : TV_GENRES).find(
+            (g) => g.name === genre
+        );
+
         if (matched) {
-            dispatch(setClearGenres())
-            dispatch(setGenres([matched.id]))
-            navigate(contentType === 'tv' ? `/tv/genre/${matched.id}` : `/movies/genre/${matched.id}`);
+            dispatch(setClearAllFilters());
+            dispatch(setGenres([matched.id]));
+            navigate(`/${contentType}/genre/${matched.id}`); // Динамический путь в зависимости от контента
         }
     };
 
@@ -99,7 +102,7 @@ export const CategoryBlock = <T,>({
                             <div
                                 key={genre}
                                 className="flex flex-col items-center rounded-2xl p-8 hover:bg-neutral-800 transition-colors duration-300"
-                                onClick={() => handleGenreClick(genre)}
+                                onClick={() => handleGenreClick(genre)} // Обработчик клика
                             >
                                 <div className="relative rounded-2xl overflow-hidden">
                                     <div className="grid grid-cols-2 grid-rows-2">

@@ -39,6 +39,9 @@ const filterSlice = createSlice({
         setContentType: (state, action: PayloadAction<'movie' | 'tv'>) => {
             state.contentType = action.payload;
         },
+        setClearAllFilters: () => {
+            return initialState
+        }
     },
 })
 
@@ -48,7 +51,8 @@ export const {
     setReleaseDate,
     setGenres,
     setClearGenres,
-    setContentType
+    setContentType,
+    setClearAllFilters
 } = filterSlice.actions;
 
 export const selectReleaseDateFilter = (state: RootState) => state.filter.release_date;

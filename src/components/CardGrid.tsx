@@ -1,29 +1,24 @@
-import { MovieInterface } from "@/Interface/Movie/MovieBaseInterface.ts";
 import { useSelector } from "react-redux";
-import {
-    selectGenresFilter,
-    selectOriginalLanguageFilter,
-    selectReleaseDateFilter,
-    selectSortFilter
-} from "@/redux/slices/filterSlice.ts";
-import { useGetFilteredMoviesQuery } from "@/services/tmdb/filterApi.ts";
-import { MovieFilterMenu } from "@/features/movie/MovieFilterMenu.tsx";
+import { selectGenresFilter, selectOriginalLanguageFilter, selectReleaseDateFilter, selectSortFilter } from "@/redux/slices/filterSlice.ts";
+import { useGetFilteredMoviesQuery, useGetFilteredTvShowsQuery } from "@/services/tmdb/filterApi.ts";
 import { useEffect, useMemo, useState, useCallback } from "react";
 import { useInfiniteScroll } from "@/utils/hooks/useInfiniteScroll.ts";
 import { Link } from "react-router-dom";
+import {MovieFilterMenu} from "@/features/movie/MovieFilterMenu.tsx";
 
 interface CardGridProps {
     genreId: number;
+    contentType: 'movie' | 'tv'; // Добавляем contentType
 }
 
-export const CardGrid = ({ genreId }: CardGridProps) => {
+export const CardGrid = ({ genreId, contentType }: CardGridProps) => {
     const sort_by = useSelector(selectSortFilter);
     const release_year = useSelector(selectReleaseDateFilter);
     const languages = useSelector(selectOriginalLanguageFilter);
     const genres = useSelector(selectGenresFilter);
 
     const [page, setPage] = useState(1);
-    const [allMovies, setAllMovies] = useState<MovieInterface[]>([]);
+    const [allItems, setAllItems] = useState<any[]>([]); // Массив для фильмов или сериалов
     const [hasFilterChanged, setHasFilterChanged] = useState(false);
 
     const queryParams = useMemo(() => {
@@ -37,26 +32,28 @@ export const CardGrid = ({ genreId }: CardGridProps) => {
         };
     }, [sort_by, release_year, languages, genres, genreId, page]);
 
-    const { data, isLoading, isFetching, error } = useGetFilteredMoviesQuery(queryParams);
+    const { data, isLoading, isFetching, error } = contentType === 'tv'
+        ? useGetFilteredTvShowsQuery(queryParams) // Запрос для сериалов
+        : useGetFilteredMoviesQuery(queryParams); // Запрос для фильмов
 
-    // Сброс фильмов при изменении фильтров
+    // Сброс фильмов/сериалов при изменении фильтров
     useEffect(() => {
-        console.log("Filters changed, resetting movies...");
+        console.log("Filters changed, resetting movies/shows...");
         setPage(1);
-        setAllMovies([]); // Сброс фильмов
+        setAllItems([]); // Сброс данных
     }, [sort_by, release_year, languages, genres, genreId]);
 
-    // Обновление allMovies после запроса
+    // Обновление allItems после запроса
     useEffect(() => {
         if (data) {
             console.log("Data received from API:", data);
-            setAllMovies(prev => {
-                const combinedMovies = [...prev, ...data];
-                // Удаление дублирующихся фильмов по id
-                const uniqueMovies = combinedMovies.filter((movie, index, self) =>
-                    index === self.findIndex(m => m.id === movie.id)
+            setAllItems(prev => {
+                const combinedItems = [...prev, ...data];
+                // Удаление дублирующихся элементов по id
+                const uniqueItems = combinedItems.filter((item, index, self) =>
+                    index === self.findIndex(i => i.id === item.id)
                 );
-                return hasFilterChanged ? data : uniqueMovies;
+                return hasFilterChanged ? data : uniqueItems;
             });
             setHasFilterChanged(false);
         }
@@ -74,20 +71,20 @@ export const CardGrid = ({ genreId }: CardGridProps) => {
 
     return (
         <div className="flex flex-col gap-10">
-            <MovieFilterMenu baseGenreId={genreId} />
+             <MovieFilterMenu baseGenreId={genreId} />
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
-                {allMovies.map((movie: MovieInterface, index: number) => (
+                {allItems.map((item: any, index: number) => (
                     <Link
-                        key={`${movie.id}-${index}`}
-                        to={`/movies/${movie.id}`}
+                        key={`${item.id}-${index}`}
+                        to={`/${contentType === 'tv' ? 'tv' : 'movies'}/${item.id}`}
                         className="flex flex-col items-center rounded-2xl p-5 justify-between gap-2"
                         style={{ backgroundColor: "var(--black-15)" }}
                     >
                         <div className="relative rounded-2xl overflow-hidden w-full">
                             <img
-                                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                                alt={`Image ${movie.original_title}`}
+                                src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
+                                alt={`Image ${item.original_title || item.original_name}`}
                                 className="rounded-lg object-cover w-full"
                                 style={{ height: "404px" }}
                             />
@@ -95,7 +92,7 @@ export const CardGrid = ({ genreId }: CardGridProps) => {
                         </div>
                         <div className="w-full text-[16px] gap-2">
                             <div className="gap-0.5 rounded-xl p-3.5 bg-neutral-900 text-center">
-                                <p>{movie.title}</p>
+                                <p>{item.original_title || item.original_name}</p>
                             </div>
                         </div>
                     </Link>
