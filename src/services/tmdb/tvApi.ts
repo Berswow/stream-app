@@ -1,5 +1,5 @@
 import {tmdbApi} from './tmdbApi';
-import {ShowInterface} from "@/Interface/ShowInterface.ts";
+import {TvShowInterface} from "@/Interface/Show/TvShowBaseInterface.ts";
 
 interface TMDBResponse<T> {
     results: T[];
@@ -32,7 +32,7 @@ export const tvApi = tmdbApi.injectEndpoints({
                 }
             })
         }),
-        getPopularActionAdventureTV: builder.query<ShowInterface[], void>({
+        getPopularActionAdventureTV: builder.query<TvShowInterface[], void>({
             query: () => ({
                 url: 'discover/tv',
                 params: {
@@ -41,11 +41,11 @@ export const tvApi = tmdbApi.injectEndpoints({
                     page: 1
                 }
             }),
-            transformResponse: (response: TMDBResponse<ShowInterface>) => {
+            transformResponse: (response: TMDBResponse<TvShowInterface>) => {
                 return response.results
             }
         }),
-        getPopularAnimationTV: builder.query<ShowInterface[], void>({
+        getPopularAnimationTV: builder.query<TvShowInterface[], void>({
             query: () => ({
                 url: 'discover/tv',
                 params: {
@@ -54,11 +54,11 @@ export const tvApi = tmdbApi.injectEndpoints({
                     page: 1
                 }
             }),
-            transformResponse: (response: TMDBResponse<ShowInterface>) => {
+            transformResponse: (response: TMDBResponse<TvShowInterface>) => {
                 return response.results
             }
         }),
-        getPopularComedyTV: builder.query<ShowInterface[], void>({
+        getPopularComedyTV: builder.query<TvShowInterface[], void>({
             query: () => ({
                 url: 'discover/tv',
                 params: {
@@ -67,11 +67,11 @@ export const tvApi = tmdbApi.injectEndpoints({
                     page: 1
                 }
             }),
-            transformResponse: (response: TMDBResponse<ShowInterface>) => {
+            transformResponse: (response: TMDBResponse<TvShowInterface>) => {
                 return response.results
             }
         }),
-        getPopularDramaTV: builder.query<ShowInterface[], void>({
+        getPopularDramaTV: builder.query<TvShowInterface[], void>({
             query: () => ({
                 url: 'discover/tv',
                 params: {
@@ -80,11 +80,11 @@ export const tvApi = tmdbApi.injectEndpoints({
                     page: 1
                 }
             }),
-            transformResponse: (response: TMDBResponse<ShowInterface>) => {
+            transformResponse: (response: TMDBResponse<TvShowInterface>) => {
                 return response.results
             }
         }),
-        getPopularFamilyTV: builder.query<ShowInterface[], void>({
+        getPopularFamilyTV: builder.query<TvShowInterface[], void>({
             query: () => ({
                 url: 'discover/tv',
                 params: {
@@ -93,7 +93,7 @@ export const tvApi = tmdbApi.injectEndpoints({
                     page: 1
                 }
             }),
-            transformResponse: (response: TMDBResponse<ShowInterface>) => {
+            transformResponse: (response: TMDBResponse<TvShowInterface>) => {
                 return response.results
             }
         }),

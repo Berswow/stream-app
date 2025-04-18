@@ -1,5 +1,5 @@
 import {Clock3, Star} from "lucide-react";
-import {ShowInterface} from "@/Interface/ShowInterface.ts";
+import {TvShowInterface} from "@/Interface/Show/TvShowBaseInterface.ts";
 import { useGetOnTheAirQuery} from "@/services/tmdb/tvApi.ts";
 
 export const OnTheAir = () => {
@@ -29,7 +29,7 @@ export const OnTheAir = () => {
                 </div>
             </div>
             <div className='flex justify-between gap-5'>
-                {shows.map((show: ShowInterface) => (
+                {shows.map((show: TvShowInterface) => (
                     <div key={show.id} className='flex flex-col items-center rounded-2xl p-5'
                          style={{backgroundColor: "var(--black-15)"}}>
                         <div className="relative rounded-2xl overflow-hidden">

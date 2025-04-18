@@ -1,4 +1,4 @@
-import {ShowInterface} from "@/Interface/ShowInterface.ts";
+import {TvShowInterface} from "@/Interface/Show/TvShowBaseInterface.ts";
 import {useGetAiringTodayQuery} from "@/services/tmdb/tvApi.ts";
 
 export const AiringToday = () => {
@@ -28,7 +28,7 @@ export const AiringToday = () => {
                 </div>
             </div>
             <div className='flex justify-between gap-7.5'>
-                {shows.map((show: ShowInterface) => (
+                {shows.map((show: TvShowInterface) => (
                     <div key={show.id} className='flex flex-col items-center rounded-2xl p-5'
                          style={{backgroundColor: "var(--black-15)"}}>
                         <div className="relative rounded-2xl overflow-hidden">

@@ -4,7 +4,7 @@ import {
     useGetPopularAnimationTVQuery,
     useGetPopularComedyTVQuery, useGetPopularDramaTVQuery, useGetPopularFamilyTVQuery
 } from "@/services/tmdb/tvApi.ts";
-import {ShowInterface} from "@/Interface/ShowInterface.ts";
+import {TvShowInterface} from "@/Interface/Show/TvShowBaseInterface.ts";
 import {useGenreQueries} from "@/utils/hooks/useGenreQueries.ts";
 
 const queries = [
@@ -16,14 +16,14 @@ const queries = [
 ];
 
 export const PopularShows = () => {
-    const { genreMap, isLoading, isError } = useGenreQueries<ShowInterface>(queries);
+    const { genreMap, isLoading, isError } = useGenreQueries<TvShowInterface>(queries);
 
     if (isLoading) return <div>Загрузка...</div>;
     if (isError) return <div>Ошибка загрузки</div>;
 
     return (
         <article>
-            <CategoryBlock<ShowInterface>
+            <CategoryBlock<TvShowInterface>
                 title="Top 10 TVs by Genre"
                 genres={queries.map((q) => q.genre)}
                 genreMap={genreMap}
