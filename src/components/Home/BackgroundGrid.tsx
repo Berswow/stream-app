@@ -1,14 +1,8 @@
-
-const images = import.meta.glob<{ default: string }>('../../assets/home-title-images/*.{png,jpg,jpeg,svg}', { eager: true });
-const imageArray = Object.values(images).map((img) => img.default);
-
 export const BackgroundGrid = () => {
     return (
         <div className='flex flex-col'>
-            <div className="absolute inset-0 -z-10 grid grid-cols-9 grid-rows-4 gap-5 opacity-30 max-h-[860px] max-w-[1920px] mx-auto">
-                {imageArray.map((src, index) => (
-                    <img key={index} src={src} alt={`Image ${index}`} className="rounded-lg" />
-                ))}
+            <div className="absolute inset-0 -z-10 max-h-[860px] max-w-[1920px] mx-auto">
+                <img className='w-full h-full object-cover' src="/../src/assets/backgroundGrid.png" width={1920} height={860} alt=""/>
             </div>
                 <svg className='absolute top-100 left-1/2 transform -translate-x-1/2 -translate-y-1/2' width="470" height="470" viewBox="0 0 470 470" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <foreignObject x="-12" y="-12" width="494" height="494"></foreignObject><g>

@@ -101,8 +101,8 @@ export const CategoryBlock = <T,>({
                         return (
                             <div
                                 key={genre}
-                                className="flex flex-col items-center rounded-2xl p-8 hover:bg-neutral-800 transition-colors duration-300"
-                                onClick={() => handleGenreClick(genre)} // Обработчик клика
+                                className="flex flex-col items-center rounded-2xl p-8 bg-neutral-800 hover:bg-neutral-700 transition-colors duration-300"
+                                onClick={() => handleGenreClick(genre)}
                             >
                                 <div className="relative rounded-2xl overflow-hidden">
                                     <div className="grid grid-cols-2 grid-rows-2">

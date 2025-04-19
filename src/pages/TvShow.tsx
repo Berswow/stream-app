@@ -24,7 +24,7 @@ export const TvShow = () => {const { id } = useParams();
             <TvShowHero tvShow={tvShow} />
             <div className="flex justify-between gap-5">
                 <div className="flex flex-col max-w-[1057px] gap-7.5">
-                    <TvShowSeasons />
+                    <TvShowSeasons tvShowId={tvShowId} seasons={tvShow.seasons}/>
                     <TvShowDescription overview={tvShow.overview} />
                     <TvShowCast />
                     <TvShowSimilar tvShowId={tvShowId}/>
