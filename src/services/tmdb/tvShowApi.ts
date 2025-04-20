@@ -1,8 +1,8 @@
 import {tmdbApi} from './tmdbApi';
-import {TvShowDetailed} from "@/Interface/Show/TvShowDetailInterface.ts";
-import {CastMember} from "@/Interface/Movie/MovieCastInerface.ts";
-import {CrewMember} from "@/Interface/Movie/MovieCrewInterface.ts";
-import {SeasonDetails} from "@/Interface/Show/TvShowSeasonDetailed.ts";
+import {TvShowDetailed} from "@/shared/interfaces/Show/TvShowDetailInterface.ts";
+import {CastMember} from "@/shared/interfaces/Movie/MovieCastInerface.ts";
+import {CrewMember} from "@/shared/interfaces/Movie/MovieCrewInterface.ts";
+import {SeasonDetails} from "@/shared/interfaces/Show/TvShowSeasonDetailed.ts";
 
 // interface TMDBResponse<T> {
 //     results: T[];

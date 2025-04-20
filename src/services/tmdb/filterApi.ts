@@ -1,8 +1,8 @@
 import { tmdbApi } from "@/services/tmdb/tmdbApi.ts";
-import { MovieInterface } from "@/Interface/Movie/MovieBaseInterface.ts";
-import { buildMovieParams } from "@/utils/buildMovieParams.ts";
-import {TvShowInterface} from "@/Interface/Show/TvShowBaseInterface.ts";
-import {buildTvShowParams} from "@/utils/buildTvShowsParams.ts";
+import { MovieInterface } from "@/shared/interfaces/Movie/MovieBaseInterface.ts";
+import { buildMovieParams } from "@/shared/lib/buildMovieParams.ts";
+import {TvShowInterface} from "@/shared/interfaces/Show/TvShowBaseInterface.ts";
+import {buildTvShowParams} from "@/shared/lib/buildTvShowsParams.ts";
 
 interface TMDBResponse<T> {
     results: T[];

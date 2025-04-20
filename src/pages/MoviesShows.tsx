@@ -1,13 +1,13 @@
-import { Button } from "@/components/ui/button.tsx";
-import { Hero } from "@/components/MoviesShows/Hero.tsx";
-import { TrendingMovies } from "@/components/MoviesShows/Movies/TrendingMovies.tsx";
-import { UpcomingMovies } from "@/components/MoviesShows/Movies/UpcomingMovies.tsx";
-import { NowPlayingMovies } from "@/components/MoviesShows/Movies/NowPlayingMovies.tsx";
-import { TrendingShows } from "@/components/MoviesShows/Shows/TrendingShows.tsx";
-import { AiringToday } from "@/components/MoviesShows/Shows/AiringToday.tsx";
-import { OnTheAir } from "@/components/MoviesShows/Shows/OnTheAir.tsx";
-import {PopularMovies} from "@/components/MoviesShows/Movies/PopularMovies.tsx";
-import {PopularShows} from "@/components/MoviesShows/Shows/PopularShows.tsx";
+import { Button } from "@/shared/ui/button.tsx";
+import { Hero } from "@/widgets/MoviesShows/Hero.tsx";
+import { TrendingMovies } from "@/widgets/MoviesShows/Movies/TrendingMovies.tsx";
+import { UpcomingMovies } from "@/widgets/MoviesShows/Movies/UpcomingMovies.tsx";
+import { NowPlayingMovies } from "@/widgets/MoviesShows/Movies/NowPlayingMovies.tsx";
+import { TrendingShows } from "@/widgets/MoviesShows/TvShows/TrendingShows.tsx";
+import { AiringToday } from "@/widgets/MoviesShows/TvShows/AiringToday.tsx";
+import { OnTheAir } from "@/widgets/MoviesShows/TvShows/OnTheAir.tsx";
+import {PopularMovies} from "@/widgets/MoviesShows/Movies/PopularMovies.tsx";
+import {PopularShows} from "@/widgets/MoviesShows/TvShows/PopularShows.tsx";
 
 export const MoviesShows = () => {
 
@@ -23,7 +23,7 @@ export const MoviesShows = () => {
                     <legend className="ml-10">
                         <Button className="h-12.5">Movies</Button>
                     </legend>
-                    <div className='p-12.5'>
+                    <div className='flex flex-col gap-12.5 p-12.5'>
 
                         <PopularMovies />
                         <TrendingMovies />

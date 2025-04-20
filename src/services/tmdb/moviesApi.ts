@@ -1,10 +1,10 @@
 import {tmdbApi} from "@/services/tmdb/tmdbApi.ts";
-import {MovieInterface} from "@/Interface/Movie/MovieBaseInterface.ts";
-import {VideoInterface} from "@/Interface/VideoInterface.ts";
-import {MovieDetailed} from "@/Interface/Movie/MovieDetailInterface.ts";
-import {CastMember} from "@/Interface/Movie/MovieCastInerface.ts";
-import {CrewMember} from "@/Interface/Movie/MovieCrewInterface.ts";
-import {ExternalIds} from "@/Interface/Movie/ExternalIDInterface.ts";
+import {MovieInterface} from "@/shared/interfaces/Movie/MovieBaseInterface.ts";
+import {VideoInterface} from "@/shared/interfaces/VideoInterface.ts";
+import {MovieDetailed} from "@/shared/interfaces/Movie/MovieDetailInterface.ts";
+import {CastMember} from "@/shared/interfaces/Movie/MovieCastInerface.ts";
+import {CrewMember} from "@/shared/interfaces/Movie/MovieCrewInterface.ts";
+import {ExternalIds} from "@/shared/interfaces/Movie/ExternalIDInterface.ts";
 
 interface TMDBResponse<T> {
     results: T[];

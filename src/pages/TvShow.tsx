@@ -1,10 +1,10 @@
-import { TvShowCast } from "@/components/Show/TvShowCast";
-import { TvShowDescription } from "@/components/Show/TvShowDescription";
-import { TvShowHero } from "@/components/Show/TvShowHero";
-import { TvShowSeasons } from "@/components/Show/TvShowSeasons";
-import { TvShowSimilar } from "@/components/Show/TvShowSimilar";
-import {TvShowReviews} from "@/components/Show/TvShowReviews.tsx";
-import {TvShowStats} from "@/components/Show/TvShowStats.tsx";
+import { TvShowCast } from "@/widgets/TvShowDetails/TvShowCast.tsx";
+import { TvShowDescription } from "@/widgets/TvShowDetails/TvShowDescription.tsx";
+import { TvShowHero } from "@/widgets/TvShowDetails/TvShowHero.tsx";
+import { TvShowSeasons } from "@/widgets/TvShowDetails/TvShowSeasons.tsx";
+import { TvShowSimilar } from "@/widgets/TvShowDetails/TvShowSimilar.tsx";
+import {TvShowReviews} from "@/widgets/TvShowDetails/TvShowReviews.tsx";
+import {TvShowStats} from "@/widgets/TvShowDetails/TvShowStats.tsx";
 import {useParams} from "react-router-dom";
 import {useGetTvShowDetailsQuery} from "@/services/tmdb/tvShowApi.ts";
 

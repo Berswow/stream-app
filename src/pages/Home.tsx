@@ -1,13 +1,13 @@
-import { Hero } from "@/components/Home/Hero";
-import { Devices } from "@/components/Home/Devices";
-import { Faq } from "@/components/Home/Faq";
-import { Subscription } from "@/components/Home/Subscription";
+import { HomeHero } from "@/widgets/Home/HomeHero.tsx";
+import { Devices } from "@/widgets/Home/Devices.tsx";
+import { Faq } from "@/widgets/Home/Faq.tsx";
+import { Subscription } from "@/widgets/Home/Subscription.tsx";
 
 export const Home = () => {
     return (
         <main className="flex flex-col">
             <div className="flex justify-center items-center my-50">
-                <Hero />
+                <HomeHero />
             </div>
             <div className='flex flex-col gap-50'>
                 <div className="flex justify-center items-center">

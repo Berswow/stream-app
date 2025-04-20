@@ -1,6 +1,6 @@
-import {Faq} from "@/components/Home/Faq.tsx";
-import {SupportForm} from "@/components/Support/SupportForm.tsx";
-import {SupportHero} from "@/components/Support/SupportHero.tsx";
+import {Faq} from "@/widgets/Home/Faq.tsx";
+import {SupportForm} from "@/entities/support/SupportForm.tsx";
+import {SupportHero} from "@/entities/support/SupportHero.tsx";
 
 export const Support = () => {
     return (

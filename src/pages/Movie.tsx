@@ -1,11 +1,11 @@
-import {MovieHero} from "@/components/Movie/MovieHero.tsx";
-import {MovieDescription} from "@/components/Movie/MovieDescription.tsx";
-import {MovieCast} from "@/components/Movie/MovieCast.tsx";
-import {MovieReviews} from "@/components/Movie/MovieReviews.tsx";
-import {MovieStats} from "@/components/Movie/MovieStats.tsx";
+import {MovieHero} from "@/widgets/MovieDetails/MovieHero.tsx";
+import {MovieDescription} from "@/widgets/MovieDetails/MovieDescription.tsx";
+import {MovieCast} from "@/widgets/MovieDetails/MovieCast.tsx";
+import {MovieReviews} from "@/widgets/MovieDetails/MovieReviews.tsx";
+import {MovieStats} from "@/widgets/MovieDetails/MovieStats.tsx";
 import {useParams} from "react-router-dom";
 import {useGetMovieDetailsQuery} from "@/services/tmdb/moviesApi.ts";
-import {MovieSimilar} from "@/components/Movie/MovieSimilar.tsx";
+import {MovieSimilar} from "@/widgets/MovieDetails/MovieSimilar.tsx";
 
 
 

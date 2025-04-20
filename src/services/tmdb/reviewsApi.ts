@@ -1,5 +1,5 @@
 import {tmdbApi} from "@/services/tmdb/tmdbApi.ts";
-import {ReviewsResponse} from "@/Interface/ReviewInterface.ts";
+import {ReviewsResponse} from "@/shared/interfaces/ReviewInterface.ts";
 
 export const reviewsApi = tmdbApi.injectEndpoints({
     endpoints: (builder) => ({

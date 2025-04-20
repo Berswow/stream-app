@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "@/redux/store.ts";
+import { RootState } from "@/app/store.ts";
 
 interface filterInterface {
     release_date: number | null;
