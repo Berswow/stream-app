@@ -10,7 +10,7 @@ import {TV_GENRES} from "@/shared/constants/genres.ts";
 
 interface CardGridProps {
     genreId: number;
-    contentType: 'movie' | 'tv'; // Добавляем contentType
+    contentType: 'movie' | 'tv';
 }
 
 export const CardGrid = ({ genreId, contentType }: CardGridProps) => {
@@ -20,7 +20,7 @@ export const CardGrid = ({ genreId, contentType }: CardGridProps) => {
     const genres = useSelector(selectGenresFilter);
 
     const [page, setPage] = useState(1);
-    const [allItems, setAllItems] = useState<any[]>([]); // Массив для фильмов или сериалов
+    const [allItems, setAllItems] = useState<any[]>([])
     const [hasFilterChanged, setHasFilterChanged] = useState(false);
 
     const queryParams = useMemo(() => {
@@ -35,23 +35,22 @@ export const CardGrid = ({ genreId, contentType }: CardGridProps) => {
     }, [sort_by, release_year, languages, genres, genreId, page]);
 
     const { data, isLoading, isFetching, error } = contentType === 'tv'
-        ? useGetFilteredTvShowsQuery(queryParams) // Запрос для сериалов
-        : useGetFilteredMoviesQuery(queryParams); // Запрос для фильмов
+        ? useGetFilteredTvShowsQuery(queryParams)
+        : useGetFilteredMoviesQuery(queryParams)
 
-    // Сброс фильмов/сериалов при изменении фильтров
+
     useEffect(() => {
         console.log("Filters changed, resetting movies/shows...");
         setPage(1);
-        setAllItems([]); // Сброс данных
+        setAllItems([]);
     }, [sort_by, release_year, languages, genres, genreId]);
 
-    // Обновление allItems после запроса
     useEffect(() => {
         if (data) {
             console.log("Data received from API:", data);
             setAllItems(prev => {
                 const combinedItems = [...prev, ...data];
-                // Удаление дублирующихся элементов по id
+
                 const uniqueItems = combinedItems.filter((item, index, self) =>
                     index === self.findIndex(i => i.id === item.id)
                 );
@@ -102,7 +101,7 @@ export const CardGrid = ({ genreId, contentType }: CardGridProps) => {
                     </Link>
                 ))}
 
-                {/* Триггер для скролла */}
+
                 <div ref={triggerRef} className="h-1 col-span-full" />
             </div>
 
