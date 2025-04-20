@@ -60,7 +60,7 @@ export const TvShowStats: FC<TvShowStatsProps> = ({tvShowId, tvShow}) => {
                 </div>
             </div>
 
-            {/*Gernes*/}
+            {/*Genres*/}
 
             <div className='flex flex-col gap-3.5'>
                 <div className='flex items-center gap-1' style={{color: "var(--grey-60)"}}>

@@ -6,7 +6,7 @@ interface filterInterface {
     original_language: string[];
     genres: number[];
     sort: string;
-    contentType: 'movie' | 'tv';  // Новый параметр
+    contentType: 'movie' | 'tv';
 }
 
 const initialState: filterInterface = {
@@ -14,7 +14,7 @@ const initialState: filterInterface = {
     original_language: ['en'],
     genres: [],
     sort: 'popularity.desc',
-    contentType: 'movie',  // По умолчанию фильмы
+    contentType: 'movie',
 }
 
 const filterSlice = createSlice({

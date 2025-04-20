@@ -4,13 +4,9 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from "@/shared/ui/accordion.tsx";
-
-// import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import {Button} from "@/shared/ui/button.tsx";
-// import { useState } from "react";
-// import { ArrowLeft, ArrowRight } from "lucide-react";
-// import { cn } from "@/lib/utils";
+
 
 const faqData = [
     { id: 1, question: "What is CineStreamBox?", answer: "CineStreamBox is a streaming service that allows you to watch movies and shows on demand." },
@@ -24,16 +20,7 @@ const faqData = [
 ];
 
 export const Faq = () => {
-    // const [currentSlide, setCurrentSlide] = useState(0);
-    // const [sliderRef, instanceRef] = useKeenSlider({
-    //     initial: 0,
-    //     slideChanged(slider) {
-    //         setCurrentSlide(slider.track.details.rel);
-    //     },
-    //     slides: { perView: 1, spacing: 10 },
-    // });
 
-    // Разделяем вопросы на два массива по 4 элемента
     const firstColumn = faqData.slice(0, 4);
     const secondColumn = faqData.slice(4, 8);
 
@@ -68,51 +55,6 @@ export const Faq = () => {
                     </Accordion>
                 ))}
             </div>
-
-            {/*<div className="relative w-full flex flex-col items-center">*/}
-            {/*    <div ref={sliderRef} className="keen-slider w-full max-w-md">*/}
-            {/*        <div className="keen-slider__slide bg-gray-800 h-48 flex items-center justify-center text-white">*/}
-            {/*            Slide 1*/}
-            {/*        </div>*/}
-            {/*        <div className="keen-slider__slide bg-gray-700 h-48 flex items-center justify-center text-white">*/}
-            {/*            Slide 2*/}
-            {/*        </div>*/}
-            {/*        <div className="keen-slider__slide bg-gray-600 h-48 flex items-center justify-center text-white">*/}
-            {/*            Slide 3*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-
-            {/*    /!* Навигация *!/*/}
-            {/*    <div className="flex items-center mt-4 space-x-4">*/}
-            {/*        <button*/}
-            {/*            onClick={() => instanceRef.current?.prev()}*/}
-            {/*            className="p-2 bg-gray-900 text-white rounded-full"*/}
-            {/*        >*/}
-            {/*            <ArrowLeft size={20} />*/}
-            {/*        </button>*/}
-
-            {/*        /!* Индикаторы *!/*/}
-            {/*        <div className="flex space-x-2">*/}
-            {/*            {[...Array(3)].map((_, idx) => (*/}
-            {/*                <span*/}
-            {/*                    key={idx}*/}
-            {/*                    className={cn(*/}
-            {/*                        "h-1 w-6 rounded-full bg-gray-500 transition-all",*/}
-            {/*                        currentSlide === idx && "bg-red-900 w-8"*/}
-            {/*                    )}*/}
-            {/*                />*/}
-            {/*            ))}*/}
-            {/*        </div>*/}
-
-            {/*        <button*/}
-            {/*            onClick={() => instanceRef.current?.next()}*/}
-            {/*            className="p-2 bg-gray-900 text-white rounded-full"*/}
-            {/*        >*/}
-            {/*            <ArrowRight size={20} />*/}
-            {/*        </button>*/}
-            {/*    </div>*/}
-
-            {/*</div>*/}
         </section>
 
     );

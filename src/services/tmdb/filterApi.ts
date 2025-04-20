@@ -83,7 +83,7 @@ export const filterApi = tmdbApi.injectEndpoints({
                         primary_release_year: release_year ?? undefined,
                         page,
                     });
-                    const result = await fetchWithBQ({ url: "discover/tv", params });  // используем "discover/tv" для сериалов
+                    const result = await fetchWithBQ({ url: "discover/tv", params });
                     if (result.error) return { error: result.error };
                     const tvShows = (result.data as TMDBResponse<TvShowInterface>).results ?? [];
                     return { data: tvShows.filter((tv) => tv.poster_path) };  // фильтруем по наличию постера
@@ -92,7 +92,7 @@ export const filterApi = tmdbApi.injectEndpoints({
                 const responses = await Promise.all(
                     languages.map((lang) =>
                         fetchWithBQ({
-                            url: "discover/tv",  // для сериалов
+                            url: "discover/tv",
                             params: buildMovieParams({
                                 sort_by,
                                 with_genres: genreParam,
@@ -108,7 +108,7 @@ export const filterApi = tmdbApi.injectEndpoints({
                     (res) => (res.data as TMDBResponse<TvShowInterface>)?.results ?? []
                 );
 
-                return { data: allTvShows.filter((tv) => tv.poster_path) };  // фильтруем по наличию постера
+                return { data: allTvShows.filter((tv) => tv.poster_path) };
             },
         }),
     }),

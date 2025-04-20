@@ -14,7 +14,7 @@ type CategoryBlockProps<T> = {
     getId: (item: T) => string | number;
     getImage: (item: T) => string;
     getTitle: (item: T) => string;
-    contentType: 'movie' | 'tv'; // Добавляем contentType
+    contentType: 'movie' | 'tv';
 };
 
 export const CategoryBlock = <T,>({
@@ -55,7 +55,7 @@ export const CategoryBlock = <T,>({
         if (matched) {
             dispatch(setClearAllFilters());
             dispatch(setGenres([matched.id]));
-            navigate(`/${contentType}/genre/${matched.id}`); // Динамический путь в зависимости от контента
+            navigate(`/${contentType}/genre/${matched.id}`);
         }
     };
 

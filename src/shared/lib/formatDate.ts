@@ -1,5 +1,5 @@
 export const formatDate = (dateString: string) => {
-    const date = new Date(dateString);  // Создаем объект Date из строки
+    const date = new Date(dateString);
 
 
     const months = [
@@ -9,7 +9,7 @@ export const formatDate = (dateString: string) => {
 
 
     const day = date.getDate();
-    const month = months[date.getMonth()];  // Получаем месяц по индексу
+    const month = months[date.getMonth()];
     const year = date.getFullYear();
 
 

@@ -26,7 +26,6 @@ interface FilterMenuWrapperProps {
 export const FilterMenuWrapper = ({ type, baseGenreId }: FilterMenuWrapperProps) => {
     const dispatch = useDispatch();
 
-    // Выбор слайса в зависимости от типа
     const { genres, original_language, release_date, sort } = useSelector(
         (state: RootState) => state[type === "movie" ? "movieFilter" : "tvShowFilter"]
     );

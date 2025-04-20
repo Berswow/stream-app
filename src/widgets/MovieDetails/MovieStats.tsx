@@ -31,9 +31,7 @@ export const MovieStats: FC<MovieStatsProps> = ({movieId, movie}) => {
                 </div>
             </div>
 
-
             {/*Ratings*/}
-
             <div className='flex flex-col gap-3.5'>
                 <div className='flex items-center gap-1' style={{color: "var(--grey-60)"}}>
                     <Star size={24}/><h4 style={{color: "var(--grey-60)"}}>Ratings</h4>
@@ -62,8 +60,7 @@ export const MovieStats: FC<MovieStatsProps> = ({movieId, movie}) => {
                 </div>
             </div>
 
-            {/*Gernes*/}
-
+            {/*Genres*/}
             <div className='flex flex-col gap-3.5'>
                 <div className='flex items-center gap-1' style={{color: "var(--grey-60)"}}>
                     <LayoutGrid size={24}/><h4 style={{color: "var(--grey-60)"}}>Gernes</h4>
@@ -80,12 +77,10 @@ export const MovieStats: FC<MovieStatsProps> = ({movieId, movie}) => {
             </div>
 
             {/*Director*/}
-
             <div className='flex flex-col gap-3.5'>
                 <div className='flex items-center gap-1' style={{color: "var(--grey-60)"}}>
                     <Video size={24}/><h4 style={{color: "var(--grey-60)"}}>Director</h4>
                 </div>
-
                 {directors?.map(director => (
                     <div key={director.id} className='flex gap-2.5 rounded-xl items-center p-3.5'
                          style={{backgroundColor: "var(--black-08)"}}>
@@ -110,7 +105,6 @@ export const MovieStats: FC<MovieStatsProps> = ({movieId, movie}) => {
             </div>
 
             {/*Producer*/}
-
             <div className='flex flex-col gap-3.5'>
                 <div className='flex items-center gap-1' style={{color: "var(--grey-60)"}}>
                     <Music size={24}/><h4 style={{color: "var(--grey-60)"}}>Producer</h4>

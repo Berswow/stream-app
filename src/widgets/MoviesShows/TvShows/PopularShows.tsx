@@ -24,11 +24,11 @@ export const PopularShows = () => {
     const { data: data15, isLoading: l15, isError: e15 } = useGetFilteredTvShowsQuery({ genres: [TV_GENRES[14].id] });
     const { data: data16, isLoading: l16, isError: e16 } = useGetFilteredTvShowsQuery({ genres: [TV_GENRES[15].id] });
 
-    // Проверка состояния загрузки и ошибок
+
     const isLoading = [l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12, l13, l14, l15, l16].includes(true);
     const isError = [e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, e12, e13, e14, e15, e16].includes(true);
 
-    // Формируем map для жанров
+
     const genreMap = {
         [TV_GENRES[0].name]: data1 ?? [],
         [TV_GENRES[1].name]: data2 ?? [],
@@ -59,8 +59,8 @@ export const PopularShows = () => {
                 genreMap={genreMap}
                 getId={(item) => item.id}
                 getImage={(item) => `https://image.tmdb.org/t/p/w154${item.poster_path}`}
-                getTitle={(item) => item.name} // Для сериалов используем name
-                contentType="tv" // Указываем тип контента как сериал
+                getTitle={(item) => item.name}
+                contentType="tv"
             />
         </article>
     );

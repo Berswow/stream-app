@@ -38,7 +38,7 @@ export const Hero = () => {
 
     useEffect(() => {
         if (!emblaRef.current || !emblaReady) return;
-        onSelect(); // Инициализация
+        onSelect();
         emblaRef.current.on("select", onSelect); // Слушаем изменения слайда
     }, [emblaReady, onSelect]);
 

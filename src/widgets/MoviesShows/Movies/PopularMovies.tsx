@@ -26,11 +26,11 @@ export const PopularMovies = () => {
     const { data: data18, isLoading: l18, isError: e18 } = useGetFilteredMoviesQuery({ genres: [MOVIE_GENRES[17].id] });
     const { data: data19, isLoading: l19, isError: e19 } = useGetFilteredMoviesQuery({ genres: [MOVIE_GENRES[18].id] });
 
-    // Проверка состояния загрузки и ошибок
+
     const isLoading = [l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12, l13, l14, l15, l16, l17, l18, l19].includes(true);
     const isError = [e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, e12, e13, e14, e15, e16, e17, e18, e19].includes(true);
 
-    // Формируем map для жанров
+
     const genreMap = {
         [MOVIE_GENRES[0].name]: data1 ?? [],
         [MOVIE_GENRES[1].name]: data2 ?? [],

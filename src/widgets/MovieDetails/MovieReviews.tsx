@@ -14,18 +14,13 @@ export const MovieReviews = ({movieId}: MovieReviewsProps) => {
     if (error || !data) return <div>Ошибка загрузки данных</div>;
 
     return (
-
         <div className='flex flex-col rounded-xl p-12.5 gap-7.5'
              style={{backgroundColor: "var(--black-15)"}}>
             <h4 style={{color: "var(--grey-60)"}}>Reviews</h4>
-
             <div className='flex flex-col gap-5'>
-
-
                 {reviews?.map((review: Review) => (
                     <div key={review.id} className='flex flex-col gap-5 p-10 rounded-xl basis-full'
                          style={{backgroundColor: "var(--black-06)"}}>
-
                         <div className='flex justify-between'>
                             <div className='flex gap-3'>
                                 <div className="w-[56px] h-[60px] rounded-xl overflow-hidden">
@@ -48,15 +43,11 @@ export const MovieReviews = ({movieId}: MovieReviewsProps) => {
 
                             <div className='self-end text-orange-600'>{review.author_details.rating}</div>
                         </div>
-
-
                         <div>
                             <p className="line-clamp-3" style={{color: "var(--grey-60)"}}>{review.content}</p>
                         </div>
                     </div>
                 ))}
-
-
             </div>
         </div>
     );
