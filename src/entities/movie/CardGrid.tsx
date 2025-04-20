@@ -34,10 +34,14 @@ export const CardGrid = ({ genreId, contentType }: CardGridProps) => {
         };
     }, [sort_by, release_year, languages, genres, genreId, page]);
 
+
+    // should be used another logic for these hooks :
+
     const { data, isLoading, isFetching, error } = contentType === 'tv'
         ? useGetFilteredTvShowsQuery(queryParams)
         : useGetFilteredMoviesQuery(queryParams)
 
+    //
 
     useEffect(() => {
         console.log("Filters changed, resetting movies/shows...");
