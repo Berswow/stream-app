@@ -83,7 +83,7 @@ export const Footer = () => {
 
             <div className="flex justify-between" style={{color: 'var(--grey-60)'}}>
                 <div>
-                    <p>@2023 streamvib, All Rights Reserved</p>
+                    <p>@2023 CineStreamBox, All Rights Reserved</p>
                 </div>
                 <div className="flex gap-[40px]">
                     <p>Terms of Use</p>

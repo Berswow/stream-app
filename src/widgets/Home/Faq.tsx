@@ -13,14 +13,14 @@ import {Button} from "@/shared/ui/button.tsx";
 // import { cn } from "@/lib/utils";
 
 const faqData = [
-    { id: 1, question: "What is StreamVibe?", answer: "StreamVibe is a streaming service that allows you to watch movies and shows on demand." },
-    { id: 2, question: "How much does StreamVibe cost?", answer: "StreamVibe offers various pricing plans. Check our website for the latest details." },
-    { id: 3, question: "What content is available on StreamVibe?", answer: "You can watch a vast collection of movies, TV shows, and exclusive originals." },
-    { id: 4, question: "How can I watch StreamVibe?", answer: "StreamVibe is available on web browsers, mobile apps, and smart TVs." },
-    { id: 5, question: "How do I sign up for StreamVibe?", answer: "Simply visit our website, choose a plan, and create an account." },
-    { id: 6, question: "What is the StreamVibe free trial?", answer: "New users can enjoy a 7-day free trial with access to all features." },
-    { id: 7, question: "How do I contact StreamVibe customer support?", answer: "You can reach us via email, live chat, or our help center." },
-    { id: 8, question: "What are the StreamVibe payment methods?", answer: "We accept credit cards, PayPal, and other online payment methods." },
+    { id: 1, question: "What is CineStreamBox?", answer: "CineStreamBox is a streaming service that allows you to watch movies and shows on demand." },
+    { id: 2, question: "How much does CineStreamBox cost?", answer: "CineStreamBox offers various pricing plans. Check our website for the latest details." },
+    { id: 3, question: "What content is available on CineStreamBox?", answer: "You can watch a vast collection of movies, TV shows, and exclusive originals." },
+    { id: 4, question: "How can I watch CineStreamBox?", answer: "CineStreamBox is available on web browsers, mobile apps, and smart TVs." },
+    { id: 5, question: "How do I sign up for CineStreamBox?", answer: "Simply visit our website, choose a plan, and create an account." },
+    { id: 6, question: "What is the CineStreamBox free trial?", answer: "New users can enjoy a 7-day free trial with access to all features." },
+    { id: 7, question: "How do I contact CineStreamBox customer support?", answer: "You can reach us via email, live chat, or our help center." },
+    { id: 8, question: "What are the CineStreamBox payment methods?", answer: "We accept credit cards, PayPal, and other online payment methods." },
 ];
 
 export const Faq = () => {
@@ -44,7 +44,7 @@ export const Faq = () => {
             <div className='flex justify-between'>
                 <div className='flex flex-col gap-3.5'>
                     <h2>Frequently Asked Questions</h2>
-                    <p style={{color: "var(--grey-60)"}}>Got questions? We've got answers! Check out our FAQ section to find answers to the most common questions about StreamVibe.</p>
+                    <p style={{color: "var(--grey-60)"}}>Got questions? We've got answers! Check out our FAQ section to find answers to the most common questions about CineStreamBox.</p>
                 </div>
                 <Button className='self-end'>Ask a Question</Button>
             </div>

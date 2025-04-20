@@ -51,7 +51,7 @@ export const MovieStats: FC<MovieStatsProps> = ({movieId, movie}) => {
                     </div>
                     <div className='flex flex-col gap-1 p-4 rounded-xl border border-neutral-700 flex-1/2'
                          style={{backgroundColor: "var(--black-08)"}}>
-                        <p>Streamvibe</p>
+                        <p>CineStreamBox</p>
                         <div className='flex'><Star className='fill-orange-600 stroke-0' size={24}/><Star
                             className='fill-orange-600 stroke-0' size={24}/><Star className='fill-orange-600 stroke-0'
                                                                                   size={24}/><Star

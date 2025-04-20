@@ -5,9 +5,9 @@ export const HomeHero = () => {
             <section className='flex flex-col items-center gap-12 mt-[650px]'>
                 <div className='flex flex-col items-center gap-3.5 text-center'>
                     <h1 className='font-bold'>The Best Streaming Experience</h1>
-                    <p style={{ color: "var(--grey-60)" }}>StreamVibe is the best streaming experience for watching your favorite movies and shows on
+                    <p style={{ color: "var(--grey-60)" }}>CineStreamBox is the best streaming experience for watching your favorite movies and shows on
                         demand,
-                        anytime, anywhere. With StreamVibe, you can enjoy a wide variety of content, including the
+                        anytime, anywhere. With CineStreamBox, you can enjoy a wide variety of content, including the
                         latest
                         blockbusters, classic movies, popular TV shows, and more. You can also create your own
                         watchlists,

@@ -17,7 +17,7 @@ export const Subscription = () => {
             <div className='flex justify-between items-center gap-24'>
                 <div className='flex flex-col gap-3.5'>
                     <h2>Choose the plan that's right for you</h2>
-                    <p style={{color: "var(--grey-60)"}}>Join StreamVibe and select from our flexible subscription
+                    <p style={{color: "var(--grey-60)"}}>Join CineStreamBox and select from our flexible subscription
                         options tailored to suit your viewing preferences. Get ready for non-stop entertainment!</p>
                 </div>
                 <div className='flex items-center p-2.5 gap-5 rounded-2xl'

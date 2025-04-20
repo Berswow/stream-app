@@ -4,7 +4,7 @@ export const Devices = () => {
             <div className='flex justify-between'>
                 <div className='flex flex-col gap-3.5'>
                     <h2>We Provide you streaming experience across various devices.</h2>
-                    <p style={{color: "var(--grey-60)"}}>With StreamVibe, you can enjoy your favorite movies and TV
+                    <p style={{color: "var(--grey-60)"}}>With CineStreamBox, you can enjoy your favorite movies and TV
                         shows anytime, anywhere. Our platform is designed to be compatible with a wide range of devices,
                         ensuring that you never miss a moment of entertainment.</p>
                 </div>
@@ -37,7 +37,7 @@ export const Devices = () => {
                         </div>
                         <div>
                             <p className='text-[18px]'
-                            style={{color: "var(--grey-60)"}}>StreamVibe is optimized for both Android and iOS smartphones. Download our app from the
+                            style={{color: "var(--grey-60)"}}>CineStreamBox is optimized for both Android and iOS smartphones. Download our app from the
                                 Google Play Store or the Apple App Store</p>
                         </div>
                     </div>
@@ -68,7 +68,7 @@ export const Devices = () => {
                         </div>
                         <div>
                             <p className='text-[18px]'
-                               style={{color: "var(--grey-60)"}}>StreamVibe is optimized for both Android and iOS smartphones. Download our app from the
+                               style={{color: "var(--grey-60)"}}>CineStreamBox is optimized for both Android and iOS smartphones. Download our app from the
                                 Google Play Store or the Apple App Store</p>
                         </div>
                     </div>
@@ -102,7 +102,7 @@ export const Devices = () => {
                         </div>
                         <div>
                             <p className='text-[18px]'
-                               style={{color: "var(--grey-60)"}}>StreamVibe is optimized for both Android and iOS smartphones. Download our app from the
+                               style={{color: "var(--grey-60)"}}>CineStreamBox is optimized for both Android and iOS smartphones. Download our app from the
                                 Google Play Store or the Apple App Store</p>
                         </div>
                     </div>
@@ -135,7 +135,7 @@ export const Devices = () => {
                         </div>
                         <div>
                             <p className='text-[18px]'
-                               style={{color: "var(--grey-60)"}}>StreamVibe is optimized for both Android and iOS smartphones. Download our app from the
+                               style={{color: "var(--grey-60)"}}>CineStreamBox is optimized for both Android and iOS smartphones. Download our app from the
                                 Google Play Store or the Apple App Store</p>
                         </div>
                     </div>
@@ -168,7 +168,7 @@ export const Devices = () => {
                         </div>
                         <div>
                             <p className='text-[18px]'
-                               style={{color: "var(--grey-60)"}}>StreamVibe is optimized for both Android and iOS smartphones. Download our app from the
+                               style={{color: "var(--grey-60)"}}>CineStreamBox is optimized for both Android and iOS smartphones. Download our app from the
                                 Google Play Store or the Apple App Store</p>
                         </div>
                     </div>
@@ -202,7 +202,7 @@ export const Devices = () => {
                         </div>
                         <div>
                             <p className='text-[18px]'
-                               style={{color: "var(--grey-60)"}}>StreamVibe is optimized for both Android and iOS smartphones. Download our app from the
+                               style={{color: "var(--grey-60)"}}>CineStreamBox is optimized for both Android and iOS smartphones. Download our app from the
                                 Google Play Store or the Apple App Store</p>
                         </div>
                     </div>
