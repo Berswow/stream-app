@@ -38,7 +38,6 @@ export const MovieSimilar = ({movieId}: MovieSimilarProps) => {
                     </div>
                 ))}
             </div>
-
         </div>
     );
 };

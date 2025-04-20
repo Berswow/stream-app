@@ -4,9 +4,9 @@ import {CastMember} from "@/shared/interfaces/Movie/MovieCastInerface.ts";
 import {CrewMember} from "@/shared/interfaces/Movie/MovieCrewInterface.ts";
 import {SeasonDetails} from "@/shared/interfaces/Show/TvShowSeasonDetailed.ts";
 
-// interface TMDBResponse<T> {
-//     results: T[];
-// }
+interface TMDBResponse<T> {
+    results: T[];
+}
 
 
 export const tvShowApi = tmdbApi.injectEndpoints({
@@ -71,11 +71,17 @@ export const tvShowApi = tmdbApi.injectEndpoints({
             query: ({showId, seasonId}) => ({
                 url: `tv/${showId}/season/${seasonId}`
             })
+        }),
+        getTvShowSimilar: builder.query<TvShowDetailed[], string | number>({
+            query: (id) => `/tv/${id}/similar`,
+            transformResponse: (response: TMDBResponse<TvShowDetailed>) => {
+                return response.results
+            }
         })
     }),
     overrideExisting: false,
 });
 
 export const {
-    useGetTrendingTVQuery, useGetAiringTodayQuery, useGetOnTheAirQuery, useGetTvShowDetailsQuery, useGetTvShowCastQuery, useGetTvShowSeasonDetailsQuery,
+    useGetTrendingTVQuery, useGetAiringTodayQuery, useGetOnTheAirQuery, useGetTvShowDetailsQuery, useGetTvShowCastQuery, useGetTvShowSeasonDetailsQuery, useGetTvShowSimilarQuery
 } = tvShowApi;
