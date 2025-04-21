@@ -15,3 +15,8 @@ export const formatDate = (dateString: string) => {
 
     return `${day} ${month} ${year}`;
 };
+
+export const formatDateToYear = (dateString: string) => {
+    const date = new Date(dateString);
+    return `${date.getFullYear()}`;
+}

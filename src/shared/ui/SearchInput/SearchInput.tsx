@@ -1,26 +1,38 @@
-import {Input} from "@/shared/ui/input";
-import {Button} from "@/shared/ui/button";
-import {ChangeEvent, useRef, useState} from "react";
-import {useDebounce} from "@/shared/ui/SearchInput/useSearch";
-import {useGetFilteredSearchQuery} from "@/services/tmdb/filterApi";
-import {AnimatePresence, motion} from "framer-motion";
-import {Loader2} from "lucide-react";
-import {Link} from "react-router-dom";
+import { Sheet, SheetContent, SheetTrigger } from "@/shared/ui/sheet"
+import { Input } from "@/shared/ui/input"
+import { ChangeEvent, useMemo, useState } from "react"
+import { Film, Search, Tv, User } from "lucide-react"
+import { useDispatch, useSelector } from "react-redux";
+import { selectSearchToggle, setSearchToggle } from "@/redux/slices/uiSlice.ts";
+import { useDebounce } from "@/shared/ui/SearchInput/useSearch.ts";
+import { useGetFilteredSearchQuery } from "@/services/tmdb/filterApi.ts";
+import { formatDateToYear } from "@/shared/lib/formatDate.ts";
+import { Link } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
+import { Button } from "../button";
 
-export const SearchInput = () => {
-    const [isOpen, setIsOpen] = useState(false);
+const filters = [
+    { label: "Movies", value: "movie", icon: <Film className="w-4 h-4" /> },
+    { label: "TV Shows", value: "tv", icon: <Tv className="w-4 h-4" /> },
+    { label: "People", value: "person", icon: <User className="w-4 h-4" /> },
+]
+
+export function SearchInput() {
     const [searchValue, setSearchValue] = useState("");
-    const debouncedSearch = useDebounce(searchValue, 1000);
-    const containerRef = useRef(null);
+    const dispatch = useDispatch()
+    const [type, setType] = useState("movie")
 
+    const modalState = useSelector(selectSearchToggle)
+
+    const debouncedSearch = useDebounce(searchValue, 500);
     const isValidSearch = debouncedSearch.trim().length > 0;
 
-    const {data, isLoading, error} = useGetFilteredSearchQuery(
-        {query: debouncedSearch, page: 1, include_adult: false},
-        {skip: !isValidSearch}
+    const { data, isLoading, error } = useGetFilteredSearchQuery(
+        { query: debouncedSearch, page: 1, include_adult: false },
+        { skip: !isValidSearch }
     );
 
-    const searchResults = data?.results.slice(0, 5) || [];
+    const searchResults = useMemo(() => data?.results.slice(0, 5) || [], [data]);
 
     const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
         setSearchValue(e.target.value);
@@ -32,111 +44,102 @@ export const SearchInput = () => {
         return "Unknown";
     };
 
+    const handleYear = (result: {
+        media_type: string;
+        release_date?: string;
+        first_air_date?: string;
+    }) => {
+        if (result.media_type === "movie") return formatDateToYear(result.release_date ?? "");
+        if (result.media_type === "tv") return formatDateToYear(result.first_air_date ?? "");
+        return "Unknown";
+    };
+
+    const getMediaPath = (result: { media_type: string; title?: string; name?: string; id: number }) => {
+        switch (result.media_type) {
+            case "movie":
+                return `/movies/${result.id}`;
+            case "tv":
+                return `/tvshow/${result.id}`;
+            default:
+                return "#";
+        }
+    }
+
     const handleResultClick = () => {
-        setIsOpen(false);
+        dispatch(setSearchToggle(!modalState));
         setSearchValue("");
     };
 
     return (
-        <div className="relative w-full max-w-md" ref={containerRef}>
-            <div className="flex items-center gap-2">
-                <AnimatePresence initial={false}>
-                    {isOpen ? (
-                        <motion.div
-                            key="input"
-                            initial={{width: 0, opacity: 0}}
-                            animate={{width: "100%", opacity: 1}}
-                            exit={{width: 0, opacity: 0}}
-                            transition={{duration: 0.3}}
-                            className="relative w-full"
-                        >
-                            <Input
-                                value={searchValue}
-                                onChange={handleSearch}
-                                autoFocus
-                                className="w-full pr-10"
-                            />
-                            {searchValue && (
-                                <button
-                                    onClick={() => setSearchValue("")}
-                                    className="absolute right-2 top-2 text-white"
-                                >
-                                    &times;
-                                </button>
-                            )}
-                        </motion.div>
-                    ) : (
-                        <motion.div
-                            key="icon"
-                            initial={{opacity: 0, scale: 0.8}}
-                            animate={{opacity: 1, scale: 1}}
-                            exit={{opacity: 0, scale: 0.8}}
-                            transition={{duration: 0.2}}
-                        >
-                            <Button onClick={() => setIsOpen(true)}>
-                                <svg
-                                    width="34"
-                                    height="34"
-                                    viewBox="0 0 34 34"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        d="M29.75 29.75L22.388 22.388M22.388 22.388C24.3108 20.4653 25.5 17.809 25.5 14.875C25.5 9.00697 20.743 4.25 14.875 4.25C9.00697 4.25 4.25 9.00697 4.25 14.875C4.25 20.743 9.00697 25.5 14.875 25.5C17.809 25.5 20.4653 24.3108 22.388 22.388Z"
-                                        stroke="white"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                    />
-                                </svg>
-                            </Button>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-            </div>
+        <Sheet open={modalState} onOpenChange={() => dispatch(setSearchToggle(!modalState))}>
+            <SheetTrigger asChild>
+                <Search className='cursor-pointer hover:text-red-600 transition-colors duration-300' size={30} />
+            </SheetTrigger>
 
-            <AnimatePresence>
-                {isOpen && searchValue && (
-                    <motion.div
-                        key="dropdown"
-                        initial={{opacity: 0, y: -5}}
-                        animate={{opacity: 1, y: 0}}
-                        exit={{opacity: 0, y: -5}}
-                        transition={{duration: 0.2}}
-                        className="absolute left-0 top-full z-10 mt-2 w-full rounded-xl bg-zinc-900 p-4 shadow-xl"
-                    >
-                        {isLoading && (
-                            <div className="flex justify-center py-2 text-sm text-muted">
-                                <Loader2 className="h-5 w-5 animate-spin"/>
-                            </div>
-                        )}
+            {modalState && <div className="fixed inset-0 z-40 backdrop-blur-sm bg-black/30" />}
 
-                        {error && (
-                            <div className="py-2 text-sm text-red-500">Error loading results</div>
-                        )}
-
-                        {!isLoading && searchResults.length === 0 && (
-                            <div className="py-2 text-sm text-muted">No results found</div>
-                        )}
-
-                        {searchResults.map((result) => (
-                            <div
-                                key={result.id}
-                                className="cursor-pointer rounded-md p-2 hover:bg-zinc-800 transition"
+            <SheetContent side="top"
+                          className="flex flex-col items-center max-h-[100dvh] overflow-visible z-50 py-8 bg-neutral-800 border-none shadow-[0px_5px_10px_5px_#000000]">
+                <div className="flex flex-col items-center gap-4 w-[500px] px-4">
+                    <div className="flex justify-between gap-5">
+                        {filters.map((f) => (
+                            <Button
+                                key={f.value}
+                                variant={type === f.value ? "default" : "outline"}
+                                onClick={() => setType(f.value)}
+                                className={type === f.value ? `flex items-center gap-1 text-sm shadow-[0px_5px_10px_5px_#000000] transition-shadow duration-300` : `flex items-center gap-1 text-sm hover:shadow-[0px_5px_10px_5px_#000000] transition-shadow duration-300`}
                             >
-
-                                <Link
-                                    to={`/${result.media_type === 'tv' ? 'tvshow' : 'movies'}/${result.id}`}
-                                    style={{backgroundColor: "var(--black-15)"}}
-                                    onClick={handleResultClick}
-                                >
-                                    <p>{handleTitle(result)}</p>
-                                </Link>
-                            </div>
+                                {f.icon}
+                                {f.label}
+                            </Button>
                         ))}
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </div>
-    );
-};
+                    </div>
+
+                    <div className='flex items-center gap-3 self-start w-full'>
+                        <Search size={30} />
+                        <Input
+                            value={searchValue}
+                            onChange={handleSearch}
+                            placeholder={`Search ${type}...`}
+                            className="self-start h-14 font-bold border-none"
+                        />
+                    </div>
+
+                    {isLoading && (
+                        <div className="text-white mt-4">Loading...</div>
+                    )}
+
+                    {error && (
+                        <div className="text-red-500 mt-4">Error</div>
+                    )}
+
+                    <AnimatePresence>
+                        {searchResults.length > 0 && !isLoading && !error && (
+                            <motion.ul
+                                initial={{ opacity: 0, y: -10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -10 }}
+                                transition={{ duration: 0.2 }}
+                                className="flex flex-col gap-3 py-2 self-start"
+                            >
+                                {searchResults.map((result) => (
+                                    <Link
+                                        to={getMediaPath(result)}
+                                        onClick={handleResultClick}
+                                        key={result.id}
+                                    >
+                                        <li
+                                            className="flex items-center gap-2 p-3 text-nowrap cursor-pointer rounded-xl hover:shadow-[0px_5px_10px_5px_#000000] transition-shadow duration-300"
+                                        >
+                                            <Search size={15} /> {handleTitle(result)} <span>({handleYear(result)})</span>
+                                        </li>
+                                    </Link>
+                                ))}
+                            </motion.ul>
+                        )}
+                    </AnimatePresence>
+                </div>
+            </SheetContent>
+        </Sheet>
+    )
+}

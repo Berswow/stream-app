@@ -26,6 +26,7 @@ export const Header = () => {
                           fill="white"/>
                 </svg>
             </div>
+
             <nav className="min-w-2xl">
                 <div className="relative w-full max-w-2xl mx-auto p-1 rounded-2xl min-h-[75px]"
                      style={{backgroundColor: "var(--black-10)"}}>
@@ -62,7 +63,8 @@ export const Header = () => {
                     </div>
                 </div>
             </nav>
-            <div className="flex gap-8">
+
+            <div className="flex gap-8 items-center justify-end">
                 <SearchInput/>
                 <div>
                     <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
