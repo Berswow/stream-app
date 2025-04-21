@@ -3,6 +3,7 @@ import { MovieInterface } from "@/shared/interfaces/Movie/MovieBaseInterface.ts"
 import { buildMovieParams } from "@/shared/lib/buildMovieParams.ts";
 import {TvShowInterface} from "@/shared/interfaces/Show/TvShowBaseInterface.ts";
 import {buildTvShowParams} from "@/shared/lib/buildTvShowsParams.ts";
+import {MultiSearchQuery, MultiSearchResult} from "@/shared/interfaces/MultiSearchInterface.ts";
 
 interface TMDBResponse<T> {
     results: T[];
@@ -93,7 +94,7 @@ export const filterApi = tmdbApi.injectEndpoints({
                     languages.map((lang) =>
                         fetchWithBQ({
                             url: "discover/tv",
-                            params: buildMovieParams({
+                            params: buildTvShowParams({
                                 sort_by,
                                 with_genres: genreParam,
                                 original_language: lang,
@@ -111,8 +112,21 @@ export const filterApi = tmdbApi.injectEndpoints({
                 return { data: allTvShows.filter((tv) => tv.poster_path) };
             },
         }),
+        getFilteredSearch: builder.query<MultiSearchResult, MultiSearchQuery>({
+            query: ({ query, page = 1, include_adult = false }) => ({
+                url: `search/multi`,
+                params: {
+                    query,
+                    page,
+                    include_adult
+                }
+            }),
+            transformResponse: (response: MultiSearchResult) => {
+                return response // need to modify response for popularity.desc sorting !!!!
+            }
+        })
     }),
     overrideExisting: false,
 });
 
-export const { useGetFilteredMoviesQuery, useGetFilteredTvShowsQuery } = filterApi;
+export const { useGetFilteredMoviesQuery, useGetFilteredTvShowsQuery, useGetFilteredSearchQuery } = filterApi;

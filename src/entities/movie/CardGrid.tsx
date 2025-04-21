@@ -44,14 +44,12 @@ export const CardGrid = ({ genreId, contentType }: CardGridProps) => {
     //
 
     useEffect(() => {
-        console.log("Filters changed, resetting movies/shows...");
         setPage(1);
         setAllItems([]);
     }, [sort_by, release_year, languages, genres, genreId]);
 
     useEffect(() => {
         if (data) {
-            console.log("Data received from API:", data);
             setAllItems(prev => {
                 const combinedItems = [...prev, ...data];
 

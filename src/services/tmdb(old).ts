@@ -10,7 +10,7 @@
 //     },
 // });
 //
-// // Функция для запроса к TMDb API
+//
 // const fetchFromTMDb = async (endpoint: string, params = {}) => {
 //     try {
 //         const { data } = await axiosInstance.get(endpoint, { params });
